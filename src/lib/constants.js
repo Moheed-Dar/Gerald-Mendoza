@@ -14,10 +14,10 @@ export const NAV_LINKS = {
 };
 
 export const CONTACT_INFO = {
-   phone: "(571) 210-1933",
-  phoneHref: "tel:(571) 210-1933",
-  email: "Christopher Ryan@Christopher RyanConsultant.ca",
-  emailHref: "Christopher Ryan@Christopher RyanConsultant.ca",
+   phone: "+14169964489",
+  phoneHref: "tel:+14169964489",
+  email: "Matt Vatcher@Matt VatcherConsultant.ca",
+  emailHref: "Matt Vatcher@Matt VatcherConsultant.ca",
 };
 
 export const BRAND = {

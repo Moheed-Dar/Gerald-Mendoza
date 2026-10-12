@@ -9,12 +9,13 @@ import { motion } from "framer-motion";
 gsap.registerPlugin(ScrollTrigger);
 
 // ============================================
-// SAME 3-COLOR SCHEME AS HERO SECTION
+// NEW 4-COLOR SCHEME
+// Purple | Cyan | Pink | Magenta
 // ============================================
-const TEAL = "#019586";
-const GREEN = "#00B777";
-const MINT = "#B1F1E9";
-const DARK = "#072A26";
+const PURPLE = "#3C1E74";
+const CYAN = "#5CE1E6";
+const PINK = "#FFA7E4";
+const MAGENTA = "#B462B6";
 
 // ============================================
 // SOCIAL ICONS - Only LinkedIn
@@ -32,19 +33,20 @@ export default function About() {
   const bioRef = useRef(null);
 
   const images = [
-    { src: "/images/about5up.jpg", alt: "Northern Virginia Real Estate 1" },
-    { src: "/images/about1up.jpg", alt: "Northern Virginia Real Estate 2" },
-    { src: "/images/about3up.jpg", alt: "Northern Virginia Real Estate 3" },
-    { src: "/images/about2up.jpg", alt: "Northern Virginia Real Estate 4" },
+    { src: "/images/about5up.jpg", alt: "Toronto Real Estate 1" },
+    { src: "/images/about1up.jpg", alt: "Toronto Real Estate 2" },
+    { src: "/images/about3up.jpg", alt: "Toronto Real Estate 3" },
+    { src: "/images/about2up.jpg", alt: "Toronto Real Estate 4" },
   ];
 
   // Only LinkedIn social link
+  // TODO: Update with Matt Vatcher's actual LinkedIn URL
   const socialLinks = [
     {
       icon: LinkedInIcon,
-      href: "https://www.linkedin.com/in/christopher-lepkowski/",
+      href: "https://www.linkedin.com/in/matt-vatcher/",
       label: "LinkedIn",
-      hoverColor: TEAL,
+      hoverColor: MAGENTA,
     },
   ];
 
@@ -113,33 +115,20 @@ export default function About() {
       ref={sectionRef}
       className="relative w-full overflow-hidden py-16 sm:py-24 md:py-28 lg:py-32"
     >
-      {/* ===== BACKGROUND: BOTTOM TO TOP GRADIENT ===== */}
+      {/* ===== BACKGROUND: BOTTOM TO TOP GRADIENT (NEW SCHEME) ===== */}
       <div className="absolute inset-0 z-0">
         <div
           className="absolute inset-0"
           style={{
-            background: `linear-gradient(0deg, ${TEAL} 0%, ${GREEN} 25%, ${MINT} 60%, ${MINT} 100%)`,
+            background: `linear-gradient(0deg, ${PURPLE} 0%, ${MAGENTA} 30%, ${PINK} 65%, ${CYAN} 100%)`,
           }}
         />
 
-        {/* ===== WATERMARK: navbarlogo11.png (PROPERLY VISIBLE) ===== */}
-        {/* <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: `url('/images/navlogo12.png')`,
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center center",
-            backgroundSize: "50% auto",
-            opacity: 0.15,
-            mixBlendMode: "multiply",
-          }}
-        /> */}
-
-        {/* Mobile pe watermark chhota */}
+        {/* Watermark - mobile only (smaller) */}
         <div
           className="absolute inset-0 pointer-events-none sm:hidden"
           style={{
-            backgroundImage: `url('/images/navlogo12.png')`,
+            backgroundImage: `url('/images/mettlogo11.png')`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center center",
             backgroundSize: "75% auto",
@@ -152,7 +141,7 @@ export default function About() {
         <div
           className="absolute inset-0 opacity-20"
           style={{
-            background: `radial-gradient(circle at 20% 80%, ${DARK} 0%, transparent 50%)`,
+            background: `radial-gradient(circle at 20% 80%, ${PURPLE} 0%, transparent 50%)`,
           }}
         />
       </div>
@@ -169,8 +158,8 @@ export default function About() {
           <span
             className="inline-block rounded-full px-5 py-1.5 text-[10px] sm:text-xs uppercase tracking-[0.3em] font-extrabold shadow-md"
             style={{
-              backgroundColor: DARK,
-              color: MINT,
+              backgroundColor: PURPLE,
+              color: CYAN,
             }}
           >
             ( Who I Am )
@@ -181,11 +170,11 @@ export default function About() {
         <div ref={headingRef} className="text-center mb-12 sm:mb-16 md:mb-20">
           <h2
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight max-w-4xl mx-auto tracking-[-0.02em]"
-            style={{ color: DARK }}
+            style={{ color: PURPLE }}
           >
-            Providing high-level{" "}
-            <span className="relative inline-block" style={{ color: DARK }}>
-              real estate consulting
+            Helping you move to the{" "}
+            <span className="relative inline-block" style={{ color: PURPLE }}>
+              next chapter of your life
               <svg
                 className="absolute -bottom-1 left-0 w-full"
                 height="8"
@@ -195,15 +184,15 @@ export default function About() {
               >
                 <path
                   d="M2 6C50 2 150 2 198 6"
-                  stroke={GREEN}
+                  stroke={PINK}
                   strokeWidth="3"
                   strokeLinecap="round"
-                  opacity="0.7"
+                  opacity="0.8"
                 />
               </svg>
             </span>
-            , with a focus on data-driven insights, personalized service, and a{" "}
-            <span style={{ color: TEAL }}>smooth, stress-free transaction experience.</span>
+            , with a focus on your needs, expert guidance, and a{" "}
+            <span style={{ color: MAGENTA }}>smooth, stress-free buying &amp; selling experience.</span>
           </h2>
         </div>
 
@@ -244,7 +233,7 @@ export default function About() {
                 className="p-2 sm:p-3 rounded-2xl shadow-lg group-hover:shadow-2xl transition-all duration-500"
                 style={{
                   backgroundColor: "#FFFFFF",
-                  border: `2px solid ${TEAL}30`,
+                  border: `2px solid ${MAGENTA}40`,
                 }}
               >
                 <div className="relative aspect-4/3 rounded-xl overflow-hidden">
@@ -257,25 +246,25 @@ export default function About() {
                   />
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-all duration-500"
-                    style={{ backgroundColor: TEAL }}
+                    style={{ backgroundColor: MAGENTA }}
                   />
                   <div
                     className="absolute bottom-0 left-0 right-0 h-1/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style={{
-                      background: `linear-gradient(to top, ${DARK}40, transparent)`,
+                      background: `linear-gradient(to top, ${PURPLE}40, transparent)`,
                     }}
                   />
                 </div>
                 <div className="mt-2 sm:mt-3 text-center">
                   <div
                     className="w-8 sm:w-10 h-1 rounded-full mx-auto transition-colors duration-500"
-                    style={{ backgroundColor: TEAL }}
+                    style={{ backgroundColor: MAGENTA }}
                   />
                 </div>
               </div>
               <motion.div
                 className="absolute -top-1.5 sm:-top-2 left-1/2 -translate-x-1/2 w-3 h-3 sm:w-4 sm:h-4 rounded-full group-hover:scale-125 transition-all duration-300"
-                style={{ backgroundColor: `${GREEN}60` }}
+                style={{ backgroundColor: `${PINK}70` }}
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
@@ -305,8 +294,8 @@ export default function About() {
               <span
                 className="inline-block rounded-md px-3 py-1 text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold"
                 style={{
-                  backgroundColor: DARK,
-                  color: MINT,
+                  backgroundColor: PURPLE,
+                  color: CYAN,
                 }}
               >
                 ( About Me )
@@ -320,7 +309,7 @@ export default function About() {
             >
               Hi, I&apos;m{" "}
               <span className="relative inline-block">
-                <span style={{ color: '#fffff' }}>Christopher Ryan</span>
+                <span style={{ color: CYAN }}>Matt Vatcher</span>
                 <svg
                   className="absolute -bottom-1 left-0 w-full"
                   height="8"
@@ -330,10 +319,10 @@ export default function About() {
                 >
                   <path
                     d="M2 6C50 2 150 2 198 6"
-                    stroke={GREEN}
+                    stroke={PINK}
                     strokeWidth="3"
                     strokeLinecap="round"
-                    opacity="0.6"
+                    opacity="0.7"
                   />
                 </svg>
               </span>
@@ -345,32 +334,35 @@ export default function About() {
               style={{ color: "#FFFFFF" }}
             >
               <p>
-                I provide real estate consulting services in the Northern Virginia Area. I offer all of my clients high-level consulting services that combine data aggregation with proprietary analytical methods while maintaining strict industry standards to ensure thorough preparation for every transaction.
+                Matt Vatcher is a Realtor with{" "}
+                <span className="font-bold" style={{ color: CYAN }}>
+                  Real Estate Homeward
+                </span>{" "}
+                and is committed to getting his clients across the buying and selling finish line! He
+                serves the Beaches, East York, Scarborough area and the rest of Toronto.
               </p>
 
               <blockquote
                 className="border-l-4 pl-4 py-2 rounded-r-lg italic"
                 style={{
-                  borderColor: MINT,
-                  backgroundColor: `${DARK}40`,
+                  borderColor: CYAN,
+                  backgroundColor: `${PURPLE}40`,
                   color: "#FFFFFF",
                 }}
               >
-                "Real estate isn't just about properties — it's about people making informed decisions with confidence. My goal is to provide the strategic guidance needed to navigate today's complex market."
+                &ldquo;Real estate is a long-term investment. My job is to guide, educate and realize
+                your real estate plans — and help you lay out a home equity road map that works for
+                you.&rdquo;
               </blockquote>
 
               <p>
-                My approach to real estate consulting goes beyond traditional methods. By leveraging data-driven insights and proprietary constraints, I provide my clients with a competitive edge in the Northern Virginia market. Whether you're buying or selling, I ensure you have all the information you need to make strategic decisions.
-              </p>
-              <p>
-                I specialize in both Seller and Buyer Agent Services. For sellers, I focus on positioning your property to attract the right buyers and maximize value. For buyers, I help you navigate the market with confidence, identifying opportunities that align with your goals and budget.
-              </p>
-              <p>
-                What sets me apart is my commitment to combining analytical rigor with personalized service. Every client receives a customized strategy that addresses their unique needs and circumstances.
+                Matt specializes in committing to your needs and helping you move to the next chapter
+                of your life. Whether you&apos;re buying your first home or selling a property you
+                love, he takes the time to understand your goals and builds a strategy around them.
               </p>
 
-              <p className="font-extrabold" style={{ color: MINT }}>
-                Let's work together! <br /> Christopher Ryan
+              <p className="font-extrabold" style={{ color: CYAN }}>
+                Let&apos;s work together! <br /> Matt Vatcher
               </p>
             </motion.div>
 
@@ -379,20 +371,20 @@ export default function About() {
               <div className="flex flex-col gap-3 sm:gap-4 font-medium text-xs sm:text-sm md:text-base">
                 {/* Email - Separate Line */}
                 <a
-                  href="mailto:chris@christopherryanrealty.com"
+                  href="mailto:matt@torontosrunningrealtor.com"
                   className="hover:scale-105 transition-all flex items-center gap-2 group"
                   style={{ color: "#FFFFFF" }}
                 >
                   <span
                     className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg shrink-0 transition-colors"
                     style={{
-                      backgroundColor: `${MINT}30`,
-                      border: `1px solid ${MINT}60`,
+                      backgroundColor: `${CYAN}30`,
+                      border: `1px solid ${CYAN}60`,
                     }}
                   >
                     <svg
                       className="w-4 h-4 sm:w-5 sm:h-5"
-                      style={{ color: MINT }}
+                      style={{ color: CYAN }}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -406,26 +398,26 @@ export default function About() {
                     </svg>
                   </span>
                   <span className="truncate group-hover:underline" style={{ color: "#FFFFFF" }}>
-                    chris@christopherryanrealty.com
+                    matt@torontosrunningrealtor.com
                   </span>
                 </a>
 
                 {/* Phone - Separate Line */}
                 <a
-                  href="tel:(571) 210-1933"
+                  href="tel:+14169964489"
                   className="hover:scale-105 transition-all flex items-center gap-2 group"
                   style={{ color: "#FFFFFF" }}
                 >
                   <span
                     className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg shrink-0 transition-colors"
                     style={{
-                       backgroundColor: `${MINT}30`,
-                      border: `1px solid ${MINT}60`,
+                      backgroundColor: `${CYAN}30`,
+                      border: `1px solid ${CYAN}60`,
                     }}
                   >
                     <svg
                       className="w-4 h-4 sm:w-5 sm:h-5"
-                      style={{ color: MINT }}
+                      style={{ color: CYAN }}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -439,7 +431,7 @@ export default function About() {
                     </svg>
                   </span>
                   <span className="group-hover:underline" style={{ color: "#FFFFFF" }}>
-                    (571) 210-1933
+                    +1 (416) 996-4489
                   </span>
                 </a>
 
@@ -451,13 +443,13 @@ export default function About() {
                   <span
                     className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg shrink-0 transition-colors"
                     style={{
-                       backgroundColor: `${MINT}30`,
-                      border: `1px solid ${MINT}60`,
+                      backgroundColor: `${CYAN}30`,
+                      border: `1px solid ${CYAN}60`,
                     }}
                   >
                     <svg
                       className="w-4 h-4 sm:w-5 sm:h-5"
-                      style={{ color: MINT }}
+                      style={{ color: CYAN }}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -477,7 +469,7 @@ export default function About() {
                     </svg>
                   </span>
                   <span style={{ color: "#FFFFFF" }}>
-                    11307 Stuart Mill Rd. Oakton, VA 22124
+                    1858 Queen St E, Toronto, ON M4L 1H1
                   </span>
                 </div>
               </div>
@@ -486,7 +478,7 @@ export default function About() {
             <motion.div variants={itemVariants} className="mt-6 sm:mt-8">
               <p
                 className="text-[10px] sm:text-xs uppercase tracking-[0.2em] font-bold mb-3 sm:mb-4"
-                style={{ color: MINT }}
+                style={{ color: CYAN }}
               >
                 ( Connect With Me )
               </p>
@@ -499,8 +491,8 @@ export default function About() {
                     rel="noopener noreferrer"
                     className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center transition-all duration-300"
                     style={{
-                      backgroundColor: `${MINT}40`,
-                      border: `1px solid ${MINT}60`,
+                      backgroundColor: `${CYAN}40`,
+                      border: `1px solid ${CYAN}60`,
                       color: "#FFFFFF",
                     }}
                     whileHover={{
@@ -531,8 +523,8 @@ export default function About() {
             <div className="relative mx-auto max-w-md lg:max-w-none">
               {/* Subtle background accent - just one large shape */}
               <div
-                className="absolute -top-8 -right-8 sm:-top-12 sm:-right-12 w-48 h-48 sm:w-64 sm:h-64 rounded-full blur-3xl opacity-30 -z-10"
-                style={{ backgroundColor: MINT }}
+                className="absolute -top-8 -right-8 sm:-top-12 sm:-right-12 w-48 h-48 sm:w-64 sm:h-64 rounded-full blur-3xl opacity-40 -z-10"
+                style={{ backgroundColor: PINK }}
               />
 
               {/* Main Portrait Container */}
@@ -540,14 +532,15 @@ export default function About() {
                 className="relative aspect-3/4 rounded-2xl overflow-hidden"
                 style={{
                   boxShadow: `
-                    0 25px 50px -12px ${DARK}80,
-                    0 10px 20px -5px ${TEAL}40
+                    0 25px 50px -12px ${PURPLE}80,
+                    0 10px 20px -5px ${MAGENTA}40
                   `,
                 }}
               >
+                {/* TODO: Replace with Matt's portrait if filename differs */}
                 <Image
-                  src="/images/chirsaboutpic.png"
-                  alt="Christopher Ryan"
+                  src="/images/aboutimg.jpg"
+                  alt="Matt Vatcher"
                   fill
                   className="object-cover"
                   sizes="(max-width: 640px) 90vw, (max-width: 1024px) 80vw, 45vw"
@@ -558,15 +551,15 @@ export default function About() {
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: `linear-gradient(180deg, transparent 0%, transparent 50%, ${DARK}90 100%)`,
+                    background: `linear-gradient(180deg, transparent 0%, transparent 50%, ${PURPLE}90 100%)`,
                   }}
                 />
 
-                {/* Very subtle teal tint for brand cohesion */}
+                {/* Very subtle magenta tint for brand cohesion */}
                 <div
                   className="absolute inset-0 opacity-[0.08]"
                   style={{
-                    background: `linear-gradient(135deg, ${TEAL} 0%, transparent 100%)`,
+                    background: `linear-gradient(135deg, ${MAGENTA} 0%, transparent 100%)`,
                   }}
                 />
               </div>
@@ -575,7 +568,7 @@ export default function About() {
               <div
                 className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 aspect-3/4 w-full rounded-2xl -z-10"
                 style={{
-                  border: `2px solid ${TEAL}`,
+                  border: `2px solid ${CYAN}`,
                 }}
               />
 
@@ -583,8 +576,8 @@ export default function About() {
               <motion.div
                 className="absolute left-4 right-4 sm:left-6 sm:right-6 bottom-4 sm:bottom-6 rounded-xl px-4 py-3 sm:px-5 sm:py-4 backdrop-blur-md shadow-xl"
                 style={{
-                  backgroundColor: `${DARK}E6`,
-                  border: `1px solid ${MINT}40`,
+                  backgroundColor: `${PURPLE}E6`,
+                  border: `1px solid ${CYAN}40`,
                 }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -592,35 +585,35 @@ export default function About() {
                 transition={{ delay: 0.5, duration: 0.6 }}
               >
                 <p className="text-base sm:text-lg lg:text-xl font-extrabold" style={{ color: "#FFFFFF" }}>
-                  Christopher Ryan
+                  Matt Vatcher
                 </p>
                 <div className="flex items-center gap-2 mt-1">
                   <div
                     className="h-0.5 w-6 sm:w-8 rounded-full"
-                    style={{ backgroundColor: GREEN }}
+                    style={{ backgroundColor: PINK }}
                   />
-                  <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider" style={{ color: MINT }}>
-                    Real Estate Consultant
+                  <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider" style={{ color: CYAN }}>
+                    Realtor • Real Estate Homeward
                   </p>
                 </div>
               </motion.div>
 
-              {/* Top Right Badge - Realtor Since */}
+              {/* Top Left Badge - Realtor Since */}
               <motion.div
                 className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 rounded-2xl shadow-xl p-3 sm:p-4"
                 style={{
                   backgroundColor: "#FFFFFF",
-                  boxShadow: `0 10px 30px ${DARK}40`,
+                  boxShadow: `0 10px 30px ${PURPLE}40`,
                 }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4, duration: 0.5 }}
               >
-                <p className="text-xs font-bold uppercase tracking-wider" style={{ color: TEAL }}>
+                <p className="text-xs font-bold uppercase tracking-wider" style={{ color: MAGENTA }}>
                   Since
                 </p>
-                <p className="text-2xl sm:text-3xl font-extrabold leading-none mt-0.5" style={{ color: TEAL }}>
+                <p className="text-2xl sm:text-3xl font-extrabold leading-none mt-0.5" style={{ color: PURPLE }}>
                   2025
                 </p>
               </motion.div>
@@ -629,7 +622,7 @@ export default function About() {
               <motion.div
                 className="absolute top-4 right-4 sm:top-6 sm:right-6 rounded-full px-2.5 py-1 sm:px-3 sm:py-1.5 backdrop-blur-md flex items-center gap-1.5"
                 style={{
-                  backgroundColor: `${GREEN}E6`,
+                  backgroundColor: `${MAGENTA}E6`,
                   border: `1px solid #FFFFFF60`,
                 }}
                 initial={{ opacity: 0, x: 20 }}
@@ -652,7 +645,7 @@ export default function About() {
               {/* Small accent line at bottom */}
               <div
                 className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-20 h-1 rounded-full -z-10"
-                style={{ backgroundColor: GREEN }}
+                style={{ backgroundColor: PINK }}
               />
             </div>
           </motion.div>

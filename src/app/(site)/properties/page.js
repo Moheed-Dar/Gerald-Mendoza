@@ -35,28 +35,29 @@ const inter = Inter({
 });
 
 // ==========================================
-// ✅ UPDATED COLOR PALETTE
+// ✅ NEW COLOR PALETTE (matches About/Footer/Menu/Blogs)
+// Purple | Cyan | Pink | Magenta
 // ==========================================
-const TEAL = "#019586";
-const DARK_TEAL = "#014D41";
-const MINT = "#B1F1E9";
-const BRIGHT_CYAN = "#04D3C7";
+const PURPLE = "#3C1E74"; // main accent
+const CYAN = "#5CE1E6"; // light accent on dark bg (replaces MINT)
+const PINK = "#FFA7E4"; // highlight (replaces BRIGHT_CYAN)
+const MAGENTA = "#B462B6"; // bright accent (replaces TEAL for solid fills)
 
-// Derived colors from new palette
-const NAVY = "#0A2D28";
-const NAVY_LIGHT = "#0F3D36";
-const NAVY_DARK = "#06211D";
-const NAVY_CARD = "#0D332D";
+// Dark purple backgrounds (replace Navy greens)
+const DARK_PURPLE = "#1E0F3D"; // page bg (replaces NAVY)
+const LIGHT_PURPLE = "#2A1454"; // (replaces NAVY_LIGHT)
+const DEEP_PURPLE = "#150A2B"; // (replaces NAVY_DARK)
+const CARD_PURPLE = "#251247"; // card bg (replaces NAVY_CARD)
 
-// Creamy White with opacity helpers
-const CREAM_30 = "#B1F1E94D";
-const CREAM_40 = "#B1F1E966";
-const CREAM_50 = "#B1F1E980";
-const CREAM_60 = "#B1F1E999";
-const CREAM_70 = "#B1F1E9B3";
-const CREAM_75 = "#B1F1E9BF";
-const CREAM_80 = "#B1F1E9CC";
-const CREAM_90 = "#B1F1E9E6";
+// Cyan opacity helpers (replace CREAM_*)
+const CYAN_30 = "#5CE1E64D";
+const CYAN_40 = "#5CE1E666";
+const CYAN_50 = "#5CE1E680";
+const CYAN_60 = "#5CE1E699";
+const CYAN_70 = "#5CE1E6B3";
+const CYAN_75 = "#5CE1E6BF";
+const CYAN_80 = "#5CE1E6CC";
+const CYAN_90 = "#5CE1E6E6";
 
 const PROPERTY_TYPES = [
   "all",
@@ -117,7 +118,7 @@ const getStatusStyles = (status) => {
     case "off plan":
       return "bg-indigo-500/15 text-indigo-300 border border-indigo-400/15";
     case "new":
-      return "bg-teal-500/15 text-teal-300 border border-teal-400/15";
+      return "bg-pink-500/15 text-pink-300 border border-pink-400/15";
     default:
       return "bg-gray-500/15 text-gray-300 border border-gray-400/15";
   }
@@ -133,7 +134,7 @@ const getStatusDotColor = (status) => {
     case "reserved": return "bg-purple-400";
     case "under construction": return "bg-sky-400";
     case "off plan": return "bg-indigo-400";
-    case "new": return "bg-teal-400";
+    case "new": return "bg-pink-400";
     default: return "bg-gray-400";
   }
 };
@@ -154,7 +155,7 @@ const HighlightText = ({ text, query }) => {
     <>
       {parts.map((part, i) =>
         regex.test(part) ? (
-          <span key={i} style={{ color: TEAL }} className="font-semibold">
+          <span key={i} style={{ color: PINK }} className="font-semibold">
             {part}
           </span>
         ) : (
@@ -175,17 +176,17 @@ const DarkSelect = ({ value, onChange, options, className = "" }) => (
       onChange={onChange}
       className="appearance-none w-full pl-4 pr-8 py-2.5 backdrop-blur-sm border text-xs font-medium rounded-xl focus:outline-none transition-all duration-200 cursor-pointer shadow-lg shadow-black/10"
       style={{
-        backgroundColor: `${NAVY_CARD}CC`,
-        color: CREAM_90,
-        borderColor: `${MINT}15`,
+        backgroundColor: `${CARD_PURPLE}CC`,
+        color: CYAN_90,
+        borderColor: `${CYAN}15`,
         colorScheme: "dark",
       }}
       onFocus={(e) => {
-        e.currentTarget.style.borderColor = `${TEAL}50`;
-        e.currentTarget.style.boxShadow = `0 0 0 2px ${TEAL}20`;
+        e.currentTarget.style.borderColor = `${MAGENTA}50`;
+        e.currentTarget.style.boxShadow = `0 0 0 2px ${MAGENTA}20`;
       }}
       onBlur={(e) => {
-        e.currentTarget.style.borderColor = `${MINT}15`;
+        e.currentTarget.style.borderColor = `${CYAN}15`;
         e.currentTarget.style.boxShadow = "none";
       }}
     >
@@ -195,7 +196,7 @@ const DarkSelect = ({ value, onChange, options, className = "" }) => (
       size={14}
       strokeWidth={2.5}
       className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-200"
-      style={{ color: CREAM_40 }}
+      style={{ color: CYAN_40 }}
     />
   </div>
 );
@@ -354,12 +355,12 @@ export default function PropertiesPage() {
   const SkeletonCard = () => (
     <div
       className="rounded-2xl overflow-hidden animate-pulse"
-      style={{ backgroundColor: NAVY_CARD, border: `1px solid ${MINT}08` }}
+      style={{ backgroundColor: CARD_PURPLE, border: `1px solid ${CYAN}08` }}
     >
-      <div className="h-72" style={{ backgroundColor: `${MINT}05` }} />
+      <div className="h-72" style={{ backgroundColor: `${CYAN}05` }} />
       <div className="p-5 space-y-3">
-        <div className="h-5 rounded w-3/4" style={{ backgroundColor: `${MINT}05` }} />
-        <div className="h-3 rounded w-1/2" style={{ backgroundColor: `${MINT}05` }} />
+        <div className="h-5 rounded w-3/4" style={{ backgroundColor: `${CYAN}05` }} />
+        <div className="h-3 rounded w-1/2" style={{ backgroundColor: `${CYAN}05` }} />
       </div>
     </div>
   );
@@ -367,12 +368,12 @@ export default function PropertiesPage() {
   const SkeletonList = () => (
     <div
       className="rounded-2xl overflow-hidden animate-pulse flex h-48"
-      style={{ backgroundColor: NAVY_CARD, border: `1px solid ${MINT}08` }}
+      style={{ backgroundColor: CARD_PURPLE, border: `1px solid ${CYAN}08` }}
     >
-      <div className="w-56 shrink-0" style={{ backgroundColor: `${MINT}05` }} />
+      <div className="w-56 shrink-0" style={{ backgroundColor: `${CYAN}05` }} />
       <div className="p-5 flex-1 space-y-3">
-        <div className="h-5 rounded w-2/3" style={{ backgroundColor: `${MINT}05` }} />
-        <div className="h-3 rounded w-1/3" style={{ backgroundColor: `${MINT}05` }} />
+        <div className="h-5 rounded w-2/3" style={{ backgroundColor: `${CYAN}05` }} />
+        <div className="h-3 rounded w-1/3" style={{ backgroundColor: `${CYAN}05` }} />
       </div>
     </div>
   );
@@ -392,16 +393,16 @@ export default function PropertiesPage() {
           transition={{ duration: 0.5 }}
           className="relative h-105 sm:h-110px rounded-2xl overflow-hidden shadow-xl shadow-black/30 cursor-pointer transition-all duration-500"
           style={{
-            backgroundColor: NAVY_CARD,
-            border: `1px solid ${MINT}10`,
+            backgroundColor: CARD_PURPLE,
+            border: `1px solid ${CYAN}10`,
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.boxShadow = `0 25px 50px -12px ${TEAL}20`;
-            e.currentTarget.style.borderColor = `${TEAL}30`;
+            e.currentTarget.style.boxShadow = `0 25px 50px -12px ${MAGENTA}20`;
+            e.currentTarget.style.borderColor = `${MAGENTA}30`;
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.boxShadow = "0 25px 50px -12px rgba(0,0,0,0.3)";
-            e.currentTarget.style.borderColor = `${MINT}10`;
+            e.currentTarget.style.borderColor = `${CYAN}10`;
           }}
         >
           <Image
@@ -423,20 +424,20 @@ export default function PropertiesPage() {
                 <span
                   className="inline-flex items-center gap-1 px-2.5 py-1 backdrop-blur-md text-[10px] font-bold rounded-full uppercase tracking-wider"
                   style={{
-                    backgroundColor: `${TEAL}E0`,
-                    color: NAVY,
+                    backgroundColor: `${MAGENTA}E0`,
+                    color: "#FFFFFF",
                   }}
                 >
-                  <Crown size={9} style={{ fill: NAVY }} />
+                  <Crown size={9} style={{ fill: "#FFFFFF" }} />
                   Featured
                 </span>
               )}
               <span
                 className="inline-flex items-center px-2.5 py-1 backdrop-blur-md text-[10px] font-bold rounded-full uppercase tracking-wider"
                 style={{
-                  backgroundColor: `${MINT}15`,
-                  color: CREAM_90,
-                  border: `1px solid ${MINT}10`,
+                  backgroundColor: `${CYAN}15`,
+                  color: CYAN_90,
+                  border: `1px solid ${CYAN}10`,
                 }}
               >
                 {property.priceType}
@@ -447,13 +448,13 @@ export default function PropertiesPage() {
               className="w-9 h-9 flex items-center justify-center rounded-full backdrop-blur-md transition-all"
               style={{
                 backgroundColor: "rgba(0,0,0,0.3)",
-                border: `1px solid ${MINT}10`,
+                border: `1px solid ${CYAN}10`,
               }}
             >
               <Heart
                 size={15}
                 className={isLiked ? "fill-red-400 text-red-400" : ""}
-                style={!isLiked ? { color: CREAM_70 } : undefined}
+                style={!isLiked ? { color: CYAN_70 } : undefined}
               />
             </button>
           </div>
@@ -465,10 +466,10 @@ export default function PropertiesPage() {
                   className="flex items-center gap-1.5 px-2.5 py-1.5 backdrop-blur-md rounded-lg"
                   style={{
                     backgroundColor: "rgba(0,0,0,0.4)",
-                    border: `1px solid ${MINT}10`,
+                    border: `1px solid ${CYAN}10`,
                   }}
                 >
-                  <Bed size={12} style={{ color: `${TEAL}80` }} />
+                  <Bed size={12} style={{ color: PINK }} />
                   <span className="text-white text-xs font-semibold">{property.bedrooms}</span>
                 </div>
               )}
@@ -477,10 +478,10 @@ export default function PropertiesPage() {
                   className="flex items-center gap-1.5 px-2.5 py-1.5 backdrop-blur-md rounded-lg"
                   style={{
                     backgroundColor: "rgba(0,0,0,0.4)",
-                    border: `1px solid ${MINT}10`,
+                    border: `1px solid ${CYAN}10`,
                   }}
                 >
-                  <Bath size={12} style={{ color: `${TEAL}80` }} />
+                  <Bath size={12} style={{ color: PINK }} />
                   <span className="text-white text-xs font-semibold">{property.bathrooms}</span>
                 </div>
               )}
@@ -489,10 +490,10 @@ export default function PropertiesPage() {
                   className="flex items-center gap-1.5 px-2.5 py-1.5 backdrop-blur-md rounded-lg"
                   style={{
                     backgroundColor: "rgba(0,0,0,0.4)",
-                    border: `1px solid ${MINT}10`,
+                    border: `1px solid ${CYAN}10`,
                   }}
                 >
-                  <Maximize size={12} style={{ color: `${TEAL}80` }} />
+                  <Maximize size={12} style={{ color: PINK }} />
                   <span className="text-white text-xs font-semibold">
                     {property.areaSize || property.area} {property.areaUnit || "sqft"}
                   </span>
@@ -504,23 +505,8 @@ export default function PropertiesPage() {
               {property.title}
             </h3>
 
-            {/* {property.propertyCode && (
-              <div className="mb-3">
-                <span
-                  className="inline-flex items-center px-2 py-0.5 text-[11px] font-mono font-bold rounded-md"
-                  style={{
-                    backgroundColor: `${TEAL}15`,
-                    color: TEAL,
-                    border: `1px solid ${TEAL}25`,
-                  }}
-                >
-                  {property.propertyCode}
-                </span>
-              </div>
-            )} */}
-
-            <div className="flex items-center gap-1.5 text-sm mb-4" style={{ color: CREAM_70 }}>
-              <MapPin size={13} style={{ color: `${TEAL}70` }} className="shrink-0" />
+            <div className="flex items-center gap-1.5 text-sm mb-4" style={{ color: CYAN_70 }}>
+              <MapPin size={13} style={{ color: PINK }} className="shrink-0" />
               <span className="truncate">{property.location || property.city}</span>
             </div>
 
@@ -529,7 +515,7 @@ export default function PropertiesPage() {
                 <p
                   className="text-2xl leading-none font-inter"
                   style={{
-                    background: `linear-gradient(to right, ${MINT}, ${TEAL}, ${BRIGHT_CYAN})`,
+                    background: `linear-gradient(to right, ${CYAN}, ${PINK}, ${MAGENTA})`,
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}
@@ -544,7 +530,7 @@ export default function PropertiesPage() {
                     {property.status}
                   </span>
                   {property.viewsCount > 0 && (
-                    <span className="text-xs" style={{ color: CREAM_40 }}>
+                    <span className="text-xs" style={{ color: CYAN_40 }}>
                       · {property.viewsCount} views
                     </span>
                   )}
@@ -553,9 +539,9 @@ export default function PropertiesPage() {
               <div
                 className="w-9 h-9 flex items-center justify-center rounded-xl opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300"
                 style={{
-                  backgroundColor: TEAL,
-                  color: NAVY,
-                  boxShadow: `0 4px 12px ${TEAL}30`,
+                  backgroundColor: MAGENTA,
+                  color: "#FFFFFF",
+                  boxShadow: `0 4px 12px ${MAGENTA}30`,
                 }}
               >
                 <ArrowUpRight size={16} />
@@ -582,16 +568,16 @@ export default function PropertiesPage() {
           transition={{ duration: 0.4 }}
           className="relative h-52 sm:h-56 rounded-2xl overflow-hidden shadow-lg shadow-black/30 cursor-pointer transition-all duration-500"
           style={{
-            backgroundColor: NAVY_CARD,
-            border: `1px solid ${MINT}10`,
+            backgroundColor: CARD_PURPLE,
+            border: `1px solid ${CYAN}10`,
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.boxShadow = `0 25px 50px -12px ${TEAL}20`;
-            e.currentTarget.style.borderColor = `${TEAL}30`;
+            e.currentTarget.style.boxShadow = `0 25px 50px -12px ${MAGENTA}20`;
+            e.currentTarget.style.borderColor = `${MAGENTA}30`;
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.boxShadow = "0 25px 50px -12px rgba(0,0,0,0.3)";
-            e.currentTarget.style.borderColor = `${MINT}10`;
+            e.currentTarget.style.borderColor = `${CYAN}10`;
           }}
         >
           <Image
@@ -609,18 +595,18 @@ export default function PropertiesPage() {
               {property.isFeatured && (
                 <span
                   className="px-2 py-0.5 text-[9px] font-bold rounded-full uppercase tracking-wider"
-                  style={{ backgroundColor: `${TEAL}E0`, color: NAVY }}
+                  style={{ backgroundColor: `${MAGENTA}E0`, color: "#FFFFFF" }}
                 >
-                  <Crown size={8} style={{ fill: NAVY }} className="inline mr-0.5" />
+                  <Crown size={8} style={{ fill: "#FFFFFF" }} className="inline mr-0.5" />
                   Featured
                 </span>
               )}
               <span
                 className="px-2 py-0.5 backdrop-blur-md text-[9px] font-bold rounded-full uppercase tracking-wider"
                 style={{
-                  backgroundColor: `${MINT}15`,
-                  color: CREAM_90,
-                  border: `1px solid ${MINT}10`,
+                  backgroundColor: `${CYAN}15`,
+                  color: CYAN_90,
+                  border: `1px solid ${CYAN}10`,
                 }}
               >
                 {property.priceType}
@@ -637,13 +623,13 @@ export default function PropertiesPage() {
               className="w-8 h-8 flex items-center justify-center rounded-full backdrop-blur-md transition-all"
               style={{
                 backgroundColor: "rgba(0,0,0,0.3)",
-                border: `1px solid ${MINT}10`,
+                border: `1px solid ${CYAN}10`,
               }}
             >
               <Heart
                 size={14}
                 className={isLiked ? "fill-red-400 text-red-400" : ""}
-                style={!isLiked ? { color: CREAM_70 } : undefined}
+                style={!isLiked ? { color: CYAN_70 } : undefined}
               />
             </button>
           </div>
@@ -654,21 +640,21 @@ export default function PropertiesPage() {
                 <h3 className="text-lg text-white mb-0.5 leading-tight drop-shadow-lg line-clamp-1 font-inter">
                   {property.title}
                 </h3>
-                <div className="flex items-center gap-1.5 text-xs" style={{ color: CREAM_60 }}>
+                <div className="flex items-center gap-1.5 text-xs" style={{ color: CYAN_60 }}>
                   {property.propertyCode && (
                     <span
                       className="inline-block font-mono text-[10px] font-bold mr-2 px-1.5 py-0.5 rounded"
                       style={{
-                        color: `${TEAL}80`,
-                        backgroundColor: `${TEAL}10`,
+                        color: PINK,
+                        backgroundColor: `${MAGENTA}10`,
                       }}
                     >
                       {property.propertyCode}
                     </span>
                   )}
-                  <MapPin size={11} style={{ color: `${TEAL}70` }} />
+                  <MapPin size={11} style={{ color: PINK }} />
                   <span className="truncate">{property.location || property.city}</span>
-                  <span style={{ color: `${MINT}20` }} className="mx-1">·</span>
+                  <span style={{ color: `${CYAN}20` }} className="mx-1">·</span>
                   <div className="flex items-center gap-2">
                     {property.bedrooms > 0 && <span>{property.bedrooms} Bed</span>}
                     {property.bathrooms > 0 && <span>{property.bathrooms} Bath</span>}
@@ -681,7 +667,7 @@ export default function PropertiesPage() {
               <p
                 className="text-xl leading-none font-inter"
                 style={{
-                  background: `linear-gradient(to right, ${MINT}, ${TEAL})`,
+                  background: `linear-gradient(to right, ${CYAN}, ${PINK})`,
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                 }}
@@ -699,8 +685,8 @@ export default function PropertiesPage() {
   // DARK OPTION STYLE
   // ============================================
   const darkOptionStyle = {
-    backgroundColor: NAVY_CARD,
-    color: MINT,
+    backgroundColor: CARD_PURPLE,
+    color: CYAN,
     padding: "8px 12px",
   };
 
@@ -708,13 +694,13 @@ export default function PropertiesPage() {
   // RENDER
   // ============================================
   return (
-    <div className="min-h-screen font-inter" style={{ backgroundColor: NAVY }}>
+    <div className="min-h-screen font-inter" style={{ backgroundColor: DARK_PURPLE }}>
       {/* Background Texture + Watermark */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, ${TEAL} 1px, transparent 0)`,
+            backgroundImage: `radial-gradient(circle at 1px 1px, ${CYAN} 1px, transparent 0)`,
             backgroundSize: "40px 40px",
           }}
         />
@@ -732,13 +718,13 @@ export default function PropertiesPage() {
         <div
           className="absolute inset-0"
           style={{
-            background: `radial-gradient(ellipse at top left, ${TEAL}10 0%, transparent 40%)`,
+            background: `radial-gradient(ellipse at top left, ${MAGENTA}10 0%, transparent 40%)`,
           }}
         />
         <div
           className="absolute inset-0"
           style={{
-            background: `radial-gradient(ellipse at bottom right, ${MINT}08 0%, transparent 50%)`,
+            background: `radial-gradient(ellipse at bottom right, ${PINK}08 0%, transparent 50%)`,
           }}
         />
       </div>
@@ -751,12 +737,12 @@ export default function PropertiesPage() {
               <div
                 className="w-8 h-px"
                 style={{
-                  background: `linear-gradient(to right, ${TEAL}, transparent)`,
+                  background: `linear-gradient(to right, ${MAGENTA}, transparent)`,
                 }}
               />
               <p
                 className="text-sm font-semibold uppercase tracking-[0.2em] flex items-center gap-2"
-                style={{ color: TEAL }}
+                style={{ color: PINK }}
               >
                 <Building2 size={14} />
                 Explore Listings
@@ -765,7 +751,7 @@ export default function PropertiesPage() {
             <h1 className="text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-[1.1] mb-4 font-inter">
               Our Properties
             </h1>
-            <p className="text-sm sm:text-base leading-relaxed mb-8" style={{ color: CREAM_70 }}>
+            <p className="text-sm sm:text-base leading-relaxed mb-8" style={{ color: CYAN_70 }}>
               Discover your perfect property from our curated collection of premium real estate listings.
             </p>
           </div>
@@ -778,11 +764,11 @@ export default function PropertiesPage() {
                   <div
                     className="relative flex items-center rounded-2xl transition-all"
                     style={{
-                      backgroundColor: `${MINT}0A`,
-                      border: `1px solid ${MINT}15`,
+                      backgroundColor: `${CYAN}0A`,
+                      border: `1px solid ${CYAN}15`,
                     }}
                   >
-                    <Search size={16} className="absolute left-3.5" style={{ color: CREAM_40 }} />
+                    <Search size={16} className="absolute left-3.5" style={{ color: CYAN_40 }} />
                     <input
                       ref={searchInputRef}
                       type="text"
@@ -796,7 +782,7 @@ export default function PropertiesPage() {
                       }}
                       placeholder="Search by title, location, or property code..."
                       className="w-full pl-9 pr-20 py-3 text-sm bg-transparent text-white focus:outline-none"
-                      style={{ color: MINT }}
+                      style={{ color: CYAN }}
                       autoComplete="off"
                     />
                     {searchInput && (
@@ -804,19 +790,19 @@ export default function PropertiesPage() {
                         type="button"
                         onClick={handleClearSearch}
                         className="absolute right-12 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center rounded-full transition-colors group"
-                        style={{ backgroundColor: `${MINT}08` }}
+                        style={{ backgroundColor: `${CYAN}08` }}
                         title="Clear search"
                       >
-                        <X size={14} style={{ color: CREAM_50 }} />
+                        <X size={14} style={{ color: CYAN_50 }} />
                       </button>
                     )}
                     <button
                       type="submit"
                       className="absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-xl transition-colors"
                       style={{
-                        backgroundColor: TEAL,
-                        color: NAVY,
-                        boxShadow: `0 4px 12px ${TEAL}25`,
+                        backgroundColor: MAGENTA,
+                        color: "#FFFFFF",
+                        boxShadow: `0 4px 12px ${MAGENTA}25`,
                       }}
                       title="Search"
                     >
@@ -836,25 +822,25 @@ export default function PropertiesPage() {
                       transition={{ duration: 0.2 }}
                       className="absolute top-full left-0 right-0 mt-2 backdrop-blur-xl rounded-2xl shadow-2xl shadow-black/50 overflow-hidden z-50"
                       style={{
-                        backgroundColor: `${NAVY_CARD}F2`,
-                        border: `1px solid ${MINT}10`,
+                        backgroundColor: `${CARD_PURPLE}F2`,
+                        border: `1px solid ${CYAN}10`,
                       }}
                     >
-                      <div className="flex items-center justify-between px-4 py-2.5" style={{ borderBottom: `1px solid ${MINT}08` }}>
-                        <span className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: CREAM_40 }}>
+                      <div className="flex items-center justify-between px-4 py-2.5" style={{ borderBottom: `1px solid ${CYAN}08` }}>
+                        <span className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: CYAN_40 }}>
                           {suggestions.length} suggestion{suggestions.length !== 1 ? "s" : ""} found
                         </span>
                         <button
                           onClick={() => setShowSuggestions(false)}
                           className="w-5 h-5 flex items-center justify-center rounded-full transition-colors"
-                          style={{ backgroundColor: `${MINT}08` }}
+                          style={{ backgroundColor: `${CYAN}08` }}
                         >
-                          <X size={11} style={{ color: CREAM_30 }} />
+                          <X size={11} style={{ color: CYAN_30 }} />
                         </button>
                       </div>
                       <div
                         className="max-h-80 overflow-y-auto"
-                        style={{ scrollbarWidth: "thin", scrollbarColor: `${TEAL}30 transparent` }}
+                        style={{ scrollbarWidth: "thin", scrollbarColor: `${MAGENTA}30 transparent` }}
                       >
                         {suggestions.map((property) => {
                           const img = getSafeImg(property.thumbnail) || getSafeImg(property.images?.[0]) || PLACEHOLDER;
@@ -864,15 +850,15 @@ export default function PropertiesPage() {
                               href={`/properties/${property._id}`}
                               onClick={handleSuggestionClick}
                               className="flex items-center gap-3.5 px-4 py-3 transition-colors"
-                              style={{ borderBottom: `1px solid ${MINT}05` }}
-                              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = `${MINT}08`)}
+                              style={{ borderBottom: `1px solid ${CYAN}05` }}
+                              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = `${CYAN}08`)}
                               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
                             >
                               <div
                                 className="relative w-16 h-12 rounded-lg overflow-hidden shrink-0 shadow-lg shadow-black/30"
                                 style={{
-                                  backgroundColor: `${MINT}05`,
-                                  boxShadow: `inset 0 0 0 1px ${MINT}10`,
+                                  backgroundColor: `${CYAN}05`,
+                                  boxShadow: `inset 0 0 0 1px ${CYAN}10`,
                                 }}
                               >
                                 <Image src={img} alt="" fill className="object-cover" sizes="64px" unoptimized />
@@ -882,16 +868,16 @@ export default function PropertiesPage() {
                                   <HighlightText text={property.title} query={searchInput} />
                                 </p>
                                 <div className="flex items-center gap-1.5 mt-1">
-                                  <MapPin size={10} style={{ color: `${TEAL}70` }} className="shrink-0" />
-                                  <span className="text-[11px] truncate" style={{ color: CREAM_50 }}>
+                                  <MapPin size={10} style={{ color: PINK }} className="shrink-0" />
+                                  <span className="text-[11px] truncate" style={{ color: CYAN_50 }}>
                                     <HighlightText text={property.location || property.city || "N/A"} query={searchInput} />
                                   </span>
                                   {property.propertyCode && (
                                     <span
                                       className="ml-2 text-[10px] font-mono font-bold px-1.5 py-0.5 rounded"
                                       style={{
-                                        color: `${TEAL}70`,
-                                        backgroundColor: `${TEAL}10`,
+                                        color: PINK,
+                                        backgroundColor: `${MAGENTA}10`,
                                       }}
                                     >
                                       {property.propertyCode}
@@ -900,30 +886,30 @@ export default function PropertiesPage() {
                                 </div>
                               </div>
                               <div className="flex items-center gap-2.5 shrink-0">
-                                <span className="text-xs font-bold" style={{ color: CREAM_70 }}>
+                                <span className="text-xs font-bold" style={{ color: CYAN_70 }}>
                                   {property.currency === "PKR" ? "Rs" : "$"} {Number(property.price)?.toLocaleString()}
                                 </span>
                                 <span className={`inline-block w-2 h-2 rounded-full ${getStatusDotColor(property.status)}`} title={property.status} />
                                 <div
                                   className="w-6 h-6 rounded-md flex items-center justify-center"
-                                  style={{ backgroundColor: `${TEAL}10` }}
+                                  style={{ backgroundColor: `${MAGENTA}10` }}
                                 >
-                                  <ArrowUpRight size={11} style={{ color: `${TEAL}60` }} />
+                                  <ArrowUpRight size={11} style={{ color: `${MAGENTA}90` }} />
                                 </div>
                               </div>
                             </Link>
                           );
                         })}
                       </div>
-                      <div style={{ borderTop: `1px solid ${MINT}05` }}>
+                      <div style={{ borderTop: `1px solid ${CYAN}05` }}>
                         <button
                           onClick={() => {
                             setSearch(searchInput);
                             setShowSuggestions(false);
                           }}
                           className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-semibold transition-colors"
-                          style={{ color: TEAL }}
-                          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = `${TEAL}10`)}
+                          style={{ color: PINK }}
+                          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = `${MAGENTA}10`)}
                           onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
                         >
                           <Search size={12} />
@@ -946,22 +932,22 @@ export default function PropertiesPage() {
                       transition={{ duration: 0.2 }}
                       className="absolute top-full left-0 right-0 mt-2 backdrop-blur-xl rounded-2xl shadow-2xl shadow-black/50 overflow-hidden z-50"
                       style={{
-                        backgroundColor: `${NAVY_CARD}F2`,
-                        border: `1px solid ${MINT}10`,
+                        backgroundColor: `${CARD_PURPLE}F2`,
+                        border: `1px solid ${CYAN}10`,
                       }}
                     >
                       <div className="flex flex-col items-center justify-center py-8 px-4">
                         <div
                           className="w-10 h-10 rounded-full flex items-center justify-center mb-3"
                           style={{
-                            backgroundColor: `${TEAL}08`,
-                            border: `1px solid ${TEAL}15`,
+                            backgroundColor: `${MAGENTA}08`,
+                            border: `1px solid ${MAGENTA}15`,
                           }}
                         >
-                          <Search size={16} style={{ color: `${TEAL}40` }} />
+                          <Search size={16} style={{ color: `${MAGENTA}50` }} />
                         </div>
-                        <p className="text-sm font-medium" style={{ color: CREAM_50 }}>No matches found</p>
-                        <p className="text-[11px] mt-1" style={{ color: CREAM_30 }}>Try different keywords</p>
+                        <p className="text-sm font-medium" style={{ color: CYAN_50 }}>No matches found</p>
+                        <p className="text-[11px] mt-1" style={{ color: CYAN_30 }}>Try different keywords</p>
                       </div>
                     </motion.div>
                   )}
@@ -972,9 +958,9 @@ export default function PropertiesPage() {
               <div
                 className="shrink-0 px-3 py-1.5 backdrop-blur-sm rounded-full text-xs font-medium whitespace-nowrap"
                 style={{
-                  backgroundColor: `${MINT}0A`,
-                  border: `1px solid ${MINT}10`,
-                  color: CREAM_80,
+                  backgroundColor: `${CYAN}0A`,
+                  border: `1px solid ${CYAN}10`,
+                  color: CYAN_80,
                 }}
               >
                 {filteredProperties.length} {filteredProperties.length === 1 ? "property" : "properties"}
@@ -986,9 +972,9 @@ export default function PropertiesPage() {
                 disabled={loading}
                 className="p-2.5 rounded-xl transition-all shrink-0 disabled:opacity-40"
                 style={{
-                  backgroundColor: `${MINT}0A`,
-                  border: `1px solid ${MINT}15`,
-                  color: CREAM_60,
+                  backgroundColor: `${CYAN}0A`,
+                  border: `1px solid ${CYAN}15`,
+                  color: CYAN_60,
                 }}
                 title="Refresh listings"
               >
@@ -1002,14 +988,14 @@ export default function PropertiesPage() {
                 style={
                   showFilters || hasActiveFilters
                     ? {
-                        backgroundColor: TEAL,
-                        color: NAVY,
-                        boxShadow: `0 4px 12px ${TEAL}25`,
+                        backgroundColor: MAGENTA,
+                        color: "#FFFFFF",
+                        boxShadow: `0 4px 12px ${MAGENTA}25`,
                       }
                     : {
-                        backgroundColor: `${MINT}0A`,
-                        color: CREAM_70,
-                        border: `1px solid ${MINT}15`,
+                        backgroundColor: `${CYAN}0A`,
+                        color: CYAN_70,
+                        border: `1px solid ${CYAN}15`,
                       }
                 }
               >
@@ -1018,7 +1004,7 @@ export default function PropertiesPage() {
                 {hasActiveFilters && (
                   <span
                     className="w-4 h-4 flex items-center justify-center text-[10px] font-black rounded-full"
-                    style={{ backgroundColor: NAVY, color: TEAL }}
+                    style={{ backgroundColor: "#FFFFFF", color: MAGENTA }}
                   >
                     !
                   </span>
@@ -1029,8 +1015,8 @@ export default function PropertiesPage() {
               <div
                 className="flex items-center rounded-xl p-1 shrink-0"
                 style={{
-                  backgroundColor: `${MINT}0A`,
-                  border: `1px solid ${MINT}10`,
+                  backgroundColor: `${CYAN}0A`,
+                  border: `1px solid ${CYAN}10`,
                 }}
               >
                 <button
@@ -1038,8 +1024,8 @@ export default function PropertiesPage() {
                   className="p-1.5 rounded-lg transition-colors"
                   style={
                     viewMode === "grid"
-                      ? { backgroundColor: TEAL, color: NAVY, boxShadow: `0 4px 12px ${TEAL}25` }
-                      : { color: CREAM_40 }
+                      ? { backgroundColor: MAGENTA, color: "#FFFFFF", boxShadow: `0 4px 12px ${MAGENTA}25` }
+                      : { color: CYAN_40 }
                   }
                 >
                   <Grid3X3 size={15} />
@@ -1049,8 +1035,8 @@ export default function PropertiesPage() {
                   className="p-1.5 rounded-lg transition-colors"
                   style={
                     viewMode === "list"
-                      ? { backgroundColor: TEAL, color: NAVY, boxShadow: `0 4px 12px ${TEAL}25` }
-                      : { color: CREAM_40 }
+                      ? { backgroundColor: MAGENTA, color: "#FFFFFF", boxShadow: `0 4px 12px ${MAGENTA}25` }
+                      : { color: CYAN_40 }
                   }
                 >
                   <List size={15} />
@@ -1085,9 +1071,9 @@ export default function PropertiesPage() {
                   <span
                     className="flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold rounded-full capitalize"
                     style={{
-                      backgroundColor: `${TEAL}20`,
-                      color: MINT,
-                      border: `1px solid ${TEAL}25`,
+                      backgroundColor: `${MAGENTA}20`,
+                      color: PINK,
+                      border: `1px solid ${MAGENTA}25`,
                     }}
                   >
                     {propertyType}
@@ -1098,9 +1084,9 @@ export default function PropertiesPage() {
                   <span
                     className="flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold rounded-full capitalize"
                     style={{
-                      backgroundColor: `${TEAL}20`,
-                      color: MINT,
-                      border: `1px solid ${TEAL}25`,
+                      backgroundColor: `${MAGENTA}20`,
+                      color: PINK,
+                      border: `1px solid ${MAGENTA}25`,
                     }}
                   >
                     {priceType}
@@ -1111,9 +1097,9 @@ export default function PropertiesPage() {
                   <span
                     className="flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold rounded-full"
                     style={{
-                      backgroundColor: `${TEAL}20`,
-                      color: MINT,
-                      border: `1px solid ${TEAL}25`,
+                      backgroundColor: `${MAGENTA}20`,
+                      color: PINK,
+                      border: `1px solid ${MAGENTA}25`,
                     }}
                   >
                     &quot;{search.slice(0, 15)}&quot;
@@ -1123,7 +1109,7 @@ export default function PropertiesPage() {
                 <button
                   onClick={clearAllFilters}
                   className="text-[11px] font-semibold hover:underline"
-                  style={{ color: BRIGHT_CYAN }}
+                  style={{ color: CYAN }}
                 >
                   Clear all
                 </button>
@@ -1143,14 +1129,14 @@ export default function PropertiesPage() {
             transition={{ duration: 0.25 }}
             className="relative z-40 overflow-hidden backdrop-blur-xl shadow-lg"
             style={{
-              backgroundColor: `${NAVY_LIGHT}F2`,
-              borderBottom: `1px solid ${MINT}10`,
+              backgroundColor: `${LIGHT_PURPLE}F2`,
+              borderBottom: `1px solid ${CYAN}10`,
             }}
           >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider mb-1.5" style={{ color: CREAM_60 }}>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider mb-1.5" style={{ color: CYAN_60 }}>
                     Property Type
                   </label>
                   <DarkSelect
@@ -1165,7 +1151,7 @@ export default function PropertiesPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider mb-1.5" style={{ color: CREAM_60 }}>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider mb-1.5" style={{ color: CYAN_60 }}>
                     Listing Type
                   </label>
                   <DarkSelect
@@ -1180,7 +1166,7 @@ export default function PropertiesPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider mb-1.5" style={{ color: CREAM_60 }}>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider mb-1.5" style={{ color: CYAN_60 }}>
                     Sort By
                   </label>
                   <DarkSelect
@@ -1202,145 +1188,127 @@ export default function PropertiesPage() {
                     ))}
                   />
                 </div>
-                <div className="flex items-end">
-                  <button
-                    onClick={clearAllFilters}
-                    className="w-full px-4 py-2.5 text-sm font-semibold rounded-xl transition-colors"
-                    style={{
-                      border: `1px solid ${MINT}15`,
-                      color: CREAM_60,
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = `${MINT}0A`)}
-                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
-                  >
-                    Reset
-                  </button>
-                </div>
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ===== GRID / LIST ===== */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
-        {loading ? (
-          viewMode === "grid" ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <SkeletonCard key={i} />
-              ))}
-            </div>
-          ) : (
-            <div className="flex flex-col gap-4">
-              {Array.from({ length: 4 }).map((_, i) => (
-                <SkeletonList key={i} />
-              ))}
-            </div>
-          )
-        ) : filteredProperties.length === 0 ? (
+      {/* ===== MAIN CONTENT ===== */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-20">
+        {/* Loading */}
+        {loading && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <SkeletonCard key={i} />
+            ))}
+          </div>
+        )}
+
+        {/* Empty State */}
+        {!loading && filteredProperties.length === 0 && (
           <div className="flex flex-col items-center justify-center py-24 text-center">
             <div
-              className="w-20 h-20 rounded-full flex items-center justify-center mb-4"
+              className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
               style={{
-                backgroundColor: `${TEAL}10`,
-                border: `1px solid ${TEAL}15`,
+                backgroundColor: `${MAGENTA}08`,
+                border: `1px solid ${MAGENTA}15`,
               }}
             >
-              <Search size={28} style={{ color: `${TEAL}40` }} />
+              <Building2 size={32} style={{ color: `${MAGENTA}50` }} />
             </div>
-            <h3 className="text-lg text-white mb-1 font-inter">No Properties Found</h3>
-            <p className="text-sm max-w-sm mb-4" style={{ color: CREAM_60 }}>
-              {hasActiveFilters
-                ? `No match found for "${search}". Try different keywords or clear filters.`
-                : "No properties listed yet."}
+            <h3 className="text-xl font-bold text-white mb-2">No Properties Found</h3>
+            <p className="text-sm mb-6 max-w-sm" style={{ color: CYAN_50 }}>
+              {search || hasActiveFilters
+                ? "Try adjusting your search or filters to find what you're looking for."
+                : "No properties are available right now. Check back soon!"}
             </p>
             {hasActiveFilters && (
               <button
                 onClick={clearAllFilters}
-                className="px-5 py-2.5 text-sm font-semibold rounded-xl transition-colors"
+                className="px-5 py-2.5 text-sm font-semibold rounded-xl transition-all hover:scale-105"
                 style={{
-                  backgroundColor: TEAL,
-                  color: NAVY,
-                  boxShadow: `0 4px 12px ${TEAL}25`,
+                  background: `linear-gradient(135deg, ${PURPLE}, ${MAGENTA})`,
+                  color: "#FFFFFF",
+                  boxShadow: `0 4px 12px ${MAGENTA}25`,
                 }}
               >
                 Clear All Filters
               </button>
             )}
           </div>
-        ) : viewMode === "grid" ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        )}
+
+        {/* Grid View */}
+        {!loading && filteredProperties.length > 0 && viewMode === "grid" && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProperties.map((property) => (
               <PropertyCard key={property._id} property={property} />
             ))}
           </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        )}
+
+        {/* List View */}
+        {!loading && filteredProperties.length > 0 && viewMode === "list" && (
+          <div className="flex flex-col gap-5">
             {filteredProperties.map((property) => (
               <PropertyListItem key={property._id} property={property} />
             ))}
           </div>
         )}
 
-        {/* ===== PAGINATION ===== */}
-        {pagination && pagination.totalPages > 1 && (
+        {/* Pagination */}
+        {!loading && pagination && pagination.totalPages > 1 && (
           <div className="flex items-center justify-center gap-2 mt-12">
             <button
               onClick={() => fetchProperties(page - 1)}
-              disabled={!pagination.hasPrevPage}
-              className="w-10 h-10 flex items-center justify-center rounded-xl transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              disabled={page <= 1}
+              className="flex items-center gap-1 px-4 py-2 rounded-xl text-sm font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed"
               style={{
-                border: `1px solid ${MINT}15`,
-                color: CREAM_40,
+                backgroundColor: `${CYAN}0A`,
+                border: `1px solid ${CYAN}15`,
+                color: CYAN_70,
               }}
             >
-              <ChevronLeft size={18} />
+              <ChevronLeft size={15} /> Prev
             </button>
-            {Array.from({ length: pagination.totalPages }, (_, i) => i + 1)
-              .filter((p) => p === 1 || p === pagination.totalPages || Math.abs(p - page) <= 1)
-              .reduce((acc, p, i, arr) => {
-                if (i > 0 && p - arr[i - 1] > 1) acc.push("...");
-                acc.push(p);
-                return acc;
-              }, [])
-              .map((item, i) =>
-                item === "..." ? (
-                  <span key={`d${i}`} className="w-10 h-10 flex items-center justify-center text-sm" style={{ color: CREAM_20 }}>
-                    ...
-                  </span>
-                ) : (
-                  <button
-                    key={item}
-                    onClick={() => fetchProperties(item)}
-                    className="w-10 h-10 flex items-center justify-center rounded-xl text-sm font-semibold transition-colors"
-                    style={
-                      page === item
-                        ? {
-                            backgroundColor: TEAL,
-                            color: NAVY,
-                            boxShadow: `0 4px 12px ${TEAL}25`,
-                          }
-                        : {
-                            border: `1px solid ${MINT}15`,
-                            color: CREAM_50,
-                          }
-                    }
-                  >
-                    {item}
-                  </button>
-                )
-              )}
+
+            <div className="flex items-center gap-1.5">
+              {Array.from({ length: pagination.totalPages }, (_, i) => i + 1).map((p) => (
+                <button
+                  key={p}
+                  onClick={() => fetchProperties(p)}
+                  className="w-10 h-10 rounded-xl text-sm font-semibold transition-all"
+                  style={
+                    p === page
+                      ? {
+                          background: `linear-gradient(135deg, ${PURPLE}, ${MAGENTA})`,
+                          color: "#FFFFFF",
+                          boxShadow: `0 4px 12px ${MAGENTA}25`,
+                        }
+                      : {
+                          backgroundColor: `${CYAN}0A`,
+                          border: `1px solid ${CYAN}15`,
+                          color: CYAN_70,
+                        }
+                  }
+                >
+                  {p}
+                </button>
+              ))}
+            </div>
+
             <button
               onClick={() => fetchProperties(page + 1)}
-              disabled={!pagination.hasNextPage}
-              className="w-10 h-10 flex items-center justify-center rounded-xl transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              disabled={page >= pagination.totalPages}
+              className="flex items-center gap-1 px-4 py-2 rounded-xl text-sm font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed"
               style={{
-                border: `1px solid ${MINT}15`,
-                color: CREAM_40,
+                backgroundColor: `${CYAN}0A`,
+                border: `1px solid ${CYAN}15`,
+                color: CYAN_70,
               }}
             >
-              <ChevronRight size={18} />
+              Next <ChevronRight size={15} />
             </button>
           </div>
         )}

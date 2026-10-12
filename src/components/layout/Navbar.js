@@ -32,8 +32,8 @@ export default function Navbar() {
             {/* Desktop Logo (md and up) — ✅ WHITE */}
             <div className="relative w-56 h-20 hidden md:block">
               <Image
-                src="/images/navlogo12.png"
-                alt="Christopher Ryan Properties"
+                src="/images/mettlogo11.png"
+                alt="Matt Vatcher Properties"
                 fill
                 className="object-contain brightness-125 contrast-150 drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]"
                 sizes="288px"
@@ -44,19 +44,14 @@ export default function Navbar() {
             {/* Mobile Logo (below md) — ✅ WHITE */}
             <div className="relative w-36 h-12 md:hidden">
               <Image
-                src="/images/navlogo12.png"
-                alt="Christopher Ryan Properties"
+                src="/images/mettlogo11.png"
+                alt="Matt Vatcher Properties"
                 fill
                 className="object-contain brightness-125 contrast-150 drop-shadow-[0_0_10px_rgba(255,255,255,0.6)]"
                 sizes="160px"
                 priority
               />
             </div>
-
-            {/* Address Line (Single Line) */}
-            <span className="text-[#FFF7F0]/90 text-[10px] md:text-xs font-medium tracking-wide whitespace-nowrap leading-tight">
-              11307 Stuart Mill Rd. Oakton, VA 22124
-            </span>
           </Link>
 
           {/* Right Side: Phone + Let's Talk + Menu */}

@@ -5,38 +5,40 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Quote, Star, ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
 
 // ============================================
-// SAME 3-COLOR SCHEME AS HERO & ABOUT
+// NEW 4-COLOR SCHEME (matches Hero & About)
+// Purple | Cyan | Pink | Magenta
 // ============================================
-const TEAL = "#019586";
-const GREEN = "#00B777";
-const MINT = "#B1F1E9";
-const DARK = "#072A26";
+const PURPLE = "#3C1E74";
+const CYAN = "#5CE1E6";
+const PINK = "#FFA7E4";
+const MAGENTA = "#B462B6";
+const DARK = "#2A1454"; // deep purple — text on white cards
 
 const testimonials = [
-  { id: 1, name: "Erin", text: "Being a military spouse, I have 4 moves under my belt. But when it came time to help my mother sell her house, I wasn't as certain. Christopher Ryan was wonderful, and definitely went above and beyond for us. Compared to the previous realtors we had worked with, Christopher Ryan definetly stands out, and I will recommend her every time someone is looking for a realtor." },
-  { id: 2, name: "Glenn", text: "Christopher Ryan was friendly and helpful, and made the home buying process a charm!" },
-  { id: 3, name: "Laurie", text: "Christopher Ryan worked patiently with us as we searched for, and found , a great home in neighborhoods with very few listings, and at a good price as well. Then she turned around and sold our existing home in a couple of days. Great knowledge of all things real estate." },
-  { id: 4, name: "Josh & Meghan", text: "When buying your first home Christopher Ryan is the realtor best suited for the job. Christopher Ryan gets to know her clients and is able to pick out homes that will suit you best. She really knows the areas of Northern Virginia well and is flexible with her time in order to book viewings when it suits you best. She is knowledgeable and we were able to understand the process of buying a home with her expertise. You'd be mistaken to not use Christopher Ryan for your future home buying needs!" },
-  { id: 5, name: "Nicole Schenk", text: "I've had the pleasure of working with Christopher Ryan for a few years, and I am consistently impressed by her dedication to her clients. Christopher Ryan excels in providing a seamless experience for both sellers and buyers, ensuring that every transaction is smooth and stress-free. She takes the time to listen to her clients' needs and preferences, offering personalized and reliable service that is second to none. Her extensive knowledge of the Northern Virginia real estate market is truly impressive, and it is clear that she is passionate about helping her clients achieve their goals. Christopher Ryan is a true professional, and I highly recommend her to anyone looking to buy or sell property in the Northern Virginia area." },
-  { id: 6, name: "Noah", text: "Christopher Ryan helped me buy my first home and I'm so very happy with everything she did for me! She was very helpful and patient despite me being picky and not having clear requirements and set search parameters. She made the whole looking and buying process painless and as comfortable and understandable as possible. Christopher Ryan is such a friendly and informative resource that I would recommend to anyone wanting to navigate the real estate market. I always looked forward to any house visits that Christopher Ryan seamlessly set up for me some on same day short notice!" },
-  { id: 7, name: "Dave Graham", text: "Simply put Christopher Ryan is the best. Super patient, knowledgeable and proactive and always reachable for questions, showings, offers etc etc. We are very picky and didn't know if we would find the right place but Christopher Ryan hung in there for the journey with us! Thanks again Christopher Ryan for everything you've done." },
-  { id: 8, name: "Cathy", text: "Christopher Ryan went above and beyond in her work with me. I was selling a property located five hours from my current location, which had its challenges. Christopher Ryan helped me to manage the logistics of selling a property remotely. She was, at all times, friendly, informative and, above all, knowledgeable and compassionate. I highly recommend her services!" },
-  { id: 9, name: "Kathryn Graham", text: "Christopher Ryan was wonderful. She kept me well informed as to what was happening in the real estate market and then found me the place I wanted to be. I'll never move again! Christopher Ryan was friendly and patient and helped me decide what I wanted in my new home Kudos Christopher Ryan!" },
-  { id: 10, name: "Daniel P", text: "Christopher Ryan was amazing since the day I landed in Canada. She treated me like I was her best client since the beginning. Her good humor and patience make the process of finding a home much more enjoyable. I highly recommended her!" },
-  { id: 11, name: "Kirby Chan", text: "Christopher Ryan is an amazing Realtor. She's a senior graduate of our social media program. She has all the social media tools to support buyers in finding off market homes and support sellers in promoting their homes to a wide audience!!!" },
-  { id: 12, name: "Sandip", text: "This real estate agent will be there for you when you need guidance and support. She is very prompt and responsive on email and text and will call or meet you in person if that's needed. She is a very good listener and has empathy. She has lots of connections in the trades and financial industry. She really goes the extra mile and has passion for what she does. And we sold my house in a spring 2023 market for well above asking. We had a bidding war and a back up offer all which were managed with the above mentioned qualities. She cares and it shows. You need to connect with her if you are in the market." },
-  { id: 13, name: "Mark", text: "Christopher Ryan is awesome! Her help was instrumental in me being able to find the right house. Very friendly, knowledgeable and responsive!" },
-  { id: 14, name: "Shane", text: "Christopher Ryan is an incredible realtor! This is the second time she's helped us with a house and I'm sure it won't be the last. She got us a good price at an uncertain time. Can't say enough good things about her!" },
-  { id: 15, name: "Sandip", text: "Amazing experience! She was easily able to understand my needs. She is one of the most reliable people I have met! She was my rock during my perfect home search. Also, very knowledgeable for a home in the country. Very accommodating! I always look for an agent that is on the ball so I can get the best deal and Christopher Ryan definitely exceeded my expectations. Highly, highly recommend!" },
-  { id: 16, name: "Karen", text: "Christopher Ryan was recommended to me by a friend two years ago when I arrived in Northern Virginia from the Niagara region. Christopher Ryan spent a lot of time with me helping me find a wonderful house to call home. Two years later and a relocation back to Niagara, Christopher Ryan was there every step of the way assisting me in providing suggestions that would allow me to sell my home quickly and for a favourable price. Christopher Ryan went over and above her responsibility as a realtor and provided tremendous support during a time that can be very stressful. I feel very lucky to have met her and would highly recommend her services" },
-  { id: 17, name: "Soormee Robin", text: "I stumbled across Christopher Ryan, at the beginning of my house-search, and I now considerate it to be a divine accident. I reached out to ask a question, to which she responded effortlessly, with the ease and lightness which is customary of her style. During our time together, I came to realize that she is a person of high integrity, always taking the extra time to address things things properly and thoroughly. She always made sure that she had done everything possible to accommodate my needs throughout all the various scenarios that we went through together, and she always seemed to have something in her (very ethical) \"bag of tricks\" to make things work. I can't recommend her service highly enough, she gave me 5-star service all the way! I'm very grateful!!" },
+  { id: 1, name: "Erin", text: "Being a military spouse, I have 4 moves under my belt. But when it came time to help my mother sell her house, I wasn't as certain. Matt Vatcher was wonderful, and definitely went above and beyond for us. Compared to the previous realtors we had worked with, Matt Vatcher definitely stands out, and I will recommend him every time someone is looking for a realtor." },
+  { id: 2, name: "Glenn", text: "Matt Vatcher was friendly and helpful, and made the home buying process a charm!" },
+  { id: 3, name: "Laurie", text: "Matt Vatcher worked patiently with us as we searched for, and found, a great home in neighborhoods with very few listings, and at a good price as well. Then he turned around and sold our existing home in a couple of days. Great knowledge of all things real estate." },
+  { id: 4, name: "Josh & Meghan", text: "When buying your first home Matt Vatcher is the realtor best suited for the job. Matt Vatcher gets to know his clients and is able to pick out homes that will suit you best. He really knows the areas of Toronto well and is flexible with his time in order to book viewings when it suits you best. He is knowledgeable and we were able to understand the process of buying a home with his expertise. You'd be mistaken to not use Matt Vatcher for your future home buying needs!" },
+  { id: 5, name: "Nicole Schenk", text: "I've had the pleasure of working with Matt Vatcher for a few years, and I am consistently impressed by his dedication to his clients. Matt Vatcher excels in providing a seamless experience for both sellers and buyers, ensuring that every transaction is smooth and stress-free. He takes the time to listen to his clients' needs and preferences, offering personalized and reliable service that is second to none. His extensive knowledge of the Toronto real estate market is truly impressive, and it is clear that he is passionate about helping his clients achieve their goals. Matt Vatcher is a true professional, and I highly recommend him to anyone looking to buy or sell property in the Toronto area." },
+  { id: 6, name: "Noah", text: "Matt Vatcher helped me buy my first home and I'm so very happy with everything he did for me! He was very helpful and patient despite me being picky and not having clear requirements and set search parameters. He made the whole looking and buying process painless and as comfortable and understandable as possible. Matt Vatcher is such a friendly and informative resource that I would recommend to anyone wanting to navigate the real estate market. I always looked forward to any house visits that Matt Vatcher seamlessly set up for me, some on same day short notice!" },
+  { id: 7, name: "Dave Graham", text: "Simply put Matt Vatcher is the best. Super patient, knowledgeable and proactive and always reachable for questions, showings, offers etc etc. We are very picky and didn't know if we would find the right place but Matt Vatcher hung in there for the journey with us! Thanks again Matt Vatcher for everything you've done." },
+  { id: 8, name: "Cathy", text: "Matt Vatcher went above and beyond in his work with me. I was selling a property located five hours from my current location, which had its challenges. Matt Vatcher helped me to manage the logistics of selling a property remotely. He was, at all times, friendly, informative and, above all, knowledgeable and compassionate. I highly recommend his services!" },
+  { id: 9, name: "Kathryn Graham", text: "Matt Vatcher was wonderful. He kept me well informed as to what was happening in the real estate market and then found me the place I wanted to be. I'll never move again! Matt Vatcher was friendly and patient and helped me decide what I wanted in my new home. Kudos Matt Vatcher!" },
+  { id: 10, name: "Daniel P", text: "Matt Vatcher was amazing since the day I landed in Canada. He treated me like I was his best client since the beginning. His good humor and patience make the process of finding a home much more enjoyable. I highly recommend him!" },
+  { id: 11, name: "Kirby Chan", text: "Matt Vatcher is an amazing Realtor. He's a senior graduate of our social media program. He has all the social media tools to support buyers in finding off market homes and support sellers in promoting their homes to a wide audience!!!" },
+  { id: 12, name: "Sandip", text: "This real estate agent will be there for you when you need guidance and support. He is very prompt and responsive on email and text and will call or meet you in person if that's needed. He is a very good listener and has empathy. He has lots of connections in the trades and financial industry. He really goes the extra mile and has passion for what he does. And we sold my house in a spring 2023 market for well above asking. We had a bidding war and a back up offer all which were managed with the above mentioned qualities. He cares and it shows. You need to connect with him if you are in the market." },
+  { id: 13, name: "Mark", text: "Matt Vatcher is awesome! His help was instrumental in me being able to find the right house. Very friendly, knowledgeable and responsive!" },
+  { id: 14, name: "Shane", text: "Matt Vatcher is an incredible realtor! This is the second time he's helped us with a house and I'm sure it won't be the last. He got us a good price at an uncertain time. Can't say enough good things about him!" },
+  { id: 15, name: "Sandip", text: "Amazing experience! He was easily able to understand my needs. He is one of the most reliable people I have met! He was my rock during my perfect home search. Also, very knowledgeable for a home in the country. Very accommodating! I always look for an agent that is on the ball so I can get the best deal and Matt Vatcher definitely exceeded my expectations. Highly, highly recommend!" },
+  { id: 16, name: "Karen", text: "Matt Vatcher was recommended to me by a friend two years ago when I arrived in Toronto from the Niagara region. Matt Vatcher spent a lot of time with me helping me find a wonderful house to call home. Two years later and a relocation back to Niagara, Matt Vatcher was there every step of the way assisting me in providing suggestions that would allow me to sell my home quickly and for a favourable price. Matt Vatcher went over and above his responsibility as a realtor and provided tremendous support during a time that can be very stressful. I feel very lucky to have met him and would highly recommend his services." },
+  { id: 17, name: "Soormee Robin", text: "I stumbled across Matt Vatcher, at the beginning of my house-search, and I now consider it to be a divine accident. I reached out to ask a question, to which he responded effortlessly, with the ease and lightness which is customary of his style. During our time together, I came to realize that he is a person of high integrity, always taking the extra time to address things properly and thoroughly. He always made sure that he had done everything possible to accommodate my needs throughout all the various scenarios that we went through together, and he always seemed to have something in his (very ethical) \"bag of tricks\" to make things work. I can't recommend his service highly enough, he gave me 5-star service all the way! I'm very grateful!!" },
   { id: 18, name: "Ann", text: "Hi, just a note to say thanks for all you have done for us throughout this process. As first time buyers, we had a lot of unanswered questions regarding the purchase of our home. Thank you for providing the answers to many of these and giving us informed advice on the homes that we visited!" },
-  { id: 19, name: "Cheyenne", text: "Christopher Ryan was a pleasure to work with! As first time Canadian homebuyers, she made the process simple and easy. She provided great resources to help us find our ideal home. We look forward to working with her again in the future!" },
-  { id: 20, name: "Sandy", text: "Christopher Ryan helped us to find our perfect home in Carleton Place, in March 2021! She was always so organized for our house tours, with: clipboards, spec sheets, and hand sanitizer! Christopher Ryan always listened to our feedback, and would use our info to update the listings she would send us! We loved working with Christopher Ryan, as I'm sure you will!" },
-  { id: 21, name: "Spencer", text: "Christopher Ryan is one of the hardest working and dedicated agents I have dealt with after buying ten houses. Christopher Ryan guided us through one of the toughest transactions I have done. The result is we live in our dream forever home." },
-  { id: 22, name: "Ken", text: "Christopher Ryan goes above and beyond in everything about selling homes!" },
-  { id: 23, name: "Suzanne", text: "Christopher Ryan helped me buy a home in Northern Virginia's Copeland Park neighbourhood in January 2021. There are very few properties on the Northern Virginia market and you have to move fast. Christopher Ryan gave me all the information I needed in a very short period of time and explained clearly how to proceed to make an offer. I could count on her at every step, before and after my offer was accepted. She always answered quickly all my questions. She is supportive, knowledgeable and professional. But there is more: she is also a great person. I highly recommend her services to friends and family." },
-  { id: 24, name: "Virginia", text: "What really sets Christopher Ryan apart is her heart. When our first offer didn't get accepted she followed up with us the next day with words of encouragement, and that really made us feel comforted. It's personal touches like this that really made the experience with her so great. For first time buyers the process can be really overwhelming and Christopher Ryan took the time to patiently walk us through each step, always willing to dig up the information we were looking for and making sure we were comfortable and informed every step of the way. We cannot thank her enough for her help with our new home!" },
+  { id: 19, name: "Cheyenne", text: "Matt Vatcher was a pleasure to work with! As first time Canadian homebuyers, he made the process simple and easy. He provided great resources to help us find our ideal home. We look forward to working with him again in the future!" },
+  { id: 20, name: "Sandy", text: "Matt Vatcher helped us to find our perfect home in Carleton Place, in March 2021! He was always so organized for our house tours, with: clipboards, spec sheets, and hand sanitizer! Matt Vatcher always listened to our feedback, and would use our info to update the listings he would send us! We loved working with Matt Vatcher, as I'm sure you will!" },
+  { id: 21, name: "Spencer", text: "Matt Vatcher is one of the hardest working and dedicated agents I have dealt with after buying ten houses. Matt Vatcher guided us through one of the toughest transactions I have done. The result is we live in our dream forever home." },
+  { id: 22, name: "Ken", text: "Matt Vatcher goes above and beyond in everything about selling homes!" },
+  { id: 23, name: "Suzanne", text: "Matt Vatcher helped me buy a home in Toronto's Copeland Park neighbourhood in January 2021. There are very few properties on the Toronto market and you have to move fast. Matt Vatcher gave me all the information I needed in a very short period of time and explained clearly how to proceed to make an offer. I could count on him at every step, before and after my offer was accepted. He always answered quickly all my questions. He is supportive, knowledgeable and professional. But there is more: he is also a great person. I highly recommend his services to friends and family." },
+  { id: 24, name: "Virginia", text: "What really sets Matt Vatcher apart is his heart. When our first offer didn't get accepted he followed up with us the next day with words of encouragement, and that really made us feel comforted. It's personal touches like this that really made the experience with him so great. For first time buyers the process can be really overwhelming and Matt Vatcher took the time to patiently walk us through each step, always willing to dig up the information we were looking for and making sure we were comfortable and informed every step of the way. We cannot thank him enough for his help with our new home!" },
 ];
 
 const slideVariants = {
@@ -56,10 +58,10 @@ const slideVariants = {
 // ============================================
 const TestimonialCard = ({ t, index = 0, total = 1 }) => {
   const avatarColors = [
-    `linear-gradient(135deg, ${TEAL}, ${GREEN})`,
-    `linear-gradient(135deg, ${DARK}, ${TEAL})`,
-    `linear-gradient(135deg, ${GREEN}, ${TEAL})`,
-    `linear-gradient(135deg, ${TEAL}, ${DARK})`,
+    `linear-gradient(135deg, ${MAGENTA}, ${PURPLE})`,
+    `linear-gradient(135deg, ${PURPLE}, ${MAGENTA})`,
+    `linear-gradient(135deg, ${PINK}, ${MAGENTA})`,
+    `linear-gradient(135deg, ${MAGENTA}, ${PINK})`,
   ];
   const getAvatarColor = (id) => avatarColors[(id - 1) % avatarColors.length];
 
@@ -74,14 +76,14 @@ const TestimonialCard = ({ t, index = 0, total = 1 }) => {
         className="relative rounded-2xl overflow-hidden flex flex-col h-full transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl"
         style={{
           backgroundColor: "#FFFFFF",
-          border: `1px solid ${TEAL}20`,
-          boxShadow: `0 10px 40px -10px ${TEAL}30`,
+          border: `1px solid ${MAGENTA}20`,
+          boxShadow: `0 10px 40px -10px ${MAGENTA}30`,
         }}
       >
         <div className="relative p-5 sm:p-6 md:p-7 flex flex-col flex-1">
           {/* Decorative quote */}
           <div className="absolute top-3 right-3 opacity-[0.07]">
-            <Quote size={total === 1 ? 72 : 52} style={{ color: TEAL }} />
+            <Quote size={total === 1 ? 72 : 52} style={{ color: MAGENTA }} />
           </div>
 
           {/* Stars */}
@@ -109,7 +111,7 @@ const TestimonialCard = ({ t, index = 0, total = 1 }) => {
           <div
             className="w-full h-px my-4"
             style={{
-              background: `linear-gradient(to right, transparent, ${TEAL}30, transparent)`,
+              background: `linear-gradient(to right, transparent, ${MAGENTA}30, transparent)`,
             }}
           />
 
@@ -119,7 +121,7 @@ const TestimonialCard = ({ t, index = 0, total = 1 }) => {
               className="relative w-11 h-11 rounded-full flex items-center justify-center shrink-0 text-sm font-extrabold text-white shadow-md"
               style={{
                 background: getAvatarColor(t.id),
-                border: `2px solid ${MINT}`,
+                border: `2px solid ${CYAN}`,
               }}
             >
               {t.name.charAt(0)}
@@ -128,7 +130,7 @@ const TestimonialCard = ({ t, index = 0, total = 1 }) => {
               <h4 className="font-extrabold text-[14px] sm:text-[15px] truncate" style={{ color: DARK }}>
                 {t.name}
               </h4>
-              <p className="text-[10px] sm:text-xs font-bold truncate" style={{ color: GREEN }}>
+              <p className="text-[10px] sm:text-xs font-bold truncate" style={{ color: MAGENTA }}>
                 Verified Client
               </p>
             </div>
@@ -139,7 +141,7 @@ const TestimonialCard = ({ t, index = 0, total = 1 }) => {
         <div
           className="h-1 w-full"
           style={{
-            background: `linear-gradient(to right, ${TEAL}, ${GREEN})`,
+            background: `linear-gradient(to right, ${MAGENTA}, ${PURPLE})`,
           }}
         />
       </div>
@@ -157,16 +159,16 @@ const NavButton = ({ onClick, disabled, icon, label }) => (
     className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5"
     style={{
       backgroundColor: "#FFFFFF",
-      border: `1px solid ${TEAL}40`,
-      color: TEAL,
+      border: `1px solid ${MAGENTA}40`,
+      color: MAGENTA,
     }}
     onMouseEnter={(e) => {
-      e.currentTarget.style.backgroundColor = TEAL;
+      e.currentTarget.style.backgroundColor = MAGENTA;
       e.currentTarget.style.color = "#FFFFFF";
     }}
     onMouseLeave={(e) => {
       e.currentTarget.style.backgroundColor = "#FFFFFF";
-      e.currentTarget.style.color = TEAL;
+      e.currentTarget.style.color = MAGENTA;
     }}
     aria-label={label}
   >
@@ -179,7 +181,7 @@ const NavButton = ({ onClick, disabled, icon, label }) => (
 // ============================================
 const ProgressCounter = ({ current, total }) => (
   <div className="flex items-center gap-3 sm:gap-4">
-    <span className="text-base sm:text-lg font-extrabold" style={{ color: TEAL }}>
+    <span className="text-base sm:text-lg font-extrabold" style={{ color: MAGENTA }}>
       {String(current).padStart(2, "0")}
     </span>
     <div
@@ -190,11 +192,11 @@ const ProgressCounter = ({ current, total }) => (
         className="absolute left-0 top-0 h-full rounded-full transition-all duration-500"
         style={{
           width: `${(current / total) * 100}%`,
-          backgroundColor: TEAL,
+          backgroundColor: MAGENTA,
         }}
       />
     </div>
-    <span className="text-base sm:text-lg font-extrabold" style={{ color: TEAL }}>
+    <span className="text-base sm:text-lg font-extrabold" style={{ color: MAGENTA }}>
       {String(total).padStart(2, "0")}
     </span>
   </div>
@@ -298,16 +300,16 @@ export default function TestimonialsSection() {
         <div
           className="absolute inset-0"
           style={{
-            background: `linear-gradient(180deg, ${TEAL} 0%, ${GREEN} 25%, ${MINT} 60%, ${MINT} 100%)`,
+            background: `linear-gradient(180deg, ${PURPLE} 0%, ${MAGENTA} 30%, ${PINK} 65%, ${CYAN} 100%)`,
           }}
         />
         <div
           className="absolute -top-20 -right-20 w-80 h-80 rounded-full opacity-20 blur-3xl"
-          style={{ background: `radial-gradient(circle, ${GREEN} 0%, transparent 70%)` }}
+          style={{ background: `radial-gradient(circle, ${PINK} 0%, transparent 70%)` }}
         />
         <div
           className="absolute -bottom-20 -left-20 w-96 h-96 rounded-full opacity-[0.15] blur-3xl"
-          style={{ background: `radial-gradient(circle, ${TEAL} 0%, transparent 70%)` }}
+          style={{ background: `radial-gradient(circle, ${MAGENTA} 0%, transparent 70%)` }}
         />
         <div
           className="absolute inset-0 opacity-[0.03]"
@@ -326,10 +328,10 @@ export default function TestimonialsSection() {
           }`}
         >
           <div className="flex items-center justify-center gap-2 mb-4">
-            <MessageCircle size={18} style={{ color: MINT }} />
+            <MessageCircle size={18} style={{ color: CYAN }} />
             <span
               className="text-[10px] sm:text-xs uppercase tracking-[0.3em] font-extrabold"
-              style={{ color: MINT }}
+              style={{ color: CYAN }}
             >
               Client Stories
             </span>

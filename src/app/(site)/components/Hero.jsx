@@ -15,12 +15,20 @@ import {
 } from "lucide-react";
 
 // ============================================
-// 3-COLOR SCHEME ONLY (No white)
+// 4-COLOR SCHEME — "Purple Dream" (Modern)
 // ============================================
-const TEAL = "#019586";
-const GREEN = "#00B777";
-const MINT = "#B1F1E9";
-const DARK = "#072A26";
+// #3C1E74 → Deep Purple (dark / text / buttons)
+// #B462B6 → Purple      (primary brand)
+// #5CE1E6 → Cyan        (bright accent)
+// #FFA7E4 → Pink        (soft background)
+const DEEP = "#3C1E74";
+const PURPLE = "#B462B6";
+const CYAN = "#5CE1E6";
+const PINK = "#FFA7E4";
+
+// Soft tints (scheme se derive kiye — smooth gradients ke liye)
+const PINK_SOFT = "#FFC9EE";
+const LAVENDER = "#EBD9F6";
 
 // ============================================
 // SAFE IMAGE HELPER
@@ -36,7 +44,7 @@ const PLACEHOLDER =
   "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80";
 
 // ============================================
-// STATUS DOT COLOR
+// STATUS DOT COLOR (scheme-friendly)
 // ============================================
 const getStatusDotColor = (status) => {
   const s = (status || "").toLowerCase().trim();
@@ -50,9 +58,9 @@ const getStatusDotColor = (status) => {
     case "pending":
       return "bg-yellow-400";
     case "new":
-      return GREEN;
+      return "bg-cyan-300";
     default:
-      return TEAL;
+      return "bg-purple-400";
   }
 };
 
@@ -147,8 +155,8 @@ export default function HeroSection() {
         className="group relative flex h-full flex-1 flex-col overflow-hidden rounded-2xl transition-transform duration-300 hover:-translate-y-1"
         style={{
           backgroundColor: "#FFFFFF",
-          boxShadow: `0 20px 50px -15px ${TEAL}30`,
-          border: `1px solid ${TEAL}20`,
+          boxShadow: `0 20px 50px -15px ${PURPLE}35`,
+          border: `1px solid ${PURPLE}25`,
         }}
       >
         {/* Image Area (65% height to fill the space nicely) */}
@@ -168,13 +176,13 @@ export default function HeroSection() {
             className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-md transition-all hover:scale-110"
             style={{
               backgroundColor: "#FFFFFFAA",
-              border: `1px solid ${TEAL}30`,
+              border: `1px solid ${PURPLE}35`,
             }}
           >
             <Heart
               size={14}
-              className={isLiked ? "fill-red-400 text-red-400" : ""}
-              style={!isLiked ? { color: TEAL } : undefined}
+              className={isLiked ? "fill-pink-400 text-pink-400" : ""}
+              style={!isLiked ? { color: PURPLE } : undefined}
             />
           </button>
 
@@ -182,9 +190,9 @@ export default function HeroSection() {
           <div
             className="absolute right-3 bottom-3 flex h-9 w-9 items-center justify-center rounded-xl opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-2"
             style={{
-              backgroundColor: TEAL,
+              backgroundColor: PURPLE,
               color: "#FFFFFF",
-              boxShadow: `0 4px 12px ${GREEN}40`,
+              boxShadow: `0 4px 14px ${PURPLE}55`,
             }}
           >
             <ArrowUpRight size={16} strokeWidth={2.5} />
@@ -195,16 +203,16 @@ export default function HeroSection() {
         <div className="flex flex-1 flex-col justify-center px-4 py-4">
           <span
             className="truncate text-sm font-extrabold"
-            style={{ color: DARK }}
+            style={{ color: DEEP }}
           >
             {property.title || "Untitled Property"}
           </span>
 
           <span
             className="mt-1.5 flex items-center gap-1.5 text-[11px] font-medium"
-            style={{ color: TEAL }}
+            style={{ color: PURPLE }}
           >
-            <MapPin size={11} className="shrink-0" style={{ color: GREEN }} />
+            <MapPin size={11} className="shrink-0" style={{ color: PURPLE }} />
             <span className="truncate">
               {property.location || property.city || "Location"}
             </span>
@@ -215,9 +223,9 @@ export default function HeroSection() {
             <span
               className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider"
               style={{
-                backgroundColor: `${TEAL}15`,
-                color: TEAL,
-                border: `1px solid ${TEAL}25`,
+                backgroundColor: `${PURPLE}12`,
+                color: PURPLE,
+                border: `1px solid ${PURPLE}28`,
               }}
             >
               <span
@@ -229,8 +237,8 @@ export default function HeroSection() {
               <span
                 className="rounded-md px-1.5 py-0.5 font-mono text-[9px] font-bold"
                 style={{
-                  color: GREEN,
-                  backgroundColor: `${GREEN}15`,
+                  color: PURPLE,
+                  backgroundColor: `${PURPLE}15`,
                 }}
               >
                 {property.propertyCode}
@@ -252,16 +260,16 @@ export default function HeroSection() {
     >
       <div
         className="h-[65%] w-full"
-        style={{ backgroundColor: `${TEAL}10` }}
+        style={{ backgroundColor: `${PURPLE}10` }}
       />
       <div className="flex flex-1 flex-col justify-center gap-2 px-4 py-4">
         <div
           className="h-4 rounded w-3/4"
-          style={{ backgroundColor: `${TEAL}15` }}
+          style={{ backgroundColor: `${PURPLE}15` }}
         />
         <div
           className="h-3 rounded w-1/2"
-          style={{ backgroundColor: `${TEAL}15` }}
+          style={{ backgroundColor: `${PURPLE}15` }}
         />
       </div>
     </div>
@@ -269,15 +277,44 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative w-full min-h-screen overflow-hidden text-[#072A26]"
-      style={{ backgroundColor: MINT }}
+      className="relative w-full min-h-screen overflow-hidden text-[#3C1E74]"
+      style={{
+        background: `linear-gradient(165deg, ${PINK} 0%, ${PINK_SOFT} 55%, ${LAVENDER} 100%)`,
+      }}
     >
-      {/* ==== TOP GRADIENT ADDED WITH #019586 ==== */}
+      {/* ==== DECORATIVE GLOW BLOBS (modern depth) ==== */}
+      <div
+        className="pointer-events-none absolute"
+        style={{
+          top: "8%",
+          left: "-140px",
+          width: 420,
+          height: 420,
+          borderRadius: "9999px",
+          backgroundColor: CYAN,
+          opacity: 0.22,
+          filter: "blur(90px)",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute"
+        style={{
+          bottom: "-120px",
+          right: "-80px",
+          width: 460,
+          height: 460,
+          borderRadius: "9999px",
+          backgroundColor: PURPLE,
+          opacity: 0.18,
+          filter: "blur(100px)",
+        }}
+      />
+
+      {/* ==== TOP GRADIENT (Deep Purple wash) ==== */}
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-150"
         style={{
-          background: `linear-gradient(to bottom, ${TEAL} 0%, transparent 100%)`,
-          opacity: 0.75,
+          background: `linear-gradient(to bottom, ${DEEP}B3 0%, ${PURPLE}40 55%, transparent 100%)`,
         }}
       />
 
@@ -288,8 +325,9 @@ export default function HeroSection() {
           <span
             className="w-fit rounded-full px-4 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.2em] shadow-md sm:text-[11px]"
             style={{
-              backgroundColor: TEAL,
-              color: MINT,
+              backgroundColor: DEEP,
+              color: CYAN,
+              border: `1px solid ${CYAN}40`,
             }}
           >
             ( Find Your Place )
@@ -297,24 +335,33 @@ export default function HeroSection() {
 
           {/* Main Heading */}
           <h1 className="mt-6 text-[40px] font-extrabold leading-[1.08] tracking-[-0.03em] sm:text-5xl md:text-6xl xl:text-[58px]">
-            <span style={{ color: DARK }}>Discover Your</span>
+            <span style={{ color: DEEP }}>Discover Your</span>
             <br />
-            <span style={{ color: TEAL }}>
+            <span
+              style={{
+                background: `linear-gradient(90deg, ${DEEP} 0%, ${PURPLE} 100%)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
               Dream Home
             </span>{" "}
-            <span style={{ color: DARK }}>Today</span>
+            <span style={{ color: DEEP }}>Today</span>
           </h1>
 
-          {/* Divider (Solid Color) */}
+          {/* Divider (Purple → Cyan Gradient) */}
           <div
             className="mt-8 h-0.75 w-24 sm:w-32 md:w-36 rounded-full"
-            style={{ backgroundColor: TEAL }}
+            style={{
+              background: `linear-gradient(90deg, ${PURPLE} 0%, ${CYAN} 100%)`,
+            }}
           />
 
           {/* Paragraph */}
           <p
             className="mt-6 sm:mt-8 max-w-[320px] sm:max-w-90 md:max-w-100 text-justify text-[13px] font-medium leading-6 sm:text-sm"
-            style={{ color: `${DARK}CC` }}
+            style={{ color: `${DEEP}CC` }}
           >
             Handpicked properties in prime locations — built for comfort, luxury,
             and everyday living.
@@ -324,9 +371,9 @@ export default function HeroSection() {
           <div className="mt-8 sm:mt-9 flex flex-wrap items-center gap-4 sm:gap-6">
             <Link
               href="/properties"
-              className="group flex w-fit items-center gap-3 sm:gap-4 rounded-full py-2.5 pl-6 sm:pl-7 pr-2 sm:pr-2.5 shadow-[0_12px_30px_-10px_rgba(1,149,134,0.6)] transition-all duration-300 hover:-translate-y-0.5"
+              className="group flex w-fit items-center gap-3 sm:gap-4 rounded-full py-2.5 pl-6 sm:pl-7 pr-2 sm:pr-2.5 shadow-[0_12px_30px_-10px_rgba(60,30,116,0.55)] transition-all duration-300 hover:-translate-y-0.5"
               style={{
-                backgroundColor: TEAL,
+                background: `linear-gradient(135deg, ${DEEP} 0%, ${PURPLE} 100%)`,
                 color: "#FFFFFF",
               }}
             >
@@ -334,8 +381,8 @@ export default function HeroSection() {
               <span
                 className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full transition-transform duration-300 group-hover:translate-x-1"
                 style={{
-                  backgroundColor: "#FFFFFF",
-                  color: TEAL,
+                  backgroundColor: CYAN,
+                  color: DEEP,
                 }}
               >
                 <ArrowRight size={14} strokeWidth={2.5} className="sm:hidden" />
@@ -347,16 +394,16 @@ export default function HeroSection() {
               href="https://calendar.app.google/zf9eeGFTRRb44AKU6"
               className="border-b-2 pb-1 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.18em] transition-colors"
               style={{
-                color: TEAL,
-                borderColor: `${TEAL}50`,
+                color: PURPLE,
+                borderColor: `${PURPLE}66`,
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.color = GREEN;
-                e.currentTarget.style.borderColor = GREEN;
+                e.currentTarget.style.color = DEEP;
+                e.currentTarget.style.borderColor = DEEP;
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.color = TEAL;
-                e.currentTarget.style.borderColor = `${TEAL}50`;
+                e.currentTarget.style.color = PURPLE;
+                e.currentTarget.style.borderColor = `${PURPLE}66`;
               }}
             >
               ( Book A Consultation )
@@ -388,18 +435,18 @@ export default function HeroSection() {
             <div className="flex flex-col">
               <span
                 className="flex items-center gap-1 text-xs sm:text-sm font-extrabold"
-                style={{ color: DARK }}
+                style={{ color: DEEP }}
               >
-                4.9 <Star size={12} className="fill-[#FFC107] text-[#FFC107] sm:hidden" />
-                <Star size={14} className="fill-[#FFC107] text-[#FFC107] hidden sm:block" />
+                4.9 <Star size={12} className="fill-[#5CE1E6] text-[#5CE1E6] sm:hidden" />
+                <Star size={14} className="fill-[#5CE1E6] text-[#5CE1E6] hidden sm:block" />
               </span>
-              <span className="text-[10px] sm:text-xs" style={{ color: `${DARK}A0` }}>
+              <span className="text-[10px] sm:text-xs" style={{ color: `${DEEP}A0` }}>
                 12k+ happy homeowners
               </span>
             </div>
             <span
-              className="ml-1 border-b-2 border-transparent pb-0.5 text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.18em] transition-colors group-hover:border-[#FFC107]"
-              style={{ color: TEAL }}
+              className="ml-1 border-b-2 border-transparent pb-0.5 text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.18em] transition-colors group-hover:border-[#5CE1E6]"
+              style={{ color: PURPLE }}
             >
               ( Testimonials )
             </span>
@@ -417,7 +464,7 @@ export default function HeroSection() {
               <div
                 className="group relative h-full w-full overflow-hidden rounded-2xl"
                 style={{
-                  boxShadow: `0 30px 70px -20px ${TEAL}40`,
+                  boxShadow: `0 30px 70px -20px ${DEEP}4D`,
                   border: `1px solid #FFFFFF50`,
                 }}
               >
@@ -444,13 +491,13 @@ export default function HeroSection() {
                 <div
                   className="absolute right-4 top-4 flex items-center gap-2 rounded-full px-3 py-1.5 shadow-lg backdrop-blur-md sm:right-5 sm:top-5 sm:px-4 sm:py-2"
                   style={{
-                    backgroundColor: `${MINT}E6`,
-                    color: TEAL,
+                    backgroundColor: `${PINK}E6`,
+                    color: DEEP,
                   }}
                 >
                   <span
                     className="h-2 w-2 animate-pulse rounded-full"
-                    style={{ backgroundColor: GREEN }}
+                    style={{ backgroundColor: CYAN }}
                   />
                   <span className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.15em]">
                     250+ New Listings
@@ -461,8 +508,8 @@ export default function HeroSection() {
                 <div
                   className="absolute left-4 bottom-4 flex items-center gap-2 rounded-full px-3 py-1.5 backdrop-blur-md sm:left-5 sm:bottom-5 sm:px-4 sm:py-2"
                   style={{
-                    backgroundColor: `${TEAL}E6`,
-                    color: MINT,
+                    backgroundColor: `${DEEP}E6`,
+                    color: CYAN,
                   }}
                 >
                   <Building2 size={14} />
@@ -475,22 +522,22 @@ export default function HeroSection() {
 
             {/* Progress Bar */}
             <div className="flex items-center justify-center gap-3 sm:gap-4 mb-5 sm:mb-6">
-              <span className="text-base sm:text-lg font-extrabold" style={{ color: TEAL }}>
+              <span className="text-base sm:text-lg font-extrabold" style={{ color: DEEP }}>
                 {String(currentImageIndex + 1).padStart(2, "0")}
               </span>
               <div
                 className="relative h-0.75 w-28 sm:w-40 overflow-hidden rounded-full"
-                style={{ backgroundColor: "#014D41" }}
+                style={{ backgroundColor: `${DEEP}66` }}
               >
                 <div
                   className="absolute left-0 top-0 h-full rounded-full transition-all duration-500"
                   style={{
                     width: `${((currentImageIndex + 1) / totalImages) * 100}%`,
-                    backgroundColor: "#FFFFFF",
+                    background: `linear-gradient(90deg, ${PURPLE} 0%, ${CYAN} 100%)`,
                   }}
                 />
               </div>
-              <span className="text-base sm:text-lg font-extrabold" style={{ color: TEAL }}>
+              <span className="text-base sm:text-lg font-extrabold" style={{ color: DEEP }}>
                 {String(totalImages).padStart(2, "0")}
               </span>
             </div>
@@ -512,12 +559,12 @@ export default function HeroSection() {
                     className="flex h-full flex-1 flex-col rounded-2xl"
                     style={{
                       backgroundColor: "#FFFFFF",
-                      border: `1px solid ${TEAL}20`,
+                      border: `1px solid ${PURPLE}25`,
                     }}
                   >
                     <div className="flex flex-1 flex-col justify-center items-center px-4">
-                      <Building2 size={32} style={{ color: TEAL }} />
-                      <span className="mt-3 text-sm font-extrabold text-center" style={{ color: DARK }}>
+                      <Building2 size={32} style={{ color: PURPLE }} />
+                      <span className="mt-3 text-sm font-extrabold text-center" style={{ color: DEEP }}>
                         No Properties Available
                       </span>
                     </div>
@@ -526,12 +573,12 @@ export default function HeroSection() {
                     className="flex h-full flex-1 flex-col rounded-2xl"
                     style={{
                       backgroundColor: "#FFFFFF",
-                      border: `1px solid ${TEAL}20`,
+                      border: `1px solid ${PURPLE}25`,
                     }}
                   >
                     <div className="flex flex-1 flex-col justify-center items-center px-4">
-                      <Crown size={32} style={{ color: GREEN }} />
-                      <span className="mt-3 text-sm font-extrabold text-center" style={{ color: DARK }}>
+                      <Crown size={32} style={{ color: CYAN }} />
+                      <span className="mt-3 text-sm font-extrabold text-center" style={{ color: DEEP }}>
                         Featured Soon
                       </span>
                     </div>
@@ -549,7 +596,7 @@ export default function HeroSection() {
             <div
               className="group relative h-full w-full overflow-hidden rounded-tl-[200px] lg:rounded-tl-[300px] rounded-2xl"
               style={{
-                boxShadow: `0 30px 70px -20px ${TEAL}40`,
+                boxShadow: `0 30px 70px -20px ${DEEP}4D`,
                 border: `1px solid #FFFFFF50`,
               }}
             >
@@ -576,13 +623,13 @@ export default function HeroSection() {
               <div
                 className="absolute right-4 top-4 md:right-5 md:top-5 flex items-center gap-2 rounded-full px-3 py-1.5 md:px-4 md:py-2 shadow-lg backdrop-blur-md"
                 style={{
-                  backgroundColor: `${MINT}E6`,
-                  color: TEAL,
+                  backgroundColor: `${PINK}E6`,
+                  color: DEEP,
                 }}
               >
                 <span
                   className="h-2 w-2 animate-pulse rounded-full"
-                  style={{ backgroundColor: GREEN }}
+                  style={{ backgroundColor: CYAN }}
                 />
                 <span className="text-[9px] md:text-[10px] font-extrabold uppercase tracking-[0.15em]">
                   250+ New Listings
@@ -593,8 +640,8 @@ export default function HeroSection() {
               <div
                 className="absolute left-4 bottom-4 md:left-5 md:bottom-5 flex items-center gap-2 rounded-full px-3 py-1.5 md:px-4 md:py-2 backdrop-blur-md"
                 style={{
-                  backgroundColor: `${TEAL}E6`,
-                  color: MINT,
+                  backgroundColor: `${DEEP}E6`,
+                  color: CYAN,
                 }}
               >
                 <Building2 size={14} />
@@ -622,12 +669,12 @@ export default function HeroSection() {
                   className="flex h-full flex-1 flex-col rounded-2xl"
                   style={{
                     backgroundColor: "#FFFFFF",
-                    border: `1px solid ${TEAL}20`,
+                    border: `1px solid ${PURPLE}25`,
                   }}
                 >
                   <div className="flex flex-1 flex-col justify-center items-center px-4">
-                    <Building2 size={32} style={{ color: TEAL }} />
-                    <span className="mt-3 text-sm font-extrabold text-center" style={{ color: DARK }}>
+                    <Building2 size={32} style={{ color: PURPLE }} />
+                    <span className="mt-3 text-sm font-extrabold text-center" style={{ color: DEEP }}>
                       No Properties Available
                     </span>
                   </div>
@@ -636,12 +683,12 @@ export default function HeroSection() {
                   className="flex h-full flex-1 flex-col rounded-2xl -mr-10"
                   style={{
                     backgroundColor: "#FFFFFF",
-                    border: `1px solid ${TEAL}20`,
+                    border: `1px solid ${PURPLE}25`,
                   }}
                 >
                   <div className="flex flex-1 flex-col justify-center items-center px-4">
-                    <Crown size={32} style={{ color: GREEN }} />
-                    <span className="mt-3 text-sm font-extrabold text-center" style={{ color: DARK }}>
+                    <Crown size={32} style={{ color: CYAN }} />
+                    <span className="mt-3 text-sm font-extrabold text-center" style={{ color: DEEP }}>
                       Featured Soon
                     </span>
                   </div>
@@ -650,25 +697,25 @@ export default function HeroSection() {
             )}
           </div>
 
-          {/* ---------- BOTTOM BAR : 01 —— 05 (White Color) ---------- */}
+          {/* ---------- BOTTOM BAR : 01 —— 05 ---------- */}
           <div className="absolute inset-x-0 bottom-0 flex h-14 items-center pr-5 md:h-16 md:pr-10">
             <div className="flex items-center gap-3 md:gap-4 pl-1">
-              <span className="text-base md:text-lg font-extrabold" style={{ color: TEAL }}>
+              <span className="text-base md:text-lg font-extrabold" style={{ color: DEEP }}>
                 {String(currentImageIndex + 1).padStart(2, "0")}
               </span>
               <div
                 className="relative h-0.75 w-32 md:w-40 lg:w-56 overflow-hidden rounded-full"
-                style={{ backgroundColor: "#014D41" }}
+                style={{ backgroundColor: `${DEEP}66` }}
               >
                 <div
                   className="absolute left-0 top-0 h-full rounded-full transition-all duration-500"
                   style={{
                     width: `${((currentImageIndex + 1) / totalImages) * 100}%`,
-                    backgroundColor: "#FFFFFF",
+                    background: `linear-gradient(90deg, ${PURPLE} 0%, ${CYAN} 100%)`,
                   }}
                 />
               </div>
-              <span className="text-base md:text-lg font-extrabold" style={{ color: TEAL }}>
+              <span className="text-base md:text-lg font-extrabold" style={{ color: DEEP }}>
                 {String(totalImages).padStart(2, "0")}
               </span>
             </div>

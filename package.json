@@ -1,5 +1,5 @@
 {
-  "name": "Christopher Ryan",
+  "name": "Matt Vatcher",
   "version": "0.1.0",
   "private": true,
   "allowScripts": {
@@ -7,7 +7,7 @@
     "unrs-resolver": true
   },
   "scripts": {
-    "dev": "next dev -p 3003",
+    "dev": "next dev -p 3004",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

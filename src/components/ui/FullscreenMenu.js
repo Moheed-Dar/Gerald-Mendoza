@@ -20,6 +20,23 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import { motion, AnimatePresence } from "framer-motion";
 
+// ============================================
+// NEW 4-COLOR SCHEME (matches About & Footer)
+// Purple | Cyan | Pink | Magenta
+// ============================================
+const PURPLE = "#3C1E74"; // main accent
+const CYAN = "#5CE1E6"; // bright accent
+const PINK = "#FFA7E4"; // highlight
+const MAGENTA = "#B462B6"; // secondary / admin accent
+const DARK = "#2A1454"; // dark purple base
+
+// Tailwind hex mappings used in classes below:
+// #FFF7F0 -> #FAF7FF (light lavender bg)
+// #208288 -> #3C1E74 (purple)
+// #1F203D -> #2A1454 (dark purple)
+// #BEEBF0 -> #DCF7F9 (light cyan tint)
+// #F2673A -> #B462B6 (magenta / admin)
+
 const DEFAULT_NAV_LINKS = [
   { label: "Home", href: "/", icon: Home },
   { label: "About", href: "/about", icon: User },
@@ -198,26 +215,27 @@ export default function FullscreenMenu({ isOpen, onClose }) {
         ref={menuRef}
         className="hidden md:flex fixed top-25 left-0 right-0 z-999 justify-center px-4 lg:px-8"
       >
-        <div className="w-full max-w-3xl bg-[#FFF7F0] rounded-2xl overflow-hidden shadow-2xl">
+        <div className="w-full max-w-3xl bg-[#FAF7FF] rounded-2xl overflow-hidden shadow-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
             {/* Left: Hero Preview Image */}
             <div className="relative h-44 lg:h-auto lg:min-h-70">
               <Image
                 src="/banner/banner2.jpg"
-                alt="Christopher Ryan Properties Preview"
+                alt="Matt Vatcher Properties Preview"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
                 sizes="(max-width: 1024px) 128px, 160px"
               />
-              {/* Navy overlay instead of black */}
-              <div className="absolute inset-0 bg-linear-to-t from-[#1F203D]/80 via-[#1F203D]/20 to-transparent" />
+              {/* Dark purple overlay instead of navy */}
+              <div className="absolute inset-0 bg-linear-to-t from-[#2A1454]/80 via-[#2A1454]/20 to-transparent" />
 
               <div className="absolute top-3 left-3">
                 <div className="relative w-24 h-8 flex items-center justify-center">
                   <div className="relative z-10 mt-10 w-50 h-20">
+                    {/* ✅ NEW LOGO — mettlogo11.png */}
                     <Image
-                      src="/images/logo12.png"
-                      alt="Christopher Ryan"
+                      src="/images/mettlogo11.png"
+                      alt="Matt Vatcher"
                       fill
                       className="object-contain"
                       sizes="80px"
@@ -228,13 +246,13 @@ export default function FullscreenMenu({ isOpen, onClose }) {
 
               <div className="absolute bottom-3 left-3">
                 <h2 className="text-2xl lg:text-3xl font-bold text-white tracking-tight">
-                  Christopher Ryan
+                  Matt Vatcher
                 </h2>
               </div>
             </div>
 
             {/* Right: Navigation Links */}
-            <div className="p-5 lg:p-6 bg-[#FFF7F0]">
+            <div className="p-5 lg:p-6 bg-[#FAF7FF]">
               <div className="grid grid-cols-2 gap-6">
                 <div>
                   <div className="flex flex-col gap-1.5">
@@ -243,11 +261,11 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                         key={index}
                         href={link.href}
                         onClick={handleLinkClick}
-                        className="group relative py-1.5 text-gray-600 hover:text-[#208288] transition-colors text-sm font-medium"
+                        className="group relative py-1.5 text-gray-600 hover:text-[#3C1E74] transition-colors text-sm font-medium"
                       >
                         <span className="relative">
                           {link.label}
-                          <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-[#208288] transition-all duration-300 group-hover:w-full" />
+                          <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-[#B462B6] transition-all duration-300 group-hover:w-full" />
                         </span>
                       </Link>
                     ))}
@@ -261,11 +279,11 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                         key={index}
                         href={link.href}
                         onClick={handleLinkClick}
-                        className="group relative py-1.5 text-gray-600 hover:text-[#208288] transition-colors text-sm font-medium"
+                        className="group relative py-1.5 text-gray-600 hover:text-[#3C1E74] transition-colors text-sm font-medium"
                       >
                         <span className="relative">
                           {link.label}
-                          <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-[#208288] transition-all duration-300 group-hover:w-full" />
+                          <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-[#B462B6] transition-all duration-300 group-hover:w-full" />
                         </span>
                       </Link>
                     ))}
@@ -276,14 +294,14 @@ export default function FullscreenMenu({ isOpen, onClose }) {
           </div>
 
           {/* Bottom Section */}
-          <div className="border-t border-[#BEEBF0] p-4 flex items-center justify-between gap-3 bg-[#FFF7F0]">
+          <div className="border-t border-[#DCF7F9] p-4 flex items-center justify-between gap-3 bg-[#FAF7FF]">
             <a
-              href="mailto:chris@christopherryanrealty.com"
-              className="flex items-center gap-2 text-gray-500 hover:text-[#208288] transition-colors"
+              href="mailto:matt@torontosrunningrealtor.com"
+              className="flex items-center gap-2 text-gray-500 hover:text-[#3C1E74] transition-colors"
             >
               <Mail size={15} />
               <span className="text-sm font-medium">
-                chris@christopherryanrealty.com
+                matt@torontosrunningrealtor.com
               </span>
             </a>
 
@@ -294,8 +312,8 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                 onClick={handleLinkClick}
                 className={`flex items-center gap-1.5 px-3 py-2 text-sm font-semibold rounded-lg transition-colors ${
                   isLoggedIn
-                    ? "bg-[#F2673A]/10 border border-[#F2673A]/30 text-[#F2673A] hover:bg-[#F2673A]/20 hover:border-[#F2673A]/50"
-                    : "bg-[#BEEBF0]/50 border border-[#208288]/30 text-[#208288] hover:bg-[#BEEBF0] hover:border-[#208288]/50"
+                    ? "bg-[#B462B6]/10 border border-[#B462B6]/30 text-[#B462B6] hover:bg-[#B462B6]/20 hover:border-[#B462B6]/50"
+                    : "bg-[#DCF7F9]/60 border border-[#3C1E74]/30 text-[#3C1E74] hover:bg-[#DCF7F9] hover:border-[#3C1E74]/50"
                 }`}
               >
                 {(() => {
@@ -307,13 +325,13 @@ export default function FullscreenMenu({ isOpen, onClose }) {
               <Link
                 href="/properties"
                 onClick={handleLinkClick}
-                className="px-4 py-2 bg-[#1F203D] text-white text-sm font-semibold rounded-lg hover:bg-[#208288] transition-colors"
+                className="px-4 py-2 bg-[#3C1E74] text-white text-sm font-semibold rounded-lg hover:bg-[#B462B6] transition-colors"
               >
                 All Properties
               </Link>
               <button
                 onClick={handleClose}
-                className="w-9 h-9 flex items-center justify-center bg-[#1F203D] text-white rounded-lg hover:bg-[#208288] transition-colors"
+                className="w-9 h-9 flex items-center justify-center bg-[#2A1454] text-white rounded-lg hover:bg-[#B462B6] transition-colors"
               >
                 <ArrowRight size={16} />
               </button>
@@ -346,7 +364,7 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                 stiffness: 300,
                 damping: 30,
               }}
-              className="md:hidden fixed top-0 right-0 bottom-0 z-999 w-80 bg-[#FFF7F0] shadow-2xl flex flex-col"
+              className="md:hidden fixed top-0 right-0 bottom-0 z-999 w-80 bg-[#FAF7FF] shadow-2xl flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
@@ -355,7 +373,7 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring" }}
                 onClick={handleClose}
-                className="absolute top-3 right-3 z-50 w-9 h-9 flex items-center justify-center rounded-full bg-[#208288] text-white hover:bg-[#1F203D] transition-colors shadow-lg"
+                className="absolute top-3 right-3 z-50 w-9 h-9 flex items-center justify-center rounded-full bg-[#3C1E74] text-white hover:bg-[#B462B6] transition-colors shadow-lg"
               >
                 <X size={18} />
               </motion.button>
@@ -364,29 +382,36 @@ export default function FullscreenMenu({ isOpen, onClose }) {
               <div className="relative h-40 shrink-0">
                 <Image
                   src="/banner/banner2.jpg"
-                  alt="Christopher Ryan"
+                  alt="Matt Vatcher"
                   fill
                   className="object-cover"
                   sizes="320px"
                   priority
                 />
-                {/* Navy overlay */}
-                <div className="absolute inset-0 bg-linear-to-t from-[#1F203D]/80 via-[#1F203D]/30 to-transparent" />
+                {/* Dark purple overlay */}
+                <div className="absolute inset-0 bg-linear-to-t from-[#2A1454]/80 via-[#2A1454]/30 to-transparent" />
 
                 <div className="absolute top-3 left-3">
                   <div className="flex items-center gap-2 bg-white/20 backdrop-blur-md rounded-full px-3 py-1.5 border border-white/30">
-                    <div className="w-6 h-6 rounded-full bg-[#208288] flex items-center justify-center">
-                      <span className="text-white text-[10px] font-bold">S</span>
+                    {/* ✅ NEW LOGO in badge */}
+                    <div className="relative w-6 h-6 rounded-full bg-white/90 flex items-center justify-center overflow-hidden">
+                      <Image
+                        src="/images/mettlogo11.png"
+                        alt="Matt Vatcher Logo"
+                        fill
+                        className="object-contain p-0.5"
+                        sizes="24px"
+                      />
                     </div>
                     <span className="text-white font-semibold text-xs">
-                      Christopher Ryan
+                      Matt Vatcher
                     </span>
                   </div>
                 </div>
 
                 <div className="absolute bottom-3 left-3">
-                  <p className="text-white/70 text-[10px] tracking-widest uppercase">
-                    Premium Real Estate
+                  <p className="text-[#FFA7E4] text-[10px] tracking-widest uppercase font-bold">
+                    Toronto Real Estate
                   </p>
                   <h2 className="text-lg font-bold text-white tracking-tight">
                     Find Your Dream Home
@@ -409,15 +434,15 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                           key={index}
                           href={link.href}
                           onClick={handleLinkClick}
-                          className="group flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-[#BEEBF0] active:bg-[#BEEBF0]/70 transition-all duration-200"
+                          className="group flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-[#DCF7F9] active:bg-[#DCF7F9]/70 transition-all duration-200"
                         >
-                          <div className="w-9 h-9 rounded-lg bg-[#BEEBF0]/50 group-hover:bg-[#208288] flex items-center justify-center transition-all duration-200">
+                          <div className="w-9 h-9 rounded-lg bg-[#DCF7F9]/60 group-hover:bg-[#3C1E74] flex items-center justify-center transition-all duration-200">
                             <Icon
                               size={16}
-                              className="text-[#208288] group-hover:text-white transition-colors duration-200"
+                              className="text-[#3C1E74] group-hover:text-white transition-colors duration-200"
                             />
                           </div>
-                          <span className="text-gray-700 group-hover:text-[#208288] font-medium text-sm transition-colors duration-200">
+                          <span className="text-gray-700 group-hover:text-[#3C1E74] font-medium text-sm transition-colors duration-200">
                             {link.label}
                           </span>
                         </Link>
@@ -426,7 +451,7 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                   </div>
                 </div>
 
-                <div className="h-px bg-[#BEEBF0] my-3" />
+                <div className="h-px bg-[#DCF7F9] my-3" />
 
                 {/* CMS Pages */}
                 <div>
@@ -441,15 +466,15 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                           key={index}
                           href={link.href}
                           onClick={handleLinkClick}
-                          className="group flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-[#BEEBF0] active:bg-[#BEEBF0]/70 transition-all duration-200"
+                          className="group flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-[#DCF7F9] active:bg-[#DCF7F9]/70 transition-all duration-200"
                         >
-                          <div className="w-9 h-9 rounded-lg bg-[#BEEBF0]/50 group-hover:bg-[#208288] flex items-center justify-center transition-all duration-200">
+                          <div className="w-9 h-9 rounded-lg bg-[#DCF7F9]/60 group-hover:bg-[#3C1E74] flex items-center justify-center transition-all duration-200">
                             <Icon
                               size={16}
-                              className="text-[#208288] group-hover:text-white transition-colors duration-200"
+                              className="text-[#3C1E74] group-hover:text-white transition-colors duration-200"
                             />
                           </div>
-                          <span className="text-gray-700 group-hover:text-[#208288] font-medium text-sm transition-colors duration-200">
+                          <span className="text-gray-700 group-hover:text-[#3C1E74] font-medium text-sm transition-colors duration-200">
                             {link.label}
                           </span>
                         </Link>
@@ -460,16 +485,16 @@ export default function FullscreenMenu({ isOpen, onClose }) {
               </div>
 
               {/* Bottom Section */}
-              <div className="border-t border-[#BEEBF0] px-4 py-4 shrink-0 bg-[#BEEBF0]/30">
+              <div className="border-t border-[#DCF7F9] px-4 py-4 shrink-0 bg-[#DCF7F9]/40">
                 {/* Email */}
                 <a
-                  href="mailto:Christopher Ryan@Christopher RyanConsultant.ca"
+                  href="mailto:matt@torontosrunningrealtor.com"
                   onClick={(e) => e.stopPropagation()}
-                  className="flex items-center justify-center gap-1.5 text-gray-500 hover:text-[#208288] transition-colors mb-3"
+                  className="flex items-center justify-center gap-1.5 text-gray-500 hover:text-[#3C1E74] transition-colors mb-3"
                 >
                   <Mail size={12} />
                   <span className="text-[11px] font-medium">
-                    chris@christopherryanrealty.com
+                    matt@torontosrunningrealtor.com
                   </span>
                 </a>
 
@@ -480,8 +505,8 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                     onClick={handleLinkClick}
                     className={`w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 ${
                       isLoggedIn
-                        ? "bg-[#F2673A]/10 border border-[#F2673A]/30 text-[#F2673A] hover:bg-[#F2673A]/20 active:bg-[#F2673A]/30"
-                        : "bg-[#BEEBF0]/50 border border-[#208288]/30 text-[#208288] hover:bg-[#BEEBF0] active:bg-[#BEEBF0]/70"
+                        ? "bg-[#B462B6]/10 border border-[#B462B6]/30 text-[#B462B6] hover:bg-[#B462B6]/20 active:bg-[#B462B6]/30"
+                        : "bg-[#DCF7F9]/60 border border-[#3C1E74]/30 text-[#3C1E74] hover:bg-[#DCF7F9] active:bg-[#DCF7F9]/70"
                     }`}
                   >
                     {(() => {
@@ -496,7 +521,7 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                   <Link
                     href="/properties"
                     onClick={handleLinkClick}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#208288] text-white text-sm font-semibold rounded-xl hover:bg-[#1F203D] active:bg-[#1F203D] transition-all duration-200"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#3C1E74] text-white text-sm font-semibold rounded-xl hover:bg-[#B462B6] active:bg-[#B462B6] transition-all duration-200"
                   >
                     <FileText size={16} />
                     <span>All Properties</span>
