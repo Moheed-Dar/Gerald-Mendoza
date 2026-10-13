@@ -164,7 +164,7 @@ export default function Footer() {
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.035]"
           style={{
-            backgroundImage: `url('/images/logo12.png')`,
+            backgroundImage: `url('/images/navlogo1.png')`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center center",
             backgroundSize: "45% auto",
@@ -266,7 +266,7 @@ export default function Footer() {
           <div className="lg:col-span-6 flex flex-col">
             <div className="mb-6">
               <Image
-                src="/images/navlogo12.png"
+                src="/images/mettlogo11.png"
                 alt="Matt Vatcher Logo"
                 width={180}
                 height={55}
