@@ -391,7 +391,7 @@ export default function HeroSection() {
             </Link>
 
             <Link
-              href="https://calendar.app.google/zf9eeGFTRRb44AKU6"
+              href=""
               className="border-b-2 pb-1 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.18em] transition-colors"
               style={{
                 color: PURPLE,
