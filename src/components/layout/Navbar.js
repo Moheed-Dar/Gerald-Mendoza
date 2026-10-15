@@ -72,7 +72,7 @@ export default function Navbar() {
 
             {/* Let's Talk Button */}
             <Link
-              href="https://calendar.app.google/zf9eeGFTRRb44AKU6"
+              href="/contact"
               className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg border border-[#FFF7F0]/10 bg-[#FFF7F0]/10 backdrop-blur-sm text-[#FFF7F0] hover:bg-[#20B2B8]/20 hover:border-[#20B2B8]/40 transition-all duration-300"
             >
               <MessageCircle size={18} className="text-[#edf3f3]" />

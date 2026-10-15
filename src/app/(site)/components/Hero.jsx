@@ -391,7 +391,7 @@ export default function HeroSection() {
             </Link>
 
             <Link
-              href=""
+              href="/contact"
               className="border-b-2 pb-1 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.18em] transition-colors"
               style={{
                 color: PURPLE,
@@ -471,9 +471,8 @@ export default function HeroSection() {
                 {heroImages.map((img, index) => (
                   <div
                     key={index}
-                    className={`absolute inset-0 transition-opacity duration-1200 ease-in-out ${
-                      index === currentImageIndex ? "opacity-100" : "opacity-0"
-                    }`}
+                    className={`absolute inset-0 transition-opacity duration-1200 ease-in-out ${index === currentImageIndex ? "opacity-100" : "opacity-0"
+                      }`}
                   >
                     <Image
                       src={img}
@@ -603,9 +602,8 @@ export default function HeroSection() {
               {heroImages.map((img, index) => (
                 <div
                   key={index}
-                  className={`absolute inset-0 transition-opacity duration-1200 ease-in-out ${
-                    index === currentImageIndex ? "opacity-100" : "opacity-0"
-                  }`}
+                  className={`absolute inset-0 transition-opacity duration-1200 ease-in-out ${index === currentImageIndex ? "opacity-100" : "opacity-0"
+                    }`}
                 >
                   <Image
                     src={img}
