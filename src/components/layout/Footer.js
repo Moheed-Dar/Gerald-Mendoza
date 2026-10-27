@@ -82,7 +82,10 @@ export default function Footer() {
       return;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      setSubscribeMsg({ type: "error", text: "Please enter a valid email address" });
+      setSubscribeMsg({
+        type: "error",
+        text: "Please enter a valid email address",
+      });
       return;
     }
 
@@ -117,8 +120,16 @@ export default function Footer() {
   ];
 
   const socialLinks = [
-    { name: "Instagram", href: "https://www.instagram.com/", icon: <InstagramIcon size={18} /> },
-    { name: "Facebook", href: "https://www.facebook.com/mendozafirst/", icon: <FacebookIcon size={18} /> },
+    {
+      name: "Instagram",
+      href: "https://www.instagram.com/",
+      icon: <InstagramIcon size={18} />,
+    },
+    {
+      name: "Facebook",
+      href: "https://www.facebook.com/mendozafirst/",
+      icon: <FacebookIcon size={18} />,
+    },
   ];
 
   return (
@@ -173,7 +184,10 @@ export default function Footer() {
                 style={{ color: CREAM }}
               >
                 Move to your{" "}
-                <span className="font-luxury-italic italic" style={{ color: INK }}>
+                <span
+                  className="font-luxury-italic italic"
+                  style={{ color: INK }}
+                >
                   next chapter
                 </span>
               </h3>
@@ -253,14 +267,20 @@ export default function Footer() {
               </div>
             </div>
 
-            <p className="text-sm leading-relaxed mb-5" style={{ color: CREAM_80 }}>
+            <p
+              className="text-sm leading-relaxed mb-5"
+              style={{ color: CREAM_80 }}
+            >
               A mediating source of calm, humor &amp; humility. Helping Tucson
               buyers and sellers move to the next chapter of their lives.
             </p>
 
             <div
               className="p-4"
-              style={{ backgroundColor: TEAL_10, border: `1px solid ${TEAL_20}` }}
+              style={{
+                backgroundColor: TEAL_10,
+                border: `1px solid ${TEAL_20}`,
+              }}
             >
               <div className="flex items-center gap-2 mb-2">
                 <Heart size={14} strokeWidth={2.5} style={{ color: TEAL }} />
@@ -271,7 +291,10 @@ export default function Footer() {
                   Realty Executives
                 </span>
               </div>
-              <p className="text-xs leading-relaxed" style={{ color: CREAM_80 }}>
+              <p
+                className="text-xs leading-relaxed"
+                style={{ color: CREAM_80 }}
+              >
                 Tucson Elite — Oracle Office
               </p>
             </div>
@@ -293,7 +316,9 @@ export default function Footer() {
                     className="group flex items-center gap-2 text-sm transition-all duration-300"
                     style={{ color: CREAM_80 }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = TEAL)}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = CREAM_80)}
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.color = CREAM_80)
+                    }
                   >
                     <span
                       className="w-3 h-px transition-all duration-300 group-hover:w-5"
@@ -324,9 +349,16 @@ export default function Footer() {
                 >
                   <span
                     className="flex h-9 w-9 items-center justify-center shrink-0"
-                    style={{ backgroundColor: TEAL_15, border: `1px solid ${TEAL_30}` }}
+                    style={{
+                      backgroundColor: TEAL_15,
+                      border: `1px solid ${TEAL_30}`,
+                    }}
                   >
-                    <Phone size={14} strokeWidth={2.5} style={{ color: TEAL }} />
+                    <Phone
+                      size={14}
+                      strokeWidth={2.5}
+                      style={{ color: TEAL }}
+                    />
                   </span>
                   <span className="flex-1 min-w-0">
                     <span
@@ -335,7 +367,10 @@ export default function Footer() {
                     >
                       Phone
                     </span>
-                    <span className="block text-sm font-semibold" style={{ color: CREAM }}>
+                    <span
+                      className="block text-sm font-semibold"
+                      style={{ color: CREAM }}
+                    >
                       +1 (520) 302-7600
                     </span>
                   </span>
@@ -348,7 +383,10 @@ export default function Footer() {
                 >
                   <span
                     className="flex h-9 w-9 items-center justify-center shrink-0"
-                    style={{ backgroundColor: TEAL_15, border: `1px solid ${TEAL_30}` }}
+                    style={{
+                      backgroundColor: TEAL_15,
+                      border: `1px solid ${TEAL_30}`,
+                    }}
                   >
                     <Mail size={14} strokeWidth={2.5} style={{ color: TEAL }} />
                   </span>
@@ -359,7 +397,10 @@ export default function Footer() {
                     >
                       Email
                     </span>
-                    <span className="block text-sm font-semibold break-all" style={{ color: CREAM }}>
+                    <span
+                      className="block text-sm font-semibold break-all"
+                      style={{ color: CREAM }}
+                    >
                       geraldmendoza@realtyexecutives.com
                     </span>
                   </span>
@@ -369,9 +410,16 @@ export default function Footer() {
                 <div className="group flex items-start gap-3">
                   <span
                     className="flex h-9 w-9 items-center justify-center shrink-0"
-                    style={{ backgroundColor: TEAL_15, border: `1px solid ${TEAL_30}` }}
+                    style={{
+                      backgroundColor: TEAL_15,
+                      border: `1px solid ${TEAL_30}`,
+                    }}
                   >
-                    <MapPin size={14} strokeWidth={2.5} style={{ color: TEAL }} />
+                    <MapPin
+                      size={14}
+                      strokeWidth={2.5}
+                      style={{ color: TEAL }}
+                    />
                   </span>
                   <span className="flex-1 min-w-0">
                     <span
@@ -380,10 +428,16 @@ export default function Footer() {
                     >
                       Office
                     </span>
-                    <span className="block text-sm font-semibold" style={{ color: CREAM }}>
+                    <span
+                      className="block text-sm font-semibold"
+                      style={{ color: CREAM }}
+                    >
                       6760 N. Oracle Road
                     </span>
-                    <span className="block text-xs mt-0.5" style={{ color: CREAM_60 }}>
+                    <span
+                      className="block text-xs mt-0.5"
+                      style={{ color: CREAM_60 }}
+                    >
                       Tucson, AZ
                     </span>
                   </span>
@@ -411,7 +465,10 @@ export default function Footer() {
               </p>
             </div>
 
-            <p className="text-xs leading-relaxed mb-4" style={{ color: CREAM_80 }}>
+            <p
+              className="text-xs leading-relaxed mb-4"
+              style={{ color: CREAM_80 }}
+            >
               Get market insights, new listings &amp; tips delivered monthly.
             </p>
 
@@ -518,6 +575,30 @@ export default function Footer() {
         style={{ borderColor: TEAL_20, backgroundColor: "#0A1A1C" }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          {/* ===== TOP ROW: Leatonic Credit ===== */}
+          <div
+            className="flex justify-center mb-4 pb-4 border-b"
+            style={{ borderColor: TEAL_15 }}
+          >
+            <Link
+              href="https://leatonic.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-1.5 text-xs sm:text-sm transition-all duration-300 hover:gap-2"
+              style={{ color: CREAM_60 }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = TEAL)}
+              onMouseLeave={(e) => (e.currentTarget.style.color = CREAM_60)}
+            >
+              <span>© 2026 Leatonic. All rights reserved.</span>
+              <ArrowUpRight
+                size={12}
+                strokeWidth={2.5}
+                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+              />
+            </Link>
+          </div>
+
+          {/* ===== BOTTOM ROW: Social + Gerald Copyright + Back to Top ===== */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-5">
             <div className="flex items-center gap-3">
               <span
@@ -561,7 +642,8 @@ export default function Footer() {
               className="font-luxury text-sm text-center order-first md:order-0"
               style={{ color: CREAM_80 }}
             >
-              © {currentYear} Gerald V Mendoza, Jr. — Realty Executives Tucson Elite.
+              © {currentYear} Gerald V Mendoza, Jr. — Realty Executives Tucson
+              Elite.
             </p>
 
             <button
@@ -583,12 +665,15 @@ export default function Footer() {
               aria-label="Back to top"
             >
               Back To Top
-              <ArrowUp size={12} strokeWidth={3} className="group-hover:-translate-y-0.5 transition-transform" />
+              <ArrowUp
+                size={12}
+                strokeWidth={3}
+                className="group-hover:-translate-y-0.5 transition-transform"
+              />
             </button>
           </div>
         </div>
       </div>
-
       {/* FLOATING SCROLL-TO-TOP BUTTON */}
       {mounted && (
         <button
