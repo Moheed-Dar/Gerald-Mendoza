@@ -36,29 +36,30 @@ import { getPropertyById } from "@/lib/api";
 import LeadForm from "@/components/forms/LeadForm";
 
 // ==========================================
-// ✅ NEW COLOR PALETTE (matches all updated components)
-// Purple | Cyan | Pink | Magenta
+// ✅ COLOR PALETTE — matches Footer
+// "Deep Ocean Architectural": Cream | Teal | Deep Teal | Ink
+// (variable names kept identical so all references stay valid)
 // ==========================================
-const PURPLE = "#3C1E74"; // main accent
-const CYAN = "#5CE1E6"; // light accent on dark bg (replaces MINT)
-const PINK = "#FFA7E4"; // highlight (replaces BRIGHT_CYAN)
-const MAGENTA = "#B462B6"; // bright accent (replaces TEAL for solid fills)
+const PURPLE = "#347A85";   // TEAL — main accent
+const CYAN = "#F7F7F7";     // CREAM — light text on dark
+const PINK = "#347A8566";   // TEAL_40 — highlight accent
+const MAGENTA = "#28606B";  // DEEP_TEAL — secondary accent
 
-// Dark purple backgrounds (replace Navy greens)
-const DARK_PURPLE = "#1E0F3D"; // page bg (replaces NAVY)
-const LIGHT_PURPLE = "#2A1454"; // (replaces NAVY_LIGHT)
-const DEEP_PURPLE = "#150A2B"; // (replaces NAVY_DARK)
-const CARD_PURPLE = "#251247"; // card bg (replaces NAVY_CARD)
+// Dark ink backgrounds
+const DARK_PURPLE = "#143336"; // INK — page bg
+const LIGHT_PURPLE = "#0F2A2E"; // LIGHT_INK
+const DEEP_PURPLE = "#0A1A1C";  // DEEP_INK
+const CARD_PURPLE = "#1A3D42";  // CARD_INK — card bg
 
-// Cyan opacity helpers (replace CREAM_*)
-const CYAN_30 = "#5CE1E64D";
-const CYAN_40 = "#5CE1E666";
-const CYAN_50 = "#5CE1E680";
-const CYAN_60 = "#5CE1E699";
-const CYAN_70 = "#5CE1E6B3";
-const CYAN_75 = "#5CE1E6BF";
-const CYAN_80 = "#5CE1E6CC";
-const CYAN_90 = "#5CE1E6E6";
+// Cream opacity helpers (kept CYAN_* var names so refs stay valid)
+const CYAN_30 = "#F7F7F74D";
+const CYAN_40 = "#F7F7F766";
+const CYAN_50 = "#F7F7F780";
+const CYAN_60 = "#F7F7F799";
+const CYAN_70 = "#F7F7F7B3";
+const CYAN_75 = "#F7F7F7BF";
+const CYAN_80 = "#F7F7F7CC";
+const CYAN_90 = "#F7F7F7E6";
 
 // ==========================================
 // ✅ HTML DECODE HELPER (Fixes raw tags issue)
@@ -687,13 +688,13 @@ export default function PropertyDetailPage() {
                   />
                   <div
                     className="text-sm sm:text-[15px] leading-[1.9] max-h-72 sm:max-h-80 overflow-y-auto pr-2 overflow-hidden wrap-break-word
-                               [&_p]:my-2 [&_div]:my-2 
-                               [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-2 
-                               [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:my-2 
-                               [&_li]:ml-2 [&_li]:my-1 
+                               [&_p]:my-2 [&_div]:my-2
+                               [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-2
+                               [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:my-2
+                               [&_li]:ml-2 [&_li]:my-1
                                [&_h1]:text-base [&_h1]:font-bold [&_h1]:my-2 [&_h1]:text-white
                                [&_h2]:text-sm [&_h2]:font-bold [&_h2]:my-2 [&_h2]:text-white
-                               [&_blockquote]:border-l-4 [&_blockquote]:border-[#B462B6] [&_blockquote]:pl-4 [&_blockquote]:italic"
+                               [&_blockquote]:border-l-4 [&_blockquote]:border-[#28606B] [&_blockquote]:pl-4 [&_blockquote]:italic"
                     style={{
                       color: CYAN_70,
                       scrollbarWidth: "thin",

@@ -17,27 +17,31 @@ import {
 import { submitContact } from "@/lib/contact/api";
 
 // ==========================================
-// ✅ NEW COLOR PALETTE (matches site-wide palette)
-// Purple | Cyan | Pink | Magenta
+// ✅ NEW COLOR PALETTE
+// Navy / White / Dark Teal / Teal
 // ==========================================
-const PURPLE = "#3C1E74"; // main accent (buttons, gradients)
-const CYAN = "#5CE1E6"; // light accent on dark bg (replaces MINT)
-const PINK = "#FFA7E4"; // highlight (replaces BRIGHT_CYAN)
-const MAGENTA = "#B462B6"; // bright accent (replaces TEAL)
+const NAVY = "#0A1628"; // dark background
+const WHITE = "#FFFFFF"; // foreground / text
+const DARK_TEAL = "#143336"; // card background
+const TEAL = "#347A85"; // main accent
 
-// Dark purple backgrounds
-const DARK_PURPLE = "#1E0F3D";
-const CARD_PURPLE = "#251247";
+// Teal opacity helpers (for text/background tints)
+const TEAL_20 = "#347A8533";
+const TEAL_30 = "#347A854D";
+const TEAL_40 = "#347A8566";
+const TEAL_50 = "#347A8580";
+const TEAL_60 = "#347A8599";
+const TEAL_70 = "#347A85B3";
+const TEAL_80 = "#347A85CC";
+const TEAL_90 = "#347A85E6";
 
-// Cyan opacity helpers (replace CREAM_*)
-const CYAN_30 = "#5CE1E64D";
-const CYAN_40 = "#5CE1E666";
-const CYAN_50 = "#5CE1E680";
-const CYAN_60 = "#5CE1E699";
-const CYAN_70 = "#5CE1E6B3";
-const CYAN_75 = "#5CE1E6BF";
-const CYAN_80 = "#5CE1E6CC";
-const CYAN_90 = "#5CE1E6E6";
+// White opacity helpers (for muted text)
+const WHITE_30 = "#FFFFFF4D";
+const WHITE_40 = "#FFFFFF66";
+const WHITE_50 = "#FFFFFF80";
+const WHITE_60 = "#FFFFFF99";
+const WHITE_70 = "#FFFFFFB3";
+const WHITE_80 = "#FFFFFFCC";
 
 export default function ContactForm() {
   const [form, setForm] = useState({
@@ -99,25 +103,39 @@ export default function ContactForm() {
     }
   };
 
-  // Updated input class with new color scheme
+  // ✅ Updated input class with new teal/navy scheme
   const inputClass = (hasError) =>
-    `w-full px-4 py-3.5 bg-[#5CE1E6]/10 border rounded-xl text-sm text-[#5CE1E6] placeholder-[#5CE1E6]/40 focus:outline-none focus:ring-2 focus:ring-[#B462B6]/30 focus:border-[#B462B6]/40 transition-all ${
-      hasError ? "border-red-500/50" : "border-[#5CE1E6]/15"
+    `w-full px-4 py-3.5 bg-[#0A1628]/60 border rounded-xl text-sm text-[#FFFFFF] placeholder-[#FFFFFF]/40 focus:outline-none focus:ring-2 focus:ring-[#347A85]/30 focus:border-[#347A85]/60 transition-all ${
+      hasError ? "border-red-500/50" : "border-[#FFFFFF]/10"
     }`;
 
   return (
     <div className="transform-gpu will-change-auto">
+      {/* Header */}
       <div className="flex items-center gap-3 mb-5">
-        <div className="w-10 h-10 rounded-xl flex items-center justify-center border" style={{ backgroundColor: `${MAGENTA}10`, borderColor: `${MAGENTA}20` }}>
-          <MessageSquare size={16} style={{ color: PINK }} />
+        <div
+          className="w-10 h-10 rounded-xl flex items-center justify-center border"
+          style={{ backgroundColor: `${TEAL}15`, borderColor: `${TEAL}30` }}
+        >
+          <MessageSquare size={16} style={{ color: TEAL }} />
         </div>
         <div>
-          <h2 className="text-lg font-playfair" style={{ color: CYAN }}>Send Us a Message</h2>
-          <p className="text-xs mt-0.5" style={{ color: CYAN_50 }}>We&apos;d love to hear from you</p>
+          <h2 className="text-lg font-playfair" style={{ color: WHITE }}>
+            Send Us a Message
+          </h2>
+          <p className="text-xs mt-0.5" style={{ color: WHITE_50 }}>
+            We&apos;d love to hear from you
+          </p>
         </div>
       </div>
 
-      <div className="w-full h-px mb-6" style={{ background: `linear-gradient(to right, ${CYAN}10, ${CYAN}08, transparent)` }} />
+      {/* Divider */}
+      <div
+        className="w-full h-px mb-6"
+        style={{
+          background: `linear-gradient(to right, ${TEAL}30, ${TEAL}10, transparent)`,
+        }}
+      />
 
       <AnimatePresence mode="wait">
         {submitted ? (
@@ -129,7 +147,7 @@ export default function ContactForm() {
             className="flex flex-col items-center justify-center py-14"
           >
             <div className="relative">
-              <div className="w-20 h-20 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/15">
+              <div className="w-20 h-20 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/25">
                 <CheckCircle2 size={36} className="text-emerald-400" />
               </div>
               <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center animate-bounce">
@@ -147,23 +165,29 @@ export default function ContactForm() {
                 </svg>
               </div>
             </div>
-            <h3 className="text-xl mt-5 mb-1.5 font-playfair" style={{ color: CYAN }}>
+            <h3
+              className="text-xl mt-5 mb-1.5 font-playfair"
+              style={{ color: WHITE }}
+            >
               Message Sent!
             </h3>
-            <p className="text-sm text-center max-w-xs" style={{ color: CYAN_50 }}>
+            <p
+              className="text-sm text-center max-w-xs"
+              style={{ color: WHITE_60 }}
+            >
               Thank you for reaching out. We&apos;ll get back to you within 24 hours.
             </p>
           </motion.div>
         ) : (
-          <form
-            key="form"
-            onSubmit={handleSubmit}
-            className="space-y-4"
-          >
+          <form key="form" onSubmit={handleSubmit} className="space-y-4">
             {/* Name */}
             <div>
-              <label className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] mb-1.5" style={{ color: CYAN_50 }}>
-                <User size={10} /> Full Name <span style={{ color: MAGENTA }}>*</span>
+              <label
+                className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] mb-1.5"
+                style={{ color: TEAL_80 }}
+              >
+                <User size={10} /> Full Name{" "}
+                <span style={{ color: TEAL }}>*</span>
               </label>
               <input
                 type="text"
@@ -177,8 +201,11 @@ export default function ContactForm() {
 
             {/* Email */}
             <div>
-              <label className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] mb-1.5" style={{ color: CYAN_50 }}>
-                <Mail size={10} /> Email <span style={{ color: MAGENTA }}>*</span>
+              <label
+                className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] mb-1.5"
+                style={{ color: TEAL_80 }}
+              >
+                <Mail size={10} /> Email <span style={{ color: TEAL }}>*</span>
               </label>
               <input
                 type="email"
@@ -192,7 +219,10 @@ export default function ContactForm() {
 
             {/* Phone */}
             <div>
-              <label className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] mb-1.5" style={{ color: CYAN_50 }}>
+              <label
+                className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] mb-1.5"
+                style={{ color: TEAL_80 }}
+              >
                 <Phone size={10} /> Phone Number
               </label>
               <input
@@ -207,8 +237,12 @@ export default function ContactForm() {
 
             {/* Message */}
             <div>
-              <label className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] mb-1.5" style={{ color: CYAN_50 }}>
-                <MessageSquare size={10} /> Message <span style={{ color: MAGENTA }}>*</span>
+              <label
+                className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] mb-1.5"
+                style={{ color: TEAL_80 }}
+              >
+                <MessageSquare size={10} /> Message{" "}
+                <span style={{ color: TEAL }}>*</span>
               </label>
               <textarea
                 name="message"
@@ -229,22 +263,35 @@ export default function ContactForm() {
                   exit={{ opacity: 0, y: -5 }}
                   className={`flex items-start gap-2.5 px-4 py-3 rounded-xl border ${
                     apiDown
-                      ? "bg-[#FFA7E4]/5 border-[#FFA7E4]/20"
-                      : "bg-red-500/10 border-red-500/20"
+                      ? "bg-[#347A85]/10 border-[#347A85]/30"
+                      : "bg-red-500/10 border-red-500/25"
                   }`}
                 >
                   {apiDown ? (
-                    <AlertCircle size={16} className="shrink-0 mt-0.5" style={{ color: PINK }} />
+                    <AlertCircle
+                      size={16}
+                      className="shrink-0 mt-0.5"
+                      style={{ color: TEAL }}
+                    />
                   ) : (
                     <X size={14} className="text-red-400 shrink-0 mt-0.5" />
                   )}
                   <div className="flex-1">
-                    <p className={`text-sm leading-relaxed ${apiDown ? "" : "text-red-300"}`} style={apiDown ? { color: PINK } : undefined}>
+                    <p
+                      className={`text-sm leading-relaxed ${
+                        apiDown ? "" : "text-red-300"
+                      }`}
+                      style={apiDown ? { color: TEAL } : undefined}
+                    >
                       {error}
                     </p>
                     {apiDown && (
-                      <p className="text-[11px] mt-1" style={{ color: CYAN_50 }}>
-                        Call us: <span style={{ color: PINK }}>+1 (416) 996-4489</span>
+                      <p
+                        className="text-[11px] mt-1"
+                        style={{ color: WHITE_60 }}
+                      >
+                        Call us:{" "}
+                        <span style={{ color: TEAL }}>+1 (416) 996-4489</span>
                       </p>
                     )}
                   </div>
@@ -258,8 +305,8 @@ export default function ContactForm() {
               disabled={submitting}
               className="w-full flex cursor-pointer items-center justify-center gap-2.5 px-6 py-3.5 text-white text-sm font-bold rounded-xl disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.98] transition-all shadow-lg"
               style={{
-                background: `linear-gradient(135deg, ${PURPLE}, ${MAGENTA})`,
-                boxShadow: `0 4px 16px ${MAGENTA}30`,
+                background: `linear-gradient(135deg, ${TEAL}, ${DARK_TEAL})`,
+                boxShadow: `0 4px 16px ${TEAL}40`,
               }}
             >
               {submitting ? (
@@ -268,12 +315,16 @@ export default function ContactForm() {
                 </>
               ) : (
                 <>
-                  <Send size={16} /> Send Message <ArrowRight size={14} className="opacity-70" />
+                  <Send size={16} /> Send Message{" "}
+                  <ArrowRight size={14} className="opacity-70" />
                 </>
               )}
             </button>
 
-            <p className="text-center text-[10px] mt-2" style={{ color: CYAN_30 }}>
+            <p
+              className="text-center text-[10px] mt-2"
+              style={{ color: WHITE_40 }}
+            >
               By submitting, you agree to our privacy policy.
             </p>
           </form>

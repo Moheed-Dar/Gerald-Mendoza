@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Phone,
   Mail,
@@ -14,28 +14,58 @@ import {
   Loader2,
   CheckCircle2,
   AlertCircle,
+  Heart,
 } from "lucide-react";
-import { subscribe } from "@/lib/subscribers/api"; // ✅ Subscribe API
+import { subscribe } from "@/lib/subscribers/api";
 
 // ============================================
-// NEW 4-COLOR SCHEME (matches About section)
-// Purple | Cyan | Pink | Magenta
+// 5-COLOR SCHEME — "Deep Ocean Architectural"
 // ============================================
-const PURPLE = "#3C1E74";
-const CYAN = "#5CE1E6";
-const PINK = "#FFA7E4";
-const MAGENTA = "#B462B6";
-const DARK = "#1E0F3D"; // derived dark-purple base for backgrounds
+const CREAM = "#F7F7F7";
+const TEAL = "#347A85";
+const DEEP_TEAL = "#28606B";
+const INK = "#143336";
+
+// Derived tints
+const INK_05 = `${INK}0D`;
+const TEAL_05 = `${TEAL}0D`;
+const TEAL_10 = `${TEAL}1A`;
+const TEAL_15 = `${TEAL}26`;
+const TEAL_20 = `${TEAL}33`;
+const TEAL_25 = `${TEAL}40`;
+const TEAL_30 = `${TEAL}4D`;
+const TEAL_40 = `${TEAL}66`;
+const CREAM_20 = `${CREAM}33`;
+const CREAM_40 = `${CREAM}66`;
+const CREAM_60 = `${CREAM}99`;
+const CREAM_80 = `${CREAM}CC`;
+
+// ============================================
+// SOCIAL ICONS
+// ============================================
+const InstagramIcon = ({ size = 18 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+  </svg>
+);
+
+const FacebookIcon = ({ size = 18 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+  </svg>
+);
 
 export default function Footer() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subscribing, setSubscribing] = useState(false);
-  const [subscribeMsg, setSubscribeMsg] = useState(null); // { type: 'success' | 'error', text }
+  const [subscribeMsg, setSubscribeMsg] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const currentYear = new Date().getFullYear();
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => setIsVisible(window.scrollY > 300);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -43,14 +73,10 @@ export default function Footer() {
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
-  // ============================================
-  // ✅ SUBSCRIBE HANDLER
-  // ============================================
   const handleSubscribe = async (e) => {
     e.preventDefault();
     setSubscribeMsg(null);
 
-    // ---- Client-side validation ----
     if (!name.trim() || name.trim().length < 2) {
       setSubscribeMsg({ type: "error", text: "Please enter your name" });
       return;
@@ -61,7 +87,6 @@ export default function Footer() {
     }
 
     setSubscribing(true);
-
     const res = await subscribe({ name: name.trim(), email: email.trim() });
 
     if (res.success) {
@@ -71,7 +96,6 @@ export default function Footer() {
       });
       setName("");
       setEmail("");
-      // Success message 6 sec baad auto-hide
       setTimeout(() => setSubscribeMsg(null), 6000);
     } else {
       setSubscribeMsg({
@@ -83,175 +107,105 @@ export default function Footer() {
     setSubscribing(false);
   };
 
-  const footerLinks = {
-    company: [
-      { name: "Home", href: "/" },
-      { name: "About", href: "/about" },
-      { name: "Properties", href: "/properties" },
-      { name: "Services", href: "/services" },
-      { name: "Contact", href: "/contact" },
-    ],
-    resources: [{ name: "Blog", href: "/blogs" }],
-  };
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Properties", href: "/properties" },
+    { name: "Services", href: "/services" },
+    { name: "Blog", href: "/blogs" },
+    { name: "Contact", href: "/contact" },
+  ];
 
-  // ✅ Only LinkedIn — consistent with About section
-  // TODO: Update with Matt Vatcher's actual LinkedIn URL
   const socialLinks = [
-    {
-      name: "LinkedIn",
-      href: "https://www.linkedin.com/in/matt-vatcher/",
-      icon: (
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-        </svg>
-      ),
-    },
+    { name: "Instagram", href: "https://www.instagram.com/", icon: <InstagramIcon size={18} /> },
+    { name: "Facebook", href: "https://www.facebook.com/mendozafirst/", icon: <FacebookIcon size={18} /> },
   ];
 
   return (
     <footer
-      className="relative overflow-hidden text-white"
-      style={{ backgroundColor: DARK }}
+      className="relative w-full overflow-hidden"
+      style={{ backgroundColor: INK, color: CREAM }}
     >
-      {/* ===== LAYERED BACKGROUND (DARK PURPLE) ===== */}
-      <div className="absolute inset-0 z-0">
+      {/* ============ BACKGROUND LAYERS ============ */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <div
           className="absolute inset-0"
           style={{
-            background: `
-              linear-gradient(0deg, 
-                #150A2B 0%, 
-                #1A0C36 30%, 
-                ${DARK} 55%, 
-                #271451 80%,
-                #31196A 100%
-              )
-            `,
+            background: `linear-gradient(180deg, ${INK} 0%, #0F2226 50%, #0A1A1C 100%)`,
           }}
         />
-
         <div
-          className="absolute inset-x-0 top-0 h-112.5 pointer-events-none"
-          style={{
-            background: `linear-gradient(180deg, ${CYAN} 0%, ${CYAN}B3 25%, ${CYAN}66 55%, transparent 100%)`,
-          }}
+          className="absolute -top-32 -right-32 w-125 h-125 rounded-full opacity-15 blur-3xl"
+          style={{ backgroundColor: TEAL }}
         />
-
         <div
-          className="absolute -top-24 left-1/2 -translate-x-1/2 w-250 h-96 rounded-full pointer-events-none"
-          style={{
-            background: `radial-gradient(circle, ${CYAN}CC 0%, ${CYAN}66 45%, transparent 70%)`,
-            filter: "blur(60px)",
-          }}
+          className="absolute -bottom-32 -left-32 w-125 h-125 rounded-full opacity-10 blur-3xl"
+          style={{ backgroundColor: DEEP_TEAL }}
         />
-
-        <div
-          className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full pointer-events-none"
-          style={{
-            background: `radial-gradient(circle, ${MAGENTA}25 0%, transparent 70%)`,
-            filter: "blur(80px)",
-          }}
-        />
-
-        <div
-          className="absolute -bottom-40 -left-40 w-96 h-96 rounded-full pointer-events-none"
-          style={{
-            background: `radial-gradient(circle, ${CYAN}15 0%, transparent 70%)`,
-            filter: "blur(80px)",
-          }}
-        />
-
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.035]"
-          style={{
-            backgroundImage: `url('/images/navlogo1.png')`,
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center center",
-            backgroundSize: "45% auto",
-            mixBlendMode: "screen",
-          }}
-        />
-
         <div
           className="absolute inset-0 opacity-[0.04]"
           style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, ${CYAN} 1px, transparent 0)`,
+            backgroundImage: `radial-gradient(circle at 1px 1px, ${TEAL} 1px, transparent 0)`,
             backgroundSize: "48px 48px",
           }}
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* ===== SECTION 1: LARGE CTA BANNER (Hidden on Mobile) ===== */}
-        <div
-          className="relative mt-12 sm:mt-16 mb-16 rounded-3xl overflow-hidden hidden md:block"
-          style={{
-            background: `linear-gradient(135deg, ${MAGENTA} 0%, ${DARK} 70%, ${CYAN} 140%)`,
-            border: `1px solid ${CYAN}20`,
-          }}
-        >
-          <div
-            className="absolute -top-20 -right-20 w-64 h-64 rounded-full opacity-30 pointer-events-none"
-            style={{
-              background: `radial-gradient(circle, ${CYAN} 0%, transparent 70%)`,
-            }}
-          />
-          <div
-            className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full opacity-20 pointer-events-none"
-            style={{
-              background: `radial-gradient(circle, ${PINK} 0%, transparent 70%)`,
-            }}
-          />
-
-          <div className="relative px-6 sm:px-10 lg:px-16 py-10 sm:py-14 lg:py-16 flex flex-col lg:flex-row items-center justify-between gap-6">
-            <div className="text-center lg:text-left max-w-2xl">
+      {/* ============ BLOCK 1: CTA STRIP ============ */}
+      <div
+        className="relative z-10 border-b"
+        style={{ backgroundColor: TEAL, borderColor: CREAM_20 }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+            <div className="text-center lg:text-left">
               <div
-                className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-widest mb-3"
-                style={{
-                  backgroundColor: `${CYAN}20`,
-                  color: CYAN,
-                  border: `1px solid ${CYAN}30`,
-                }}
+                className="inline-flex items-center gap-2 px-3 py-1.5 mb-3"
+                style={{ backgroundColor: `${CREAM}20`, color: CREAM }}
               >
-                <Sparkles size={12} />
-                Let's Start Your Journey
+                <Sparkles size={12} strokeWidth={2.5} />
+                <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.25em] font-bold">
+                  Let&apos;s Work Together
+                </span>
               </div>
-              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight tracking-[-0.02em]">
-                Ready to find your <br className="hidden sm:block" />
-                <span style={{ color: CYAN }}>next chapter?</span>
+              <h3
+                className="font-luxury font-luxury-tracking text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-[0.95]"
+                style={{ color: CREAM }}
+              >
+                Move to your{" "}
+                <span className="font-luxury-italic italic" style={{ color: INK }}>
+                  next chapter
+                </span>
               </h3>
               <p
-                className="mt-3 text-sm sm:text-base max-w-md mx-auto lg:mx-0"
-                style={{ color: `${CYAN}CC` }}
+                className="mt-3 text-sm sm:text-base max-w-lg mx-auto lg:mx-0"
+                style={{ color: `${CREAM}CC` }}
               >
-                Whether you're downsizing, upgrading, or investing — I'm here
-                to guide you every step of the way.
+                Buying, selling, or just exploring options — Gerald brings calm,
+                humor &amp; decades of experience to every transaction.
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
-              {/* TODO: Update with Matt's booking calendar link */}
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <Link
-                href="https://calendar.app.google/zf9eeGFTRRb44AKU6"
-                className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm font-extrabold transition-all duration-300 hover:scale-105 shadow-xl"
-                style={{
-                  backgroundColor: "#FFFFFF",
-                  color: PURPLE,
-                }}
+                href="/contact"
+                className="group inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3.5 text-sm font-extrabold transition-all duration-300 hover:scale-105"
+                style={{ backgroundColor: CREAM, color: INK }}
               >
                 Book a Consultation
                 <ArrowUpRight
-                  size={18}
-                  className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
+                  size={16}
+                  strokeWidth={3}
+                  className="group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform"
                 />
               </Link>
               <Link
                 href="/properties"
-                className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm font-extrabold transition-all duration-300 hover:scale-105"
+                className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3.5 text-sm font-extrabold transition-all duration-300 hover:scale-105"
                 style={{
-                  backgroundColor: `${CYAN}15`,
-                  color: CYAN,
-                  border: `1px solid ${CYAN}40`,
+                  backgroundColor: "transparent",
+                  color: CREAM,
+                  border: `1.5px solid ${CREAM_40}`,
                 }}
               >
                 Browse Properties
@@ -259,138 +213,320 @@ export default function Footer() {
             </div>
           </div>
         </div>
+      </div>
 
-        {/* ===== SECTION 2: MAIN FOOTER GRID ===== */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 mb-12 pt-12 md:pt-0">
-          {/* LEFT: Brand Column - 6/12 cols */}
-          <div className="lg:col-span-6 flex flex-col">
-            <div className="mb-6">
-              <Image
-                src="/images/mettlogo11.png"
-                alt="Matt Vatcher Logo"
-                width={180}
-                height={55}
-                className="object-contain"
-                style={{ width: "auto", height: "auto" }}
-                priority
-              />
-            </div>
-
-            <p
-              className="text-sm sm:text-base leading-relaxed mb-6 max-w-md"
-              style={{ color: `${CYAN}CC` }}
-            >
-              Helping homeowners, buyers and sellers across the Beaches, East
-              York, Scarborough and the rest of Toronto move to the next chapter
-              of their life — with thoughtful guidance, local knowledge, and a
-              real estate experience built on trust, kindness, and connection.
-            </p>
-
-            {/* Contact Mini Cards */}
-            <div className="space-y-3 mb-6">
-              <a
-                href="tel:+14169964489"
-                className="group flex items-center gap-3 p-3 rounded-xl transition-all duration-300 hover:-translate-x-1"
-                style={{
-                  backgroundColor: `${CYAN}08`,
-                  border: `1px solid ${CYAN}15`,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = `${MAGENTA}20`;
-                  e.currentTarget.style.borderColor = `${MAGENTA}40`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = `${CYAN}08`;
-                  e.currentTarget.style.borderColor = `${CYAN}15`;
-                }}
-              >
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-colors"
-                  style={{
-                    backgroundColor: `${MAGENTA}25`,
-                    color: CYAN,
-                  }}
-                >
-                  <Phone size={16} />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-[10px] uppercase tracking-wider font-bold" style={{ color: PINK }}>
-                    Call Anytime
-                  </p>
-                  <p className="text-sm font-semibold text-white truncate">
-                    +1 (416) 996-4489
-                  </p>
-                </div>
-              </a>
-
-              <a
-                href="mailto:matt@torontosrunningrealtor.com"
-                className="group flex items-center gap-3 p-3 rounded-xl transition-all duration-300 hover:-translate-x-1"
-                style={{
-                  backgroundColor: `${CYAN}08`,
-                  border: `1px solid ${CYAN}15`,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = `${MAGENTA}20`;
-                  e.currentTarget.style.borderColor = `${MAGENTA}40`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = `${CYAN}08`;
-                  e.currentTarget.style.borderColor = `${CYAN}15`;
-                }}
-              >
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-colors"
-                  style={{
-                    backgroundColor: `${MAGENTA}25`,
-                    color: CYAN,
-                  }}
-                >
-                  <Mail size={16} />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-[10px] uppercase tracking-wider font-bold" style={{ color: PINK }}>
-                    Email Me
-                  </p>
-                  <p className="text-sm font-semibold text-white truncate">
-                    matt@torontosrunningrealtor.com
-                  </p>
-                </div>
-              </a>
-
+      {/* ============ BLOCK 2: 4-COLUMNS MAIN GRID ============ */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+          {/* COL 1: BRAND */}
+          <div className="lg:col-span-1">
+            <div className="flex items-center gap-3 mb-5">
+              {/* ✅ LOGO IMAGE — replaces Building2 icon */}
               <div
-                className="flex items-center gap-3 p-3 rounded-xl"
+                className="relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-lg"
                 style={{
-                  backgroundColor: `${CYAN}08`,
-                  border: `1px solid ${CYAN}15`,
+                  backgroundColor: `${CREAM}10`,
+                  border: `1px solid ${TEAL_30}`,
                 }}
               >
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-                  style={{
-                    backgroundColor: `${MAGENTA}25`,
-                    color: CYAN,
-                  }}
+                <Image
+                  src="/images/logo12.png"
+                  alt="Gerald Mendoza Jr. Real Estate Logo"
+                  fill
+                  className="object-contain p-1.5"
+                  sizes="56px"
+                />
+              </div>
+              <div className="flex flex-col leading-none">
+                <span
+                  className="font-luxury text-xl font-extrabold tracking-tight"
+                  style={{ color: CREAM }}
                 >
-                  <MapPin size={16} />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-[10px] uppercase tracking-wider font-bold" style={{ color: PINK }}>
-                    Serving Area
-                  </p>
-                  <p className="text-sm font-semibold text-white truncate">
-                    BEACHES, EAST YORK, SCARBOROUGH, TORONTO
-                  </p>
-                </div>
+                  Gerald Mendoza<span style={{ color: TEAL }}>, Jr.</span>
+                </span>
+                <span
+                  className="mt-1.5 text-[9px] font-semibold uppercase tracking-[0.3em]"
+                  style={{ color: CREAM_60 }}
+                >
+                  Real Estate Promoter
+                </span>
               </div>
             </div>
 
-            {/* Social */}
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.2em] font-bold mb-3" style={{ color: CYAN }}>
-                Follow Along
+            <p className="text-sm leading-relaxed mb-5" style={{ color: CREAM_80 }}>
+              A mediating source of calm, humor &amp; humility. Helping Tucson
+              buyers and sellers move to the next chapter of their lives.
+            </p>
+
+            <div
+              className="p-4"
+              style={{ backgroundColor: TEAL_10, border: `1px solid ${TEAL_20}` }}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <Heart size={14} strokeWidth={2.5} style={{ color: TEAL }} />
+                <span
+                  className="font-mono text-[10px] uppercase tracking-[0.2em] font-bold"
+                  style={{ color: TEAL }}
+                >
+                  Realty Executives
+                </span>
+              </div>
+              <p className="text-xs leading-relaxed" style={{ color: CREAM_80 }}>
+                Tucson Elite — Oracle Office
               </p>
-              <div className="flex items-center gap-2.5">
+            </div>
+          </div>
+
+          {/* COL 2: NAVIGATION */}
+          <div>
+            <h4
+              className="font-mono text-xs uppercase tracking-[0.25em] font-extrabold mb-5 pb-3 border-b"
+              style={{ color: CREAM, borderColor: TEAL_20 }}
+            >
+              Navigate
+            </h4>
+            <ul className="space-y-3">
+              {navLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="group flex items-center gap-2 text-sm transition-all duration-300"
+                    style={{ color: CREAM_80 }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = TEAL)}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = CREAM_80)}
+                  >
+                    <span
+                      className="w-3 h-px transition-all duration-300 group-hover:w-5"
+                      style={{ backgroundColor: TEAL }}
+                    />
+                    <span className="group-hover:translate-x-1 transition-transform duration-300">
+                      {link.name}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* COL 3: CONTACT */}
+          <div>
+            <h4
+              className="font-mono text-xs uppercase tracking-[0.25em] font-extrabold mb-5 pb-3 border-b"
+              style={{ color: CREAM, borderColor: TEAL_20 }}
+            >
+              Get In Touch
+            </h4>
+            <ul className="space-y-4">
+              <li>
+                <a
+                  href="tel:+15203027600"
+                  className="group flex items-start gap-3 transition-all duration-300 hover:translate-x-1"
+                >
+                  <span
+                    className="flex h-9 w-9 items-center justify-center shrink-0"
+                    style={{ backgroundColor: TEAL_15, border: `1px solid ${TEAL_30}` }}
+                  >
+                    <Phone size={14} strokeWidth={2.5} style={{ color: TEAL }} />
+                  </span>
+                  <span className="flex-1 min-w-0">
+                    <span
+                      className="block font-mono text-[9px] uppercase tracking-wider font-bold mb-0.5"
+                      style={{ color: TEAL }}
+                    >
+                      Phone
+                    </span>
+                    <span className="block text-sm font-semibold" style={{ color: CREAM }}>
+                      +1 (520) 302-7600
+                    </span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:geraldmendoza@realtyexecutives.com"
+                  className="group flex items-start gap-3 transition-all duration-300 hover:translate-x-1"
+                >
+                  <span
+                    className="flex h-9 w-9 items-center justify-center shrink-0"
+                    style={{ backgroundColor: TEAL_15, border: `1px solid ${TEAL_30}` }}
+                  >
+                    <Mail size={14} strokeWidth={2.5} style={{ color: TEAL }} />
+                  </span>
+                  <span className="flex-1 min-w-0">
+                    <span
+                      className="block font-mono text-[9px] uppercase tracking-wider font-bold mb-0.5"
+                      style={{ color: TEAL }}
+                    >
+                      Email
+                    </span>
+                    <span className="block text-sm font-semibold break-all" style={{ color: CREAM }}>
+                      geraldmendoza@realtyexecutives.com
+                    </span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <div className="group flex items-start gap-3">
+                  <span
+                    className="flex h-9 w-9 items-center justify-center shrink-0"
+                    style={{ backgroundColor: TEAL_15, border: `1px solid ${TEAL_30}` }}
+                  >
+                    <MapPin size={14} strokeWidth={2.5} style={{ color: TEAL }} />
+                  </span>
+                  <span className="flex-1 min-w-0">
+                    <span
+                      className="block font-mono text-[9px] uppercase tracking-wider font-bold mb-0.5"
+                      style={{ color: TEAL }}
+                    >
+                      Office
+                    </span>
+                    <span className="block text-sm font-semibold" style={{ color: CREAM }}>
+                      6760 N. Oracle Road
+                    </span>
+                    <span className="block text-xs mt-0.5" style={{ color: CREAM_60 }}>
+                      Tucson, AZ
+                    </span>
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          {/* COL 4: NEWSLETTER */}
+          <div>
+            <h4
+              className="font-mono text-xs uppercase tracking-[0.25em] font-extrabold mb-5 pb-3 border-b"
+              style={{ color: CREAM, borderColor: TEAL_20 }}
+            >
+              Newsletter
+            </h4>
+
+            <div className="flex items-center gap-2 mb-3">
+              <Send size={14} strokeWidth={2.5} style={{ color: TEAL }} />
+              <p
+                className="font-mono text-[10px] uppercase tracking-[0.2em] font-bold"
+                style={{ color: TEAL }}
+              >
+                Stay Updated
+              </p>
+            </div>
+
+            <p className="text-xs leading-relaxed mb-4" style={{ color: CREAM_80 }}>
+              Get market insights, new listings &amp; tips delivered monthly.
+            </p>
+
+            <form onSubmit={handleSubscribe} className="space-y-2">
+              <input
+                type="text"
+                placeholder="Your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                disabled={subscribing}
+                required
+                minLength={2}
+                maxLength={100}
+                className="w-full py-2.5 px-4 text-sm text-white placeholder-white/40 focus:outline-none transition-all duration-300 disabled:opacity-50"
+                style={{
+                  backgroundColor: TEAL_10,
+                  border: `1px solid ${TEAL_25}`,
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = TEAL;
+                  e.currentTarget.style.boxShadow = `0 0 0 2px ${TEAL_25}`;
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = TEAL_25;
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              />
+              <input
+                type="email"
+                placeholder="your@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={subscribing}
+                required
+                maxLength={200}
+                className="w-full py-2.5 px-4 text-sm text-white placeholder-white/40 focus:outline-none transition-all duration-300 disabled:opacity-50"
+                style={{
+                  backgroundColor: TEAL_10,
+                  border: `1px solid ${TEAL_25}`,
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = TEAL;
+                  e.currentTarget.style.boxShadow = `0 0 0 2px ${TEAL_25}`;
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = TEAL_25;
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              />
+              <button
+                type="submit"
+                disabled={subscribing}
+                className="w-full py-2.5 px-4 text-sm font-extrabold text-white transition-all duration-300 hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
+                style={{
+                  background: `linear-gradient(135deg, ${TEAL}, ${DEEP_TEAL})`,
+                }}
+                aria-label="Subscribe"
+              >
+                {subscribing ? (
+                  <>
+                    <Loader2 size={14} className="animate-spin" />
+                    Subscribing...
+                  </>
+                ) : (
+                  <>
+                    Subscribe
+                    <ArrowUpRight size={14} strokeWidth={2.5} />
+                  </>
+                )}
+              </button>
+
+              {subscribeMsg && (
+                <div
+                  className="flex items-center gap-2 px-3 py-2 text-xs font-medium"
+                  style={{
+                    backgroundColor:
+                      subscribeMsg.type === "success"
+                        ? TEAL_15
+                        : "rgba(239, 68, 68, 0.12)",
+                    border: `1px solid ${
+                      subscribeMsg.type === "success"
+                        ? TEAL_40
+                        : "rgba(239, 68, 68, 0.3)"
+                    }`,
+                    color: subscribeMsg.type === "success" ? TEAL : "#fca5a5",
+                  }}
+                >
+                  {subscribeMsg.type === "success" ? (
+                    <CheckCircle2 size={12} className="shrink-0" />
+                  ) : (
+                    <AlertCircle size={12} className="shrink-0" />
+                  )}
+                  {subscribeMsg.text}
+                </div>
+              )}
+            </form>
+          </div>
+        </div>
+      </div>
+
+      {/* ============ BLOCK 3: BOTTOM BAR ============ */}
+      <div
+        className="relative z-10 border-t"
+        style={{ borderColor: TEAL_20, backgroundColor: "#0A1A1C" }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-5">
+            <div className="flex items-center gap-3">
+              <span
+                className="font-mono text-[10px] uppercase tracking-[0.25em] font-bold"
+                style={{ color: CREAM_60 }}
+              >
+                Connect:
+              </span>
+              <div className="flex items-center gap-2">
                 {socialLinks.map((social) => (
                   <a
                     key={social.name}
@@ -398,21 +534,21 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.name}
-                    className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-0.5"
+                    className="w-9 h-9 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-0.5"
                     style={{
-                      backgroundColor: `${CYAN}15`,
-                      border: `1px solid ${CYAN}30`,
-                      color: CYAN,
+                      backgroundColor: TEAL_15,
+                      border: `1px solid ${TEAL_30}`,
+                      color: TEAL,
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = MAGENTA;
-                      e.currentTarget.style.borderColor = MAGENTA;
-                      e.currentTarget.style.color = "#FFFFFF";
+                      e.currentTarget.style.backgroundColor = TEAL;
+                      e.currentTarget.style.borderColor = TEAL;
+                      e.currentTarget.style.color = CREAM;
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = `${CYAN}15`;
-                      e.currentTarget.style.borderColor = `${CYAN}30`;
-                      e.currentTarget.style.color = CYAN;
+                      e.currentTarget.style.backgroundColor = TEAL_15;
+                      e.currentTarget.style.borderColor = TEAL_30;
+                      e.currentTarget.style.color = TEAL;
                     }}
                   >
                     {social.icon}
@@ -420,280 +556,58 @@ export default function Footer() {
                 ))}
               </div>
             </div>
+
+            <p
+              className="font-luxury text-sm text-center order-first md:order-0"
+              style={{ color: CREAM_80 }}
+            >
+              © {currentYear} Gerald V Mendoza, Jr. — Realty Executives Tucson Elite.
+            </p>
+
+            <button
+              onClick={scrollToTop}
+              className="group flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:gap-3"
+              style={{
+                color: CREAM,
+                backgroundColor: TEAL_10,
+                border: `1px solid ${TEAL_30}`,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = TEAL;
+                e.currentTarget.style.color = CREAM;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = TEAL_10;
+                e.currentTarget.style.color = CREAM;
+              }}
+              aria-label="Back to top"
+            >
+              Back To Top
+              <ArrowUp size={12} strokeWidth={3} className="group-hover:-translate-y-0.5 transition-transform" />
+            </button>
           </div>
-
-          {/* RIGHT: Links Columns - 6/12 cols, 2-column layout */}
-          <div className="lg:col-span-6 grid grid-cols-2 gap-8 sm:gap-6">
-            {/* Column 1: Company */}
-            <div>
-              <h4
-                className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-extrabold mb-5"
-                style={{ color: "#FFFFFF" }}
-              >
-                <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: PINK }} />
-                Company
-              </h4>
-              <ul className="space-y-3">
-                {footerLinks.company.map((link) => (
-                  <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="group flex items-center gap-2 text-sm transition-all duration-300"
-                      style={{ color: `${CYAN}B0` }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")}
-                      onMouseLeave={(e) => (e.currentTarget.style.color = `${CYAN}B0`)}
-                    >
-                      <ArrowUpRight
-                        size={12}
-                        className="opacity-0 group-hover:opacity-100 -rotate-45 group-hover:rotate-0 transition-all duration-300"
-                        style={{ color: PINK }}
-                      />
-                      <span className="group-hover:translate-x-1 transition-transform duration-300">
-                        {link.name}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Column 2: Resources */}
-            <div>
-              <h4
-                className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-extrabold mb-5"
-                style={{ color: "#FFFFFF" }}
-              >
-                <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: CYAN }} />
-                Resources
-              </h4>
-              <ul className="space-y-3">
-                {footerLinks.resources.map((link) => (
-                  <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="group flex items-center gap-2 text-sm transition-all duration-300"
-                      style={{ color: `${CYAN}B0` }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")}
-                      onMouseLeave={(e) => (e.currentTarget.style.color = `${CYAN}B0`)}
-                    >
-                      <ArrowUpRight
-                        size={12}
-                        className="opacity-0 group-hover:opacity-100 -rotate-45 group-hover:rotate-0 transition-all duration-300"
-                        style={{ color: CYAN }}
-                      />
-                      <span className="group-hover:translate-x-1 transition-transform duration-300">
-                        {link.name}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-
-              {/* Quick Contact CTA under Resources for balance */}
-              <div
-                className="mt-6 p-4 rounded-xl"
-                style={{
-                  backgroundColor: `${CYAN}08`,
-                  border: `1px solid ${CYAN}15`,
-                }}
-              >
-                <p
-                  className="text-[10px] uppercase tracking-wider font-bold mb-1"
-                  style={{ color: PINK }}
-                >
-                  Quick Question?
-                </p>
-                <p className="text-sm mb-3" style={{ color: `${CYAN}CC` }}>
-                  Let's talk about your real estate goals.
-                </p>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-1.5 text-xs font-extrabold transition-all duration-300 hover:gap-2.5"
-                  style={{ color: CYAN }}
-                >
-                  Reach Out
-                  <ArrowUpRight size={12} />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ===== SECTION 3: NEWSLETTER CARD (✅ SUBSCRIBE IMPLEMENTED) ===== */}
-        <div
-          className="relative rounded-2xl overflow-hidden mb-12"
-          style={{
-            backgroundColor: `${CYAN}08`,
-            border: `1px solid ${CYAN}20`,
-          }}
-        >
-          <div
-            className="absolute top-0 left-0 w-full h-0.5"
-            style={{
-              background: `linear-gradient(to right, transparent, ${CYAN}, ${MAGENTA}, transparent)`,
-            }}
-          />
-          <div
-            className="absolute -right-20 -top-20 w-64 h-64 rounded-full opacity-20 pointer-events-none"
-            style={{
-              background: `radial-gradient(circle, ${MAGENTA} 0%, transparent 70%)`,
-            }}
-          />
-
-          <div className="relative px-5 sm:px-8 lg:px-12 py-6 sm:py-8 flex flex-col md:flex-row items-start md:items-center gap-5">
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-2">
-                <Send size={16} style={{ color: PINK }} />
-                <p className="text-[10px] uppercase tracking-[0.2em] font-extrabold" style={{ color: PINK }}>
-                  Newsletter
-                </p>
-              </div>
-              <h4 className="text-lg sm:text-xl font-extrabold mb-1" style={{ color: "#FFFFFF" }}>
-                Stay Updated with Toronto Real Estate
-              </h4>
-              <p className="text-xs sm:text-sm" style={{ color: `${CYAN}B0` }}>
-                Get market insights, new listings, and tips delivered monthly.
-              </p>
-            </div>
-
-            {/* ✅ SUBSCRIBE FORM — Name + Email */}
-            <div className="w-full md:w-auto md:min-w-105">
-              <form onSubmit={handleSubscribe} className="space-y-2.5">
-                <div className="flex flex-col sm:flex-row gap-2">
-                  {/* Name Input */}
-                  <input
-                    type="text"
-                    placeholder="Your name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    disabled={subscribing}
-                    required
-                    minLength={2}
-                    maxLength={100}
-                    className="flex-1 sm:w-44 rounded-full py-3 px-5 text-sm text-white placeholder-white/40 focus:outline-none transition-all duration-300 disabled:opacity-50"
-                    style={{
-                      backgroundColor: `${CYAN}10`,
-                      border: `1px solid ${CYAN}25`,
-                    }}
-                    onFocus={(e) => {
-                      e.currentTarget.style.borderColor = CYAN;
-                      e.currentTarget.style.boxShadow = `0 0 0 3px ${CYAN}25`;
-                    }}
-                    onBlur={(e) => {
-                      e.currentTarget.style.borderColor = `${CYAN}25`;
-                      e.currentTarget.style.boxShadow = "none";
-                    }}
-                  />
-
-                  {/* Email Input */}
-                  <input
-                    type="email"
-                    placeholder="your@email.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    disabled={subscribing}
-                    required
-                    maxLength={200}
-                    className="flex-1 sm:w-52 rounded-full py-3 px-5 text-sm text-white placeholder-white/40 focus:outline-none transition-all duration-300 disabled:opacity-50"
-                    style={{
-                      backgroundColor: `${CYAN}10`,
-                      border: `1px solid ${CYAN}25`,
-                    }}
-                    onFocus={(e) => {
-                      e.currentTarget.style.borderColor = CYAN;
-                      e.currentTarget.style.boxShadow = `0 0 0 3px ${CYAN}25`;
-                    }}
-                    onBlur={(e) => {
-                      e.currentTarget.style.borderColor = `${CYAN}25`;
-                      e.currentTarget.style.boxShadow = "none";
-                    }}
-                  />
-
-                  {/* Subscribe Button */}
-                  <button
-                    type="submit"
-                    disabled={subscribing}
-                    className="shrink-0 px-5 sm:px-6 py-3 rounded-full text-sm font-extrabold text-white transition-all duration-300 hover:scale-105 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
-                    style={{
-                      background: `linear-gradient(135deg, ${MAGENTA}, ${PURPLE})`,
-                      boxShadow: `0 6px 20px ${MAGENTA}50`,
-                    }}
-                    aria-label="Subscribe"
-                  >
-                    {subscribing ? (
-                      <>
-                        <Loader2 size={14} className="animate-spin" />
-                        Subscribing...
-                      </>
-                    ) : (
-                      <>
-                        Subscribe
-                        <ArrowUpRight size={14} />
-                      </>
-                    )}
-                  </button>
-                </div>
-
-                {/* ✅ Success / Error Message */}
-                {subscribeMsg && (
-                  <div
-                    className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium"
-                    style={{
-                      backgroundColor:
-                        subscribeMsg.type === "success"
-                          ? `${CYAN}15`
-                          : "rgba(239, 68, 68, 0.12)",
-                      border: `1px solid ${
-                        subscribeMsg.type === "success"
-                          ? `${CYAN}40`
-                          : "rgba(239, 68, 68, 0.3)"
-                      }`,
-                      color: subscribeMsg.type === "success" ? CYAN : "#fca5a5",
-                    }}
-                  >
-                    {subscribeMsg.type === "success" ? (
-                      <CheckCircle2 size={13} className="shrink-0" />
-                    ) : (
-                      <AlertCircle size={13} className="shrink-0" />
-                    )}
-                    {subscribeMsg.text}
-                  </div>
-                )}
-              </form>
-            </div>
-          </div>
-        </div>
-
-        {/* ===== SECTION 4: FINAL COPYRIGHT LINE (LAST) ===== */}
-        <div
-          className="pt-6 pb-4 flex flex-col items-center"
-          style={{ borderTop: `1px solid ${CYAN}15` }}
-        >
-          <p
-            className="text-xs sm:text-sm transition-colors text-center"
-            style={{ color: `${CYAN}80` }}
-          >
-            © {currentYear} Matt Vatcher. All rights reserved.
-          </p>
         </div>
       </div>
 
-      {/* SCROLL TO TOP BUTTON */}
-      <button
-        onClick={scrollToTop}
-        className={`fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full text-white flex items-center justify-center transition-all duration-300 hover:scale-110 ${
-          isVisible
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-4 pointer-events-none"
-        }`}
-        style={{
-          background: `linear-gradient(135deg, ${MAGENTA}, ${PURPLE})`,
-          boxShadow: `0 8px 24px ${MAGENTA}60`,
-        }}
-        aria-label="Scroll to top"
-      >
-        <ArrowUp size={20} strokeWidth={2.5} />
-      </button>
+      {/* FLOATING SCROLL-TO-TOP BUTTON */}
+      {mounted && (
+        <button
+          onClick={scrollToTop}
+          className={`fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 ${
+            isVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-4 pointer-events-none"
+          }`}
+          style={{
+            background: `linear-gradient(135deg, ${TEAL}, ${DEEP_TEAL})`,
+            boxShadow: `0 8px 24px ${TEAL}66`,
+            color: CREAM,
+          }}
+          aria-label="Scroll to top"
+        >
+          <ArrowUp size={20} strokeWidth={2.5} />
+        </button>
+      )}
     </footer>
   );
 }

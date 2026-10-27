@@ -5,20 +5,40 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Calendar,
+  Award,
+  Briefcase,
+  Music,
+  Home,
+  Heart,
+} from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 // ============================================
-// NEW 4-COLOR SCHEME
-// Purple | Cyan | Pink | Magenta
+// 5-COLOR SCHEME — "Deep Ocean Architectural"
 // ============================================
-const PURPLE = "#3C1E74";
-const CYAN = "#5CE1E6";
-const PINK = "#FFA7E4";
-const MAGENTA = "#B462B6";
+const CREAM = "#F7F7F7";
+const TEAL = "#347A85";
+const DEEP_TEAL = "#28606B";
+const INK = "#143336";
+const BLACK = "#000000";
+
+const INK_05 = `${INK}0D`;
+const INK_10 = `${INK}1A`;
+const INK_20 = `${INK}33`;
+const INK_40 = `${INK}66`;
+const INK_60 = `${INK}99`;
+const TEAL_15 = `${TEAL}26`;
+const TEAL_30 = `${TEAL}4D`;
+const CREAM_TINT = `${CREAM}F2`;
 
 // ============================================
-// SOCIAL ICONS - Instagram & Facebook
+// SOCIAL ICONS
 // ============================================
 const InstagramIcon = ({ size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -32,32 +52,57 @@ const FacebookIcon = ({ size = 20 }) => (
   </svg>
 );
 
+// Career highlights shown BELOW the portrait image
+const careerHighlights = [
+  {
+    icon: Briefcase,
+    year: "Early Career",
+    title: "Coiffeur Artist",
+    description: "Made every client feel like a star — discovered the Midas touch with people.",
+  },
+  {
+    icon: Music,
+    year: "Mid Journey",
+    title: "Concert Promoter",
+    description: "Promoted rock n' roll, salsa & Latin concerts across the Western U.S.",
+  },
+  {
+    icon: Home,
+    year: "Reno Era",
+    title: "Mortgage Broker — C&A Home Loans",
+    description: "Built the most productive brokerage in hardscrabble Reno, NV.",
+  },
+  {
+    icon: Heart,
+    year: "Today",
+    title: "Realty Executives Tucson Elite",
+    description: "Back home in the Ol' Pueblo, bringing calm & humor to every deal.",
+  },
+];
+
 export default function About() {
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
-  const imagesRef = useRef(null);
-  const bioRef = useRef(null);
 
-  const images = [
-    { src: "/images/about5up.jpg", alt: "Toronto Real Estate 1" },
-    { src: "/images/about1up.jpg", alt: "Toronto Real Estate 2" },
-    { src: "/images/about3up.jpg", alt: "Toronto Real Estate 3" },
-    { src: "/images/about2up.jpg", alt: "Toronto Real Estate 4" },
+  const galleryImages = [
+    { src: "/images/about5up.jpg", alt: "Tucson Real Estate 1" },
+    { src: "/images/about1up.jpg", alt: "Tucson Real Estate 2" },
+    { src: "/images/about3up.jpg", alt: "Tucson Real Estate 3" },
+    { src: "/images/about2up.jpg", alt: "Tucson Real Estate 4" },
   ];
 
-  // Instagram & Facebook social links
   const socialLinks = [
     {
       icon: InstagramIcon,
-      href: "https://www.instagram.com/torontosrunningrealtor/",
+      href: "https://www.instagram.com/",
       label: "Instagram",
-      hoverColor: PINK,
+      hoverColor: TEAL,
     },
     {
       icon: FacebookIcon,
-      href: "https://www.facebook.com/torontosrunningrealtor/",
+      href: "https://www.facebook.com/",
       label: "Facebook",
-      hoverColor: MAGENTA,
+      hoverColor: DEEP_TEAL,
     },
   ];
 
@@ -71,18 +116,6 @@ export default function About() {
         scrollTrigger: {
           trigger: headingRef.current,
           start: "top 85%",
-          toggleActions: "play none none none",
-        },
-      });
-
-      gsap.from(bioRef.current, {
-        opacity: 0,
-        x: -50,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: bioRef.current,
-          start: "top 80%",
           toggleActions: "play none none none",
         },
       });
@@ -114,213 +147,62 @@ export default function About() {
     },
   };
 
-  const frameVariants = [
-    { rotate: -3, y: 20 },
-    { rotate: 2, y: -10 },
-    { rotate: -2, y: 15 },
-    { rotate: 3, y: -5 },
-  ];
-
   return (
-    <section
-      ref={sectionRef}
-      className="relative w-full overflow-hidden py-16 sm:py-24 md:py-28 lg:py-32"
-    >
-      {/* ===== BACKGROUND: BOTTOM TO TOP GRADIENT (NEW SCHEME) ===== */}
-      <div className="absolute inset-0 z-0">
+    <>
+      {/* ============ LUXURY FONT ============ */}
+      <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+        rel="stylesheet"
+      />
+      <style jsx global>{`
+        .font-luxury {
+          font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+        }
+        .font-luxury-italic {
+          font-family: "Cormorant Garamond", Georgia, serif;
+          font-style: italic;
+        }
+        .font-luxury-tracking {
+          letter-spacing: 0.02em;
+        }
+      `}</style>
+
+      {/* ============ NO TOP BORDER ============ */}
+      <section
+        ref={sectionRef}
+        className="relative w-full overflow-hidden bg-white"
+        style={{ color: INK }}
+      >
+        {/* Soft background accents only */}
         <div
-          className="absolute inset-0"
-          style={{
-            background: `linear-gradient(0deg, ${PURPLE} 0%, ${MAGENTA} 30%, ${PINK} 65%, ${CYAN} 100%)`,
-          }}
+          className="absolute -top-40 -right-40 w-125 h-125 rounded-full blur-3xl opacity-10 pointer-events-none"
+          style={{ backgroundColor: TEAL }}
+        />
+        <div
+          className="absolute -bottom-40 -left-40 w-125 h-125 rounded-full blur-3xl opacity-10 pointer-events-none"
+          style={{ backgroundColor: DEEP_TEAL }}
         />
 
-        {/* Watermark - mobile only (smaller) */}
-        <div
-          className="absolute inset-0 pointer-events-none sm:hidden"
-          style={{
-            backgroundImage: `url('/images/mettlogo11.png')`,
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center center",
-            backgroundSize: "75% auto",
-            opacity: 0.12,
-            mixBlendMode: "multiply",
-          }}
-        />
-
-        {/* Extra gradient overlay for depth */}
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            background: `radial-gradient(circle at 20% 80%, ${PURPLE} 0%, transparent 50%)`,
-          }}
-        />
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* "Who I Am" Label */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-6 sm:mb-8"
-        >
-          <span
-            className="inline-block rounded-full px-5 py-1.5 text-[10px] sm:text-xs uppercase tracking-[0.3em] font-extrabold shadow-md"
-            style={{
-              backgroundColor: PURPLE,
-              color: CYAN,
-            }}
-          >
-            ( Who I Am )
-          </span>
-        </motion.div>
-
-        {/* Main Heading */}
-        <div ref={headingRef} className="text-center mb-12 sm:mb-16 md:mb-20">
-          <h2
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight max-w-4xl mx-auto tracking-[-0.02em]"
-            style={{ color: PURPLE }}
-          >
-            Helping you move to the{" "}
-            <span className="relative inline-block" style={{ color: PURPLE }}>
-              next chapter of your life
-              <svg
-                className="absolute -bottom-1 left-0 w-full"
-                height="8"
-                viewBox="0 0 200 8"
-                fill="none"
-                preserveAspectRatio="none"
-              >
-                <path
-                  d="M2 6C50 2 150 2 198 6"
-                  stroke={PINK}
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  opacity="0.8"
-                />
-              </svg>
+        {/* ============ HERO BLOCK: Heading + Sub-text ============ */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 md:pt-24 lg:pt-28 pb-8 sm:pb-10">
+          <div ref={headingRef} className="text-center">
+            <span
+              className="inline-block px-5 py-2 text-xs sm:text-sm uppercase tracking-[0.3em] font-extrabold mb-6 sm:mb-8"
+              style={{
+                backgroundColor: INK,
+                color: CREAM,
+              }}
+            >
+              ( Who I Am )
             </span>
-            , with a focus on your needs, expert guidance, and a{" "}
-            <span style={{ color: MAGENTA }}>smooth, stress-free buying &amp; selling experience.</span>
-          </h2>
-        </div>
 
-        {/* Image Grid */}
-        <div
-          ref={imagesRef}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16 md:mb-20"
-        >
-          {images.map((img, index) => (
-            <motion.div
-              key={index}
-              className="about-image relative group cursor-pointer"
-              initial={{
-                opacity: 0,
-                y: 50,
-                rotate: frameVariants[index % 4].rotate,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: frameVariants[index % 4].y,
-                rotate: frameVariants[index % 4].rotate,
-              }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.7,
-                delay: index * 0.1,
-                ease: "easeOut",
-              }}
-              whileHover={{
-                scale: 1.05,
-                rotate: 0,
-                y: -10,
-                zIndex: 10,
-                transition: { duration: 0.4, ease: "easeOut" },
-              }}
+            <h2
+              className="font-luxury font-luxury-tracking text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-[0.95]"
+              style={{ color: INK }}
             >
-              <div
-                className="p-2 sm:p-3 rounded-2xl shadow-lg group-hover:shadow-2xl transition-all duration-500"
-                style={{
-                  backgroundColor: "#FFFFFF",
-                  border: `2px solid ${MAGENTA}40`,
-                }}
-              >
-                <div className="relative aspect-4/3 rounded-xl overflow-hidden">
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes="(max-width: 640px) 50vw, (max-width: 768px) 50vw, 25vw"
-                  />
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-all duration-500"
-                    style={{ backgroundColor: MAGENTA }}
-                  />
-                  <div
-                    className="absolute bottom-0 left-0 right-0 h-1/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{
-                      background: `linear-gradient(to top, ${PURPLE}40, transparent)`,
-                    }}
-                  />
-                </div>
-                <div className="mt-2 sm:mt-3 text-center">
-                  <div
-                    className="w-8 sm:w-10 h-1 rounded-full mx-auto transition-colors duration-500"
-                    style={{ backgroundColor: MAGENTA }}
-                  />
-                </div>
-              </div>
-              <motion.div
-                className="absolute -top-1.5 sm:-top-2 left-1/2 -translate-x-1/2 w-3 h-3 sm:w-4 sm:h-4 rounded-full group-hover:scale-125 transition-all duration-300"
-                style={{ backgroundColor: `${PINK}70` }}
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{
-                  delay: 0.5 + index * 0.1,
-                  type: "spring",
-                  stiffness: 200,
-                }}
-              />
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Bio Section */}
-        <div
-          ref={bioRef}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 xl:gap-20 items-center"
-        >
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="order-2 lg:order-1"
-          >
-            <motion.div variants={itemVariants} className="mb-4 sm:mb-6">
-              <span
-                className="inline-block rounded-md px-3 py-1 text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold"
-                style={{
-                  backgroundColor: PURPLE,
-                  color: CYAN,
-                }}
-              >
-                ( About Me )
-              </span>
-            </motion.div>
-
-            <motion.h3
-              variants={itemVariants}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 sm:mb-8 leading-tight"
-              style={{ color: "#FFFFFF" }}
-            >
-              Hi, I&apos;m{" "}
-              <span className="relative inline-block">
-                <span style={{ color: CYAN }}>Matt Vatcher</span>
+              Patience with{" "}
+              <span className="relative inline-block" style={{ color: TEAL }}>
+                <span className="font-luxury-italic italic">Persnickety</span>
                 <svg
                   className="absolute -bottom-1 left-0 w-full"
                   height="8"
@@ -330,337 +212,600 @@ export default function About() {
                 >
                   <path
                     d="M2 6C50 2 150 2 198 6"
-                    stroke={PINK}
+                    stroke={TEAL}
                     strokeWidth="3"
                     strokeLinecap="round"
-                    opacity="0.7"
+                    opacity="0.8"
                   />
                 </svg>
-              </span>
-            </motion.h3>
+              </span>{" "}
+              Personalities
+            </h2>
 
-            <motion.div
-              variants={itemVariants}
-              className="space-y-4 sm:space-y-5 text-sm sm:text-base md:text-lg leading-relaxed"
-              style={{ color: "#FFFFFF" }}
+            <p
+              className="mt-6 sm:mt-8 max-w-2xl mx-auto text-base sm:text-lg md:text-xl font-medium leading-relaxed"
+              style={{ color: INK_60 }}
             >
-              <p>
-                Matt Vatcher is a Realtor with{" "}
-                <span className="font-bold" style={{ color: CYAN }}>
-                  Real Estate Homeward
-                </span>{" "}
-                and is committed to getting his clients across the buying and selling finish line! He
-                serves the Beaches, East York, Scarborough area and the rest of Toronto.
-              </p>
+              Whether one buys or sells a property, business, or home — Gerald
+              brings a mediating source of calm, humor, and humility.
+            </p>
+          </div>
+        </div>
 
-              <blockquote
-                className="border-l-4 pl-4 py-2 rounded-r-lg italic"
-                style={{
-                  borderColor: CYAN,
-                  backgroundColor: `${PURPLE}40`,
-                  color: "#FFFFFF",
-                }}
-              >
-                &ldquo;Real estate is a long-term investment. My job is to guide, educate and realize
-                your real estate plans — and help you lay out a home equity road map that works for
-                you.&rdquo;
-              </blockquote>
+        {/* ============ MAIN BIO GRID: Image LEFT | Text RIGHT ============ */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 md:pb-24 lg:pb-28">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-start">
 
-              <p>
-                Matt specializes in committing to your needs and helping you move to the next chapter
-                of your life. Whether you&apos;re buying your first home or selling a property you
-                love, he takes the time to understand your goals and builds a strategy around them.
-              </p>
-
-              <p className="font-extrabold" style={{ color: CYAN }}>
-                Let&apos;s work together! <br /> Matt Vatcher
-              </p>
-            </motion.div>
-
-            {/* CONTACT INFO - EMAIL, PHONE & ADDRESS */}
-            <motion.div variants={itemVariants} className="mt-6 sm:mt-8">
-              <div className="flex flex-col gap-3 sm:gap-4 font-medium text-xs sm:text-sm md:text-base">
-                {/* Email - Separate Line */}
-                <a
-                  href="mailto:matt@torontosrunningrealtor.com"
-                  className="hover:scale-105 transition-all flex items-center gap-2 group"
-                  style={{ color: "#FFFFFF" }}
-                >
-                  <span
-                    className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg shrink-0 transition-colors"
-                    style={{
-                      backgroundColor: `${CYAN}30`,
-                      border: `1px solid ${CYAN}60`,
-                    }}
-                  >
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5"
-                      style={{ color: CYAN }}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                      ></path>
-                    </svg>
-                  </span>
-                  <span className="truncate group-hover:underline" style={{ color: "#FFFFFF" }}>
-                    matt@torontosrunningrealtor.com
-                  </span>
-                </a>
-
-                {/* Phone - Separate Line */}
-                <a
-                  href="tel:+14169964489"
-                  className="hover:scale-105 transition-all flex items-center gap-2 group"
-                  style={{ color: "#FFFFFF" }}
-                >
-                  <span
-                    className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg shrink-0 transition-colors"
-                    style={{
-                      backgroundColor: `${CYAN}30`,
-                      border: `1px solid ${CYAN}60`,
-                    }}
-                  >
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5"
-                      style={{ color: CYAN }}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                      ></path>
-                    </svg>
-                  </span>
-                  <span className="group-hover:underline" style={{ color: "#FFFFFF" }}>
-                    +1 (416) 996-4489
-                  </span>
-                </a>
-
-                {/* Address - Separate Line */}
+            {/* ===== LEFT: PORTRAIT + CAREER TIMELINE BELOW IT ===== */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="lg:col-span-5"
+            >
+              <div className="relative mx-auto max-w-md lg:max-w-none">
+                {/* Background accent */}
                 <div
-                  className="flex items-center gap-2 group"
-                  style={{ color: "#FFFFFF" }}
+                  className="absolute -top-6 -right-6 sm:-top-10 sm:-right-10 w-40 h-40 sm:w-56 sm:h-56 rounded-full blur-3xl opacity-25 -z-10"
+                  style={{ backgroundColor: TEAL }}
+                />
+
+                {/* Portrait container */}
+                <div
+                  className="relative aspect-4/5 sm:aspect-3/4 overflow-hidden"
+                  style={{
+                    boxShadow: `
+                      0 25px 50px -12px ${INK}80,
+                      0 10px 20px -5px ${DEEP_TEAL}40
+                    `,
+                    border: `1px solid ${INK_10}`,
+                  }}
                 >
-                  <span
-                    className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg shrink-0 transition-colors"
+                  <Image
+                    src="/images/aboutgm.png"
+                    alt="Gerald Mendoza, Jr."
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 90vw, 40vw"
+                    priority={true}
+                  />
+
+                  {/* Color grade overlay */}
+                  <div
+                    className="absolute inset-0"
                     style={{
-                      backgroundColor: `${CYAN}30`,
-                      border: `1px solid ${CYAN}60`,
+                      background: `linear-gradient(180deg, transparent 0%, transparent 60%, ${INK}95 100%)`,
                     }}
+                  />
+
+                  {/* Subtle teal tint */}
+                  <div
+                    className="absolute inset-0 opacity-[0.06]"
+                    style={{
+                      background: `linear-gradient(135deg, ${TEAL} 0%, transparent 100%)`,
+                    }}
+                  />
+
+                  {/* Top-Right: Trusted Badge */}
+                  <motion.div
+                    className="absolute top-4 right-4 sm:top-5 sm:right-5 px-3 py-1.5 backdrop-blur-md flex items-center gap-1.5"
+                    style={{
+                      backgroundColor: `${DEEP_TEAL}E6`,
+                      border: `1px solid ${CREAM}40`,
+                    }}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.7, duration: 0.5 }}
                   >
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5"
-                      style={{ color: CYAN }}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                    <Award size={12} strokeWidth={2.5} style={{ color: CREAM }} />
+                    <span
+                      className="text-[10px] sm:text-xs font-extrabold uppercase tracking-wider"
+                      style={{ color: CREAM }}
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      Trusted
+                    </span>
+                  </motion.div>
+
+                  {/* NAME PLATE */}
+                  <motion.div
+                    className="absolute left-4 right-4 sm:left-5 sm:right-5 bottom-4 sm:bottom-5 px-5 py-4 backdrop-blur-md"
+                    style={{
+                      backgroundColor: `${INK}E6`,
+                      border: `1px solid ${TEAL_30}`,
+                    }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5, duration: 0.6 }}
+                  >
+                    <p
+                      className="font-luxury text-xl sm:text-2xl lg:text-3xl font-extrabold"
+                      style={{ color: CREAM }}
+                    >
+                      Gerald V Mendoza, Jr.
+                    </p>
+                    <div className="flex items-center gap-2 mt-1.5">
+                      <div
+                        className="h-0.5 w-10 sm:w-12"
+                        style={{ backgroundColor: TEAL }}
                       />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                  </span>
-                  <span style={{ color: "#FFFFFF" }}>
-                    1858 Queen St E, Toronto, ON M4L 1H1
-                  </span>
+                      <p
+                        className="text-[10px] sm:text-xs font-bold uppercase tracking-wider"
+                        style={{ color: TEAL }}
+                      >
+                        Real Estate Promoter
+                      </p>
+                    </div>
+                    <p
+                      className="mt-1 text-[10px] sm:text-xs font-medium"
+                      style={{ color: `${CREAM}99` }}
+                    >
+                      Realty Executives Tucson Elite – Oracle
+                    </p>
+                  </motion.div>
                 </div>
-              </div>
-            </motion.div>
 
-            <motion.div variants={itemVariants} className="mt-6 sm:mt-8">
-              <p
-                className="text-[10px] sm:text-xs uppercase tracking-[0.2em] font-bold mb-3 sm:mb-4"
-                style={{ color: CYAN }}
-              >
-                ( Connect With Me )
-              </p>
-              <div className="flex items-center gap-2.5 sm:gap-3">
-                {socialLinks.map((social) => (
-                  <motion.a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center transition-all duration-300"
-                    style={{
-                      backgroundColor: `${CYAN}40`,
-                      border: `1px solid ${CYAN}60`,
-                      color: "#FFFFFF",
-                    }}
-                    whileHover={{
-                      scale: 1.1,
-                      y: -3,
-                      backgroundColor: social.hoverColor,
-                      borderColor: social.hoverColor,
-                      color: "#FFFFFF",
-                    }}
-                    transition={{ duration: 0.2 }}
-                    aria-label={social.label}
+                {/* Top-Left: "Since 2025" Badge */}
+                <motion.div
+                  className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 p-3 sm:p-4 z-10"
+                  style={{
+                    backgroundColor: CREAM,
+                    boxShadow: `0 10px 30px ${INK}40`,
+                    border: `1px solid ${INK_10}`,
+                  }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4, duration: 0.5 }}
+                >
+                  <p
+                    className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider"
+                    style={{ color: TEAL }}
                   >
-                    <social.icon size={18} />
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* ===== PROFESSIONAL PORTRAIT IMAGE DESIGN ===== */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative order-1 lg:order-2"
-          >
-            <div className="relative mx-auto max-w-md lg:max-w-none">
-              {/* Subtle background accent - just one large shape */}
-              <div
-                className="absolute -top-8 -right-8 sm:-top-12 sm:-right-12 w-48 h-48 sm:w-64 sm:h-64 rounded-full blur-3xl opacity-40 -z-10"
-                style={{ backgroundColor: PINK }}
-              />
-
-              {/* Main Portrait Container */}
-              <div
-                className="relative aspect-3/4 rounded-2xl overflow-hidden"
-                style={{
-                  boxShadow: `
-                    0 25px 50px -12px ${PURPLE}80,
-                    0 10px 20px -5px ${MAGENTA}40
-                  `,
-                }}
-              >
-                <Image
-                  src="/images/aboutimg.jpg"
-                  alt="Matt Vatcher"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 90vw, (max-width: 1024px) 80vw, 45vw"
-                  priority={false}
-                />
-
-                {/* Subtle color grade overlay - professional look */}
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: `linear-gradient(180deg, transparent 0%, transparent 50%, ${PURPLE}90 100%)`,
-                  }}
-                />
-
-                {/* Very subtle magenta tint for brand cohesion */}
-                <div
-                  className="absolute inset-0 opacity-[0.08]"
-                  style={{
-                    background: `linear-gradient(135deg, ${MAGENTA} 0%, transparent 100%)`,
-                  }}
-                />
+                    <Calendar size={11} strokeWidth={3} />
+                    Since
+                  </p>
+                  <p
+                    className="font-luxury text-2xl sm:text-3xl font-extrabold leading-none mt-1"
+                    style={{ color: INK }}
+                  >
+                    2025
+                  </p>
+                </motion.div>
               </div>
 
-              {/* Thin elegant border frame - slightly offset */}
-              <div
-                className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 aspect-3/4 w-full rounded-2xl -z-10"
-                style={{
-                  border: `2px solid ${CYAN}`,
-                }}
-              />
-
-              {/* NAME PLATE - Professional Magazine Style */}
+              {/* ===================================================
+                  NEW: CAREER TIMELINE — placed directly BELOW image
+                  fills the empty gap that was under the portrait
+              =================================================== */}
               <motion.div
-                className="absolute left-4 right-4 sm:left-6 sm:right-6 bottom-4 sm:bottom-6 rounded-xl px-4 py-3 sm:px-5 sm:py-4 backdrop-blur-md shadow-xl"
-                style={{
-                  backgroundColor: `${PURPLE}E6`,
-                  border: `1px solid ${CYAN}40`,
-                }}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.5, duration: 0.6 }}
+                transition={{ duration: 0.7, delay: 0.3 }}
+                className="mt-10 sm:mt-12 mx-auto max-w-md lg:max-w-none"
               >
-                <p className="text-base sm:text-lg lg:text-xl font-extrabold" style={{ color: "#FFFFFF" }}>
-                  Matt Vatcher
-                </p>
-                <div className="flex items-center gap-2 mt-1">
-                  <div
-                    className="h-0.5 w-6 sm:w-8 rounded-full"
-                    style={{ backgroundColor: PINK }}
-                  />
-                  <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider" style={{ color: CYAN }}>
-                    Realtor • Real Estate Homeward
+                {/* Header strip */}
+                <div
+                  className="flex items-center justify-between px-5 py-3"
+                  style={{ backgroundColor: INK, color: CREAM }}
+                >
+                  <span className="font-mono text-xs sm:text-sm uppercase tracking-[0.25em] font-bold">
+                    [ Career Path ]
+                  </span>
+                  <span
+                    className="font-luxury-italic text-sm sm:text-base italic"
+                    style={{ color: TEAL }}
+                  >
+                    The Journey
+                  </span>
+                </div>
+
+                {/* Timeline list */}
+                <div
+                  className="border-x border-b"
+                  style={{ borderColor: INK_10, backgroundColor: CREAM }}
+                >
+                  {careerHighlights.map((item, idx) => {
+                    const Icon = item.icon;
+                    return (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.4 + idx * 0.1 }}
+                        className="relative flex gap-4 px-5 py-5 sm:px-6 sm:py-6"
+                        style={{
+                          borderBottom:
+                            idx < careerHighlights.length - 1
+                              ? `1px solid ${INK_10}`
+                              : "none",
+                        }}
+                      >
+                        {/* Icon block */}
+                        <div className="shrink-0">
+                          <div
+                            className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center"
+                            style={{
+                              backgroundColor: TEAL_15,
+                              border: `1px solid ${TEAL_30}`,
+                            }}
+                          >
+                            <Icon size={18} strokeWidth={2} style={{ color: TEAL }} />
+                          </div>
+                        </div>
+
+                        {/* Text content */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span
+                              className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] font-bold"
+                              style={{ color: TEAL }}
+                            >
+                              {item.year}
+                            </span>
+                            <div
+                              className="flex-1 h-px"
+                              style={{ backgroundColor: INK_10 }}
+                            />
+                          </div>
+                          <h4
+                            className="font-luxury text-base sm:text-lg font-bold leading-tight"
+                            style={{ color: INK }}
+                          >
+                            {item.title}
+                          </h4>
+                          <p
+                            className="mt-1.5 text-sm sm:text-base leading-relaxed"
+                            style={{ color: INK_60 }}
+                          >
+                            {item.description}
+                          </p>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+
+                {/* Bottom note */}
+                <div
+                  className="mt-4 px-5 py-4 flex items-center gap-3"
+                  style={{ backgroundColor: TEAL_15, border: `1px solid ${TEAL_30}` }}
+                >
+                  <Heart size={18} strokeWidth={2.5} style={{ color: TEAL }} />
+                  <p
+                    className="font-luxury-italic text-sm sm:text-base italic font-medium"
+                    style={{ color: INK }}
+                  >
+                    A mediating source of calm, humor & humility.
                   </p>
                 </div>
               </motion.div>
+            </motion.div>
 
-              {/* Top Left Badge - Realtor Since */}
-              <motion.div
-                className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 rounded-2xl shadow-xl p-3 sm:p-4"
-                style={{
-                  backgroundColor: "#FFFFFF",
-                  boxShadow: `0 10px 30px ${PURPLE}40`,
-                }}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-              >
-                <p className="text-xs font-bold uppercase tracking-wider" style={{ color: MAGENTA }}>
-                  Since
-                </p>
-                <p className="text-2xl sm:text-3xl font-extrabold leading-none mt-0.5" style={{ color: PURPLE }}>
-                  2025
-                </p>
-              </motion.div>
-
-              {/* Top Right - Trusted Badge (minimal) */}
-              <motion.div
-                className="absolute top-4 right-4 sm:top-6 sm:right-6 rounded-full px-2.5 py-1 sm:px-3 sm:py-1.5 backdrop-blur-md flex items-center gap-1.5"
-                style={{
-                  backgroundColor: `${MAGENTA}E6`,
-                  border: `1px solid #FFFFFF60`,
-                }}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.7, duration: 0.5 }}
-              >
-                <svg
-                  className="w-3 h-3 sm:w-3.5 sm:h-3.5"
-                  fill="#FFFFFF"
-                  viewBox="0 0 24 24"
+            {/* ===== RIGHT: BIO TEXT ===== */}
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="lg:col-span-7"
+            >
+              <motion.div variants={itemVariants} className="mb-5 sm:mb-6">
+                <span
+                  className="inline-block px-3 py-1.5 text-xs sm:text-sm uppercase tracking-[0.3em] font-bold"
+                  style={{
+                    backgroundColor: INK,
+                    color: CREAM,
+                  }}
                 >
-                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                </svg>
-                <span className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider" style={{ color: "#FFFFFF" }}>
-                  Trusted
+                  ( About Me )
                 </span>
               </motion.div>
 
-              {/* Small accent line at bottom */}
-              <div
-                className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-20 h-1 rounded-full -z-10"
-                style={{ backgroundColor: PINK }}
-              />
-            </div>
-          </motion.div>
+              <motion.h3
+                variants={itemVariants}
+                className="font-luxury font-luxury-tracking text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold mb-6 sm:mb-8 leading-tight"
+                style={{ color: INK }}
+              >
+                Hi, I&apos;m{" "}
+                <span className="relative inline-block">
+                  <span className="font-luxury-italic italic" style={{ color: TEAL }}>
+                    Gerald Mendoza, Jr.
+                  </span>
+                  <svg
+                    className="absolute -bottom-1 left-0 w-full"
+                    height="8"
+                    viewBox="0 0 200 8"
+                    fill="none"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M2 6C50 2 150 2 198 6"
+                      stroke={DEEP_TEAL}
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      opacity="0.7"
+                    />
+                  </svg>
+                </span>
+              </motion.h3>
+
+              <motion.div
+                variants={itemVariants}
+                className="space-y-4 sm:space-y-5 text-base sm:text-lg leading-relaxed"
+                style={{ color: INK_60 }}
+              >
+                <p>
+                  The son of a copper miner from Silver City, NM and a stay-at-home
+                  mother from Solomon, AZ, Gerald Mendoza, Jr. was born, raised, and
+                  schooled at Morenci, AZ — a Phelps Dodge town, a true company town.
+                  After being the only member of his family to graduate college,
+                  majoring in marketing and merchandising, Gerald went forth to see
+                  the world and practice his earned knowledge.
+                </p>
+
+                <p>
+                  Distinguishing himself as a coiffeur artist initially, Gerald found
+                  he had the Midas touch where it came to people and how he made them
+                  feel. He showed genuine interest in his clients who not only loved
+                  his artistic hairstyling, but loved his verve for life even more.
+                </p>
+
+                <blockquote
+                  className="border-l-4 pl-5 py-3 italic"
+                  style={{
+                    borderColor: TEAL,
+                    backgroundColor: INK_05,
+                    color: INK,
+                  }}
+                >
+                  <span className="font-luxury-italic text-lg sm:text-xl">
+                    &ldquo;Every client I had was a star to me.&rdquo;
+                  </span>
+                </blockquote>
+
+                <p>
+                  While making stars look beautiful, Gerald found rock n&apos; roll,
+                  salsa, and that sexy Latin sound — and started promoting concerts
+                  throughout the Western U.S. However, the life of a well-traveled
+                  promoter didn&apos;t play well with building a family of his own; so
+                  the man gravitated to another business venture, one that would keep
+                  him in front of an audience that needed a visionary with deep
+                  pockets. Gerald became a{" "}
+                  <span className="font-bold" style={{ color: TEAL }}>
+                    mortgage broker
+                  </span>
+                  ! His company, C&amp;A Home Loans, went on to become the most
+                  productive in hardscrabble Reno, NV.
+                </p>
+
+                <p>
+                  Back in his hometown in the Ol&apos; Pueblo with his lovely bride of
+                  7 years, Gerald only recently became licensed in real estate and
+                  joined Keller Williams. Now with Realty Executives Tucson Elite,
+                  he brings decades of people-savvy experience to every transaction.
+                </p>
+
+                <blockquote
+                  className="border-l-4 pl-5 py-3 italic"
+                  style={{
+                    borderColor: TEAL,
+                    backgroundColor: INK_05,
+                    color: INK,
+                  }}
+                >
+                  <span className="font-luxury-italic text-base sm:text-lg">
+                    &ldquo;Whether one buys or sells a property, business, or home,
+                    the transaction process can be frustrating and uncertain, further
+                    aggravating an already high-stress level. I am — always have
+                    been — a mediating source of calm, humor, and humility which has
+                    often helped my people.&rdquo;
+                  </span>
+                </blockquote>
+
+                <p>
+                  Gerald has come to achieve some of the highest acclaim and
+                  affection from not only his colleagues over the years, but also from
+                  his beloved family. His mother, Lydia Madrid Mendoza, was quoted
+                  saying:{" "}
+                  <span className="font-bold" style={{ color: INK }}>
+                    &ldquo;I had a great life because of my son; but, he is a
+                    mama&apos;s boy.&rdquo;
+                  </span>
+                </p>
+
+                <p className="font-luxury-italic text-lg sm:text-xl italic font-semibold pt-2" style={{ color: TEAL }}>
+                  Please give RETE&apos;s new man-of-action a warm, company-town
+                  welcome!
+                </p>
+              </motion.div>
+
+              {/* CONTACT INFO */}
+              <motion.div variants={itemVariants} className="mt-8 sm:mt-10">
+                <p
+                  className="font-mono text-xs uppercase tracking-[0.25em] font-bold mb-4 sm:mb-5"
+                  style={{ color: INK_60 }}
+                >
+                  [ Get In Touch ]
+                </p>
+                <div className="flex flex-col gap-3 sm:gap-4 font-medium text-sm sm:text-base">
+                  <a
+                    href="mailto:geraldmendoza@realtyexecutives.com"
+                    className="hover:translate-x-1 transition-transform flex items-center gap-3 group"
+                    style={{ color: INK }}
+                  >
+                    <span
+                      className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center shrink-0"
+                      style={{
+                        backgroundColor: TEAL_15,
+                        border: `1px solid ${TEAL_30}`,
+                      }}
+                    >
+                      <Mail size={18} strokeWidth={2} style={{ color: TEAL }} />
+                    </span>
+                    <span className="truncate group-hover:underline">
+                      geraldmendoza@realtyexecutives.com
+                    </span>
+                  </a>
+
+                  <a
+                    href="tel:+15203027600"
+                    className="hover:translate-x-1 transition-transform flex items-center gap-3 group"
+                    style={{ color: INK }}
+                  >
+                    <span
+                      className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center shrink-0"
+                      style={{
+                        backgroundColor: TEAL_15,
+                        border: `1px solid ${TEAL_30}`,
+                      }}
+                    >
+                      <Phone size={18} strokeWidth={2} style={{ color: TEAL }} />
+                    </span>
+                    <span className="group-hover:underline">+1 (520) 302-7600</span>
+                  </a>
+
+                  <div
+                    className="flex items-center gap-3"
+                    style={{ color: INK }}
+                  >
+                    <span
+                      className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center shrink-0"
+                      style={{
+                        backgroundColor: TEAL_15,
+                        border: `1px solid ${TEAL_30}`,
+                      }}
+                    >
+                      <MapPin size={18} strokeWidth={2} style={{ color: TEAL }} />
+                    </span>
+                    <span>
+                      6760 N. Oracle Road, Tucson, AZ
+                      <span
+                        className="block text-xs font-semibold uppercase tracking-wider mt-0.5"
+                        style={{ color: INK_60 }}
+                      >
+                        Realty Executives Tucson Elite – Oracle
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* SOCIAL LINKS */}
+              <motion.div variants={itemVariants} className="mt-8 sm:mt-10">
+                <p
+                  className="font-mono text-xs uppercase tracking-[0.25em] font-bold mb-4 sm:mb-5"
+                  style={{ color: INK_60 }}
+                >
+                  [ Connect With Me ]
+                </p>
+                <div className="flex items-center gap-3 sm:gap-4">
+                  {socialLinks.map((social) => (
+                    <motion.a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center transition-all duration-300"
+                      style={{
+                        backgroundColor: INK,
+                        color: CREAM,
+                        border: `1px solid ${INK_20}`,
+                      }}
+                      whileHover={{
+                        scale: 1.1,
+                        y: -3,
+                        backgroundColor: social.hoverColor,
+                        borderColor: social.hoverColor,
+                      }}
+                      transition={{ duration: 0.2 }}
+                      aria-label={social.label}
+                    >
+                      <social.icon size={20} />
+                    </motion.a>
+                  ))}
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
-      </div>
-    </section>
+
+        {/* ============ GALLERY GRID ============ */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 md:pb-24 lg:pb-28">
+          <div className="flex items-center gap-4 mb-8 sm:mb-10">
+            <span
+              className="font-mono text-xs sm:text-sm uppercase tracking-[0.25em] font-bold"
+              style={{ color: TEAL }}
+            >
+              [ Properties In Focus ]
+            </span>
+            <div
+              className="flex-1 h-px"
+              style={{ backgroundColor: INK_10 }}
+            />
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+            {galleryImages.map((img, index) => (
+              <motion.div
+                key={index}
+                className="relative group cursor-pointer"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.7,
+                  delay: index * 0.1,
+                  ease: "easeOut",
+                }}
+                whileHover={{
+                  scale: 1.03,
+                  y: -6,
+                  transition: { duration: 0.4, ease: "easeOut" },
+                }}
+              >
+                <div
+                  className="p-2 sm:p-3 bg-white transition-all duration-500"
+                  style={{
+                    boxShadow: `0 18px 40px -20px ${INK}40`,
+                    border: `1px solid ${INK_10}`,
+                  }}
+                >
+                  <div className="relative aspect-4/3 overflow-hidden">
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      sizes="(max-width: 640px) 50vw, (max-width: 768px) 50vw, 25vw"
+                    />
+                    <div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-15 transition-all duration-500"
+                      style={{ backgroundColor: TEAL }}
+                    />
+                    <div
+                      className="absolute bottom-0 left-0 right-0 h-1/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      style={{
+                        background: `linear-gradient(to top, ${INK}60, transparent)`,
+                      }}
+                    />
+                  </div>
+                  <div className="mt-2 sm:mt-3 text-center">
+                    <div
+                      className="w-10 sm:w-12 h-0.5 mx-auto"
+                      style={{ backgroundColor: TEAL }}
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

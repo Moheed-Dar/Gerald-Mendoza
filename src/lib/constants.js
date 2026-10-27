@@ -14,10 +14,10 @@ export const NAV_LINKS = {
 };
 
 export const CONTACT_INFO = {
-   phone: "+14169964489",
-  phoneHref: "tel:+14169964489",
-  email: "Matt Vatcher@Matt VatcherConsultant.ca",
-  emailHref: "Matt Vatcher@Matt VatcherConsultant.ca",
+   phone: "+15203027600",
+  phoneHref: "tel:+15203027600",
+  email: "Gerald Mendoza@Gerald MendozaConsultant.ca",
+  emailHref: "Gerald Mendoza@Gerald MendozaConsultant.ca",
 };
 
 export const BRAND = {

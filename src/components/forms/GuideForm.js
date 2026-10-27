@@ -28,29 +28,33 @@ const inter = Inter({
 });
 
 // ==========================================
-// ✅ NEW COLOR PALETTE (matches site-wide palette)
-// Purple | Cyan | Pink | Magenta
+// ✅ NEW COLOR PALETTE
+// Navy / White / Dark Teal / Teal
 // ==========================================
-const PURPLE = "#3C1E74"; // main accent (button gradients)
-const CYAN = "#5CE1E6"; // light accent on dark bg (replaces MINT)
-const PINK = "#FFA7E4"; // highlight (replaces BRIGHT_CYAN, icons)
-const MAGENTA = "#B462B6"; // bright accent (replaces TEAL)
+const NAVY = "#0A1628"; // dark background (replaces DARK_PURPLE / DEEP_PURPLE)
+const NAVY_LIGHT = "#0F1F33"; // slightly lighter navy for layers
+const DARK_TEAL = "#143336"; // card background (replaces CARD_PURPLE)
+const WHITE = "#FFFFFF"; // foreground / text
+const TEAL = "#347A85"; // main accent (replaces PURPLE / MAGENTA / PINK)
 
-// Dark purple backgrounds (replace Navy greens)
-const DARK_PURPLE = "#1E0F3D"; // (replaces NAVY)
-const LIGHT_PURPLE = "#2A1454"; // (replaces NAVY_LIGHT)
-const DEEP_PURPLE = "#150A2B"; // (replaces NAVY_DARK)
-const CARD_PURPLE = "#251247"; // (replaces NAVY_CARD)
+// Teal opacity helpers (replaces CYAN_* tints)
+const TEAL_10 = "#347A851A";
+const TEAL_15 = "#347A8526";
+const TEAL_20 = "#347A8533";
+const TEAL_30 = "#347A854D";
+const TEAL_40 = "#347A8566";
+const TEAL_50 = "#347A8580";
+const TEAL_60 = "#347A8599";
+const TEAL_70 = "#347A85B3";
+const TEAL_80 = "#347A85CC";
+const TEAL_90 = "#347A85E6";
 
-// Cyan opacity helpers (replace CREAM_*)
-const CYAN_20 = "#5CE1E633";
-const CYAN_30 = "#5CE1E64D";
-const CYAN_40 = "#5CE1E666";
-const CYAN_50 = "#5CE1E680";
-const CYAN_60 = "#5CE1E699";
-const CYAN_70 = "#5CE1E6B3";
-const CYAN_80 = "#5CE1E6CC";
-const CYAN_90 = "#5CE1E6E6";
+// White opacity helpers (for muted text)
+const WHITE_30 = "#FFFFFF4D";
+const WHITE_40 = "#FFFFFF66";
+const WHITE_50 = "#FFFFFF80";
+const WHITE_60 = "#FFFFFF99";
+const WHITE_70 = "#FFFFFFB3";
 
 /**
  * =============================================
@@ -105,7 +109,7 @@ export default function GuideForm({
   // ---- Guide Config ----
   const isBuyer = guideType === "buyer";
   const guideLabel = isBuyer ? "Buyer" : "Seller";
-  const guideColor = MAGENTA;
+  const guideColor = TEAL;
 
   // ---- Auto-focus ----
   useEffect(() => {
@@ -223,8 +227,8 @@ export default function GuideForm({
           onClick={() => setOpen(true)}
           className={`w-full flex items-center justify-center gap-2.5 px-5 py-3.5 text-white text-sm cursor-pointer font-bold rounded-xl transition-all active:scale-[0.98] shadow-lg ${className}`}
           style={{
-            background: `linear-gradient(135deg, ${PURPLE}, ${MAGENTA})`,
-            boxShadow: `0 10px 25px -5px ${MAGENTA}40`,
+            background: `linear-gradient(135deg, ${TEAL}, ${DARK_TEAL})`,
+            boxShadow: `0 10px 25px -5px ${TEAL}40`,
           }}
         >
           <Download size={16} /> Download {guideLabel} Guide
@@ -246,8 +250,8 @@ export default function GuideForm({
             <div
               className="relative w-full sm:max-w-md sm:rounded-2xl rounded-t-2xl shadow-2xl overflow-hidden pointer-events-auto"
               style={{
-                backgroundColor: CARD_PURPLE,
-                border: `1px solid ${CYAN}10`,
+                backgroundColor: DARK_TEAL,
+                border: `1px solid ${TEAL}20`,
               }}
               onClick={(e) => e.stopPropagation()}
             >
@@ -255,8 +259,8 @@ export default function GuideForm({
               <div
                 className="relative px-6 pt-6 pb-12"
                 style={{
-                  background: `linear-gradient(to right, ${guideColor}20, ${guideColor}10, transparent)`,
-                  borderBottom: `1px solid ${CYAN}10`,
+                  background: `linear-gradient(to right, ${guideColor}25, ${guideColor}10, transparent)`,
+                  borderBottom: `1px solid ${TEAL}15`,
                 }}
               >
                 {!submitting && !submitted && (
@@ -264,7 +268,7 @@ export default function GuideForm({
                     onClick={() => setOpen(false)}
                     className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-white hover:bg-white/20 transition-colors cursor-pointer"
                     style={{
-                      backgroundColor: `${CYAN}0A`,
+                      backgroundColor: `${TEAL}15`,
                     }}
                   >
                     <X size={16} />
@@ -275,14 +279,14 @@ export default function GuideForm({
                   <div
                     className="w-10 h-10 rounded-full flex items-center justify-center"
                     style={{
-                      backgroundColor: `${guideColor}20`,
-                      border: `1px solid ${guideColor}30`,
+                      backgroundColor: `${guideColor}25`,
+                      border: `1px solid ${guideColor}40`,
                     }}
                   >
                     {submitted ? (
-                      <CheckCircle2 size={18} style={{ color: PINK }} />
+                      <CheckCircle2 size={18} style={{ color: TEAL }} />
                     ) : (
-                      <BookOpen size={18} style={{ color: PINK }} />
+                      <BookOpen size={18} style={{ color: TEAL }} />
                     )}
                   </div>
                   <div className="min-w-0 flex-1">
@@ -291,7 +295,7 @@ export default function GuideForm({
                     >
                       {submitted ? "Guide Ready!" : `${guideLabel} Guide`}
                     </h3>
-                    <p className="text-xs truncate" style={{ color: PINK }}>
+                    <p className="text-xs truncate" style={{ color: TEAL }}>
                       {submitted
                         ? "Your download is ready below"
                         : `Free ${guideLabel.toLowerCase()} resource`}
@@ -300,7 +304,7 @@ export default function GuideForm({
                 </div>
 
                 {!submitted && (
-                  <p style={{ color: CYAN_40 }} className="text-xs mt-1">
+                  <p style={{ color: WHITE_60 }} className="text-xs mt-1">
                     Fill in your details to get instant access to our comprehensive {guideLabel.toLowerCase()} guide.
                   </p>
                 )}
@@ -312,8 +316,8 @@ export default function GuideForm({
                 <div
                   className="rounded-2xl shadow-lg p-5"
                   style={{
-                    backgroundColor: DARK_PURPLE,
-                    border: `1px solid ${CYAN}10`,
+                    backgroundColor: NAVY,
+                    border: `1px solid ${TEAL}15`,
                   }}
                 >
                   {/* SUCCESS + DOWNLOAD */}
@@ -323,11 +327,11 @@ export default function GuideForm({
                       <div
                         className="w-20 h-20 rounded-2xl flex items-center justify-center"
                         style={{
-                          backgroundColor: `${guideColor}10`,
-                          border: `1px solid ${guideColor}20`,
+                          backgroundColor: `${guideColor}15`,
+                          border: `1px solid ${guideColor}25`,
                         }}
                       >
-                        <FileText size={32} style={{ color: PINK }} />
+                        <FileText size={32} style={{ color: TEAL }} />
                       </div>
 
                       <div className="text-center">
@@ -336,7 +340,7 @@ export default function GuideForm({
                         >
                           {guideLabel} Guide PDF
                         </h4>
-                        <p className="text-sm" style={{ color: CYAN_40 }}>
+                        <p className="text-sm" style={{ color: WHITE_60 }}>
                           Click below to download your free guide
                         </p>
                       </div>
@@ -347,8 +351,8 @@ export default function GuideForm({
                           onClick={handleDownload}
                           className="w-full flex items-center justify-center gap-2.5 px-5 py-3.5 text-white text-sm font-bold rounded-xl cursor-pointer transition-all active:scale-[0.98] shadow-lg"
                           style={{
-                            background: `linear-gradient(135deg, ${PURPLE}, ${MAGENTA})`,
-                            boxShadow: `0 10px 25px -5px ${MAGENTA}40`,
+                            background: `linear-gradient(135deg, ${TEAL}, ${DARK_TEAL})`,
+                            boxShadow: `0 10px 25px -5px ${TEAL}40`,
                           }}
                         >
                           <Download size={18} />
@@ -359,9 +363,9 @@ export default function GuideForm({
                       <button
                         onClick={() => setOpen(false)}
                         className="text-xs transition-colors cursor-pointer"
-                        style={{ color: CYAN_30 }}
-                        onMouseEnter={(e) => (e.currentTarget.style.color = CYAN_50)}
-                        onMouseLeave={(e) => (e.currentTarget.style.color = CYAN_30)}
+                        style={{ color: WHITE_40 }}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = WHITE_60)}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = WHITE_40)}
                       >
                         Close
                       </button>
@@ -374,8 +378,8 @@ export default function GuideForm({
                         <div
                           className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs"
                           style={{
-                            backgroundColor: `${PINK}10`,
-                            border: `1px solid ${PINK}20`,
+                            backgroundColor: `${TEAL}10`,
+                            border: `1px solid ${TEAL}25`,
                             color: "#F87171",
                           }}
                         >
@@ -388,10 +392,10 @@ export default function GuideForm({
                       <div>
                         <label
                           className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] mb-1.5"
-                          style={{ color: CYAN_40 }}
+                          style={{ color: TEAL_80 }}
                         >
                           <User size={10} />
-                          Full Name <span style={{ color: MAGENTA }}>*</span>
+                          Full Name <span style={{ color: TEAL }}>*</span>
                         </label>
                         <input
                           ref={nameRef}
@@ -403,12 +407,12 @@ export default function GuideForm({
                           required
                           className="w-full px-4 py-2.5 rounded-xl text-sm text-white transition-all focus:outline-none focus:border-transparent"
                           style={{
-                            backgroundColor: `${CYAN}0A`,
-                            border: `1px solid ${CYAN}15`,
-                            color: CYAN,
+                            backgroundColor: `${TEAL}0A`,
+                            border: `1px solid ${TEAL}20`,
+                            color: WHITE,
                           }}
                           onFocus={(e) => {
-                            e.currentTarget.style.boxShadow = `0 0 0 2px ${guideColor}30`;
+                            e.currentTarget.style.boxShadow = `0 0 0 2px ${guideColor}40`;
                           }}
                           onBlur={(e) => {
                             e.currentTarget.style.boxShadow = "none";
@@ -420,10 +424,10 @@ export default function GuideForm({
                       <div>
                         <label
                           className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] mb-1.5"
-                          style={{ color: CYAN_40 }}
+                          style={{ color: TEAL_80 }}
                         >
                           <Mail size={10} />
-                          Email Address <span style={{ color: MAGENTA }}>*</span>
+                          Email Address <span style={{ color: TEAL }}>*</span>
                         </label>
                         <input
                           type="email"
@@ -434,12 +438,12 @@ export default function GuideForm({
                           required
                           className="w-full px-4 py-2.5 rounded-xl text-sm text-white transition-all focus:outline-none focus:border-transparent"
                           style={{
-                            backgroundColor: `${CYAN}0A`,
-                            border: `1px solid ${CYAN}15`,
-                            color: CYAN,
+                            backgroundColor: `${TEAL}0A`,
+                            border: `1px solid ${TEAL}20`,
+                            color: WHITE,
                           }}
                           onFocus={(e) => {
-                            e.currentTarget.style.boxShadow = `0 0 0 2px ${guideColor}30`;
+                            e.currentTarget.style.boxShadow = `0 0 0 2px ${guideColor}40`;
                           }}
                           onBlur={(e) => {
                             e.currentTarget.style.boxShadow = "none";
@@ -451,10 +455,10 @@ export default function GuideForm({
                       <div>
                         <label
                           className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] mb-1.5"
-                          style={{ color: CYAN_40 }}
+                          style={{ color: TEAL_80 }}
                         >
                           <Phone size={10} />
-                          Phone Number <span style={{ color: MAGENTA }}>*</span>
+                          Phone Number <span style={{ color: TEAL }}>*</span>
                         </label>
                         <input
                           type="tel"
@@ -465,12 +469,12 @@ export default function GuideForm({
                           required
                           className="w-full px-4 py-2.5 rounded-xl text-sm text-white transition-all focus:outline-none focus:border-transparent"
                           style={{
-                            backgroundColor: `${CYAN}0A`,
-                            border: `1px solid ${CYAN}15`,
-                            color: CYAN,
+                            backgroundColor: `${TEAL}0A`,
+                            border: `1px solid ${TEAL}20`,
+                            color: WHITE,
                           }}
                           onFocus={(e) => {
-                            e.currentTarget.style.boxShadow = `0 0 0 2px ${guideColor}30`;
+                            e.currentTarget.style.boxShadow = `0 0 0 2px ${guideColor}40`;
                           }}
                           onBlur={(e) => {
                             e.currentTarget.style.boxShadow = "none";
@@ -482,23 +486,23 @@ export default function GuideForm({
                       <div
                         className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl"
                         style={{
-                          backgroundColor: `${guideColor}08`,
-                          border: `1px solid ${guideColor}15`,
+                          backgroundColor: `${guideColor}10`,
+                          border: `1px solid ${guideColor}20`,
                         }}
                       >
                         <FileText
                           size={14}
-                          style={{ color: PINK }}
+                          style={{ color: TEAL }}
                           className="shrink-0"
                         />
-                        <span className="text-xs flex-1" style={{ color: CYAN_40 }}>
+                        <span className="text-xs flex-1" style={{ color: WHITE_60 }}>
                           {guideLabel} Guide — Free PDF Download
                         </span>
                         <span
                           className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"
                           style={{
-                            backgroundColor: `${guideColor}15`,
-                            color: PINK,
+                            backgroundColor: `${guideColor}20`,
+                            color: TEAL,
                           }}
                         >
                           Free
@@ -511,8 +515,8 @@ export default function GuideForm({
                         disabled={submitting}
                         className="w-full flex cursor-pointer items-center justify-center gap-2 px-5 py-3 text-white text-sm font-bold rounded-xl transition-all disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.98] shadow-lg"
                         style={{
-                          background: `linear-gradient(135deg, ${PURPLE}, ${MAGENTA})`,
-                          boxShadow: `0 10px 25px -5px ${MAGENTA}40`,
+                          background: `linear-gradient(135deg, ${TEAL}, ${DARK_TEAL})`,
+                          boxShadow: `0 10px 25px -5px ${TEAL}40`,
                         }}
                       >
                         {submitting ? (
@@ -526,7 +530,7 @@ export default function GuideForm({
                         )}
                       </button>
 
-                      <p className="text-[10px] text-center" style={{ color: CYAN_20 }}>
+                      <p className="text-[10px] text-center" style={{ color: WHITE_40 }}>
                         We respect your privacy. No spam, ever.
                       </p>
                     </form>

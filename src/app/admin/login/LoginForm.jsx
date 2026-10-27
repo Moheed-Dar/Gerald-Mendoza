@@ -67,27 +67,25 @@ export default function LoginForm() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       className="w-full"
     >
-      {/* Background Glow - Magenta */}
-      <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-48 h-48 bg-[#B462B6]/15 rounded-full blur-3xl pointer-events-none" />
-
-      {/* Card - Dark Purple Background */}
-      <div className="relative bg-[#251247] backdrop-blur-xl rounded-2xl border border-white/10 px-6 py-8 sm:px-10 sm:py-10 shadow-2xl shadow-black/40">
-
+      {/* Card */}
+      <div className="relative px-6 py-8 sm:px-10 sm:py-10">
         {/* Title */}
         <div className="flex items-center justify-center gap-3 mb-7">
-          <div className="w-10 h-10 rounded-xl bg-[#B462B6]/20 flex items-center justify-center border border-[#B462B6]/30 shrink-0">
-            <ShieldCheck size={20} className="text-[#FFA7E4]" />
+          <div className="relative w-11 h-11 rounded-xl bg-[#5CE1E6]/10 flex items-center justify-center border border-[#5CE1E6]/25 shrink-0">
+            {/* Glow behind icon */}
+            <div className="absolute inset-0 rounded-xl bg-[#5CE1E6]/20 blur-md" />
+            <ShieldCheck size={20} className="relative text-[#5CE1E6]" />
           </div>
           <div>
             <h1 className="text-lg sm:text-xl font-bold text-white leading-tight">
               Admin Panel
             </h1>
-            <p className="text-[10px] sm:text-[11px] text-white/40 uppercase tracking-[0.2em]">
+            <p className="text-[10px] sm:text-[11px] text-[#5CE1E6]/60 uppercase tracking-[0.25em]">
               Secure Access
             </p>
           </div>
@@ -95,15 +93,15 @@ export default function LoginForm() {
 
         {/* Divider */}
         <div className="flex items-center gap-3 mb-6">
-          <div className="h-px flex-1 bg-linear-to-r from-transparent via-white/10 to-transparent" />
+          <div className="h-px flex-1 bg-linear-to-r from-transparent via-[#5CE1E6]/15 to-transparent" />
         </div>
 
-        {/* Error - Using Red for error state */}
+        {/* Error */}
         {error && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-5 px-4 py-3 bg-red-500/10 border border-red-500/20 rounded-xl"
+            className="mb-5 px-4 py-3 bg-red-500/10 border border-red-500/25 rounded-xl backdrop-blur-sm"
           >
             <p className="text-red-400 text-sm">{error}</p>
           </motion.div>
@@ -113,16 +111,16 @@ export default function LoginForm() {
         <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
           {/* Email */}
           <div>
-            <label className="block text-[11px] font-semibold text-white/50 uppercase tracking-wider mb-2">
+            <label className="block text-[11px] font-semibold text-[#5CE1E6]/70 uppercase tracking-wider mb-2">
               Email Address
             </label>
-            <div className="relative">
+            <div className="relative group">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="admin@example.com"
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pr-10 text-sm text-white placeholder:text-white/25 outline-none focus:border-[#B462B6]/50 focus:ring-2 focus:ring-[#B462B6]/20 transition-all"
+                className="w-full bg-white/3 border border-white/10 rounded-xl px-4 py-3 pr-10 text-sm text-white placeholder:text-white/25 outline-none focus:border-[#5CE1E6]/50 focus:ring-2 focus:ring-[#5CE1E6]/15 focus:bg-white/5 transition-all"
                 autoComplete="email"
               />
               {email && (
@@ -139,16 +137,16 @@ export default function LoginForm() {
 
           {/* Password */}
           <div>
-            <label className="block text-[11px] font-semibold text-white/50 uppercase tracking-wider mb-2">
+            <label className="block text-[11px] font-semibold text-[#5CE1E6]/70 uppercase tracking-wider mb-2">
               Password
             </label>
-            <div className="relative">
+            <div className="relative group">
               <input
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pr-20 text-sm text-white placeholder:text-white/25 outline-none focus:border-[#B462B6]/50 focus:ring-2 focus:ring-[#B462B6]/20 transition-all"
+                className="w-full bg-white/3 border border-white/10 rounded-xl px-4 py-3 pr-20 text-sm text-white placeholder:text-white/25 outline-none focus:border-[#5CE1E6]/50 focus:ring-2 focus:ring-[#5CE1E6]/15 focus:bg-white/5 transition-all"
                 autoComplete="current-password"
               />
               {password && (
@@ -163,12 +161,12 @@ export default function LoginForm() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/5 transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-lg hover:bg-[#5CE1E6]/10 transition-colors"
               >
                 {showPassword ? (
-                  <EyeOff size={16} className="text-white/40" />
+                  <EyeOff size={16} className="text-[#5CE1E6]/60" />
                 ) : (
-                  <Eye size={16} className="text-white/40" />
+                  <Eye size={16} className="text-[#5CE1E6]/60" />
                 )}
               </button>
             </div>
@@ -179,7 +177,7 @@ export default function LoginForm() {
             <button
               type="button"
               onClick={clearFields}
-              className="flex items-center justify-center gap-2 px-4 py-3 bg-white/5 border border-white/10 text-white/60 text-sm font-medium rounded-xl hover:bg-white/10 hover:border-white/20 transition-colors flex-1 cursor-pointer"
+              className="flex items-center justify-center gap-2 px-4 py-3 bg-white/3 border border-white/10 text-white/60 text-sm font-medium rounded-xl hover:bg-white/5 hover:border-white/20 transition-colors flex-1 cursor-pointer"
             >
               <X size={14} />
               Clear
@@ -188,8 +186,10 @@ export default function LoginForm() {
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 flex items-center justify-center gap-2 bg-linear-to-r from-[#3C1E74] to-[#B462B6] hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-sm py-3 rounded-xl transition-all cursor-pointer shadow-lg shadow-[#B462B6]/30"
+              className="flex-1 relative group flex items-center justify-center gap-2 bg-linear-to-r from-[#B462B6] to-[#5CE1E6] hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-sm py-3 rounded-xl transition-all cursor-pointer shadow-lg shadow-[#B462B6]/30 overflow-hidden"
             >
+              {/* Shine effect */}
+              <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-linear-to-r from-transparent via-white/20 to-transparent" />
               {loading ? (
                 <>
                   <Loader2 size={16} className="animate-spin" />
@@ -198,7 +198,7 @@ export default function LoginForm() {
               ) : (
                 <>
                   Login
-                  <ArrowRight size={16} />
+                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
                 </>
               )}
             </button>
@@ -207,7 +207,7 @@ export default function LoginForm() {
           {/* Home Navigation Button */}
           <Link
             href="/"
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-transparent border border-white/10 text-white/70 text-sm font-medium rounded-xl hover:bg-white/5 hover:border-white/20 hover:text-white transition-all cursor-pointer"
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-transparent border border-[#5CE1E6]/15 text-[#5CE1E6]/70 text-sm font-medium rounded-xl hover:bg-[#5CE1E6]/5 hover:border-[#5CE1E6]/30 hover:text-[#5CE1E6] transition-all cursor-pointer"
           >
             <Home size={14} />
             Back to Home

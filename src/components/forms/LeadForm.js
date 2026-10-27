@@ -30,27 +30,34 @@ const inter = Inter({
 });
 
 // ==========================================
-// ✅ NEW COLOR PALETTE (matches site-wide palette)
-// Purple | Cyan | Pink | Magenta
+// ✅ NEW COLOR PALETTE
+// Navy / White / Dark Teal / Teal
 // ==========================================
-const PURPLE = "#3C1E74"; // main accent (button gradients)
-const CYAN = "#5CE1E6"; // light accent (input text, borders — replaces WARM_CREAM/LIGHT_AQUA)
-const PINK = "#FFA7E4"; // highlight (icons, subtitles — replaces TURQUOISE icon usage)
-const MAGENTA = "#B462B6"; // bright accent (tints, borders — replaces TURQUOISE)
-const DARK_PINK = "#D81B60"; // kept — semantic danger
+const NAVY = "#0A1628"; // dark background (replaces DARK_PURPLE)
+const NAVY_LIGHT = "#0F1F33"; // inner card (replaces LIGHT_PURPLE)
+const DARK_TEAL = "#143336"; // modal bg (replaces CARD_PURPLE)
+const WHITE = "#FFFFFF"; // foreground / text (replaces CYAN)
+const TEAL = "#347A85"; // main accent (replaces PURPLE/MAGENTA/PINK)
+const RED = "#EF4444"; // semantic danger (replaces DARK_PINK)
 
-// Dark purple backgrounds (replace Navy blues)
-const DARK_PURPLE = "#1E0F3D";
-const LIGHT_PURPLE = "#2A1454"; // inner card (replaces NAVY_CARD)
-const CARD_PURPLE = "#251247"; // modal bg (replaces NAVY)
+// Teal opacity helpers (for accent tints — replaces MAGENTA_* and CYAN_*)
+const TEAL_05 = "#347A850D";
+const TEAL_08 = "#347A8514";
+const TEAL_10 = "#347A851A";
+const TEAL_15 = "#347A8526";
+const TEAL_20 = "#347A8533";
+const TEAL_25 = "#347A8540";
+const TEAL_30 = "#347A854D";
+const TEAL_40 = "#347A8566";
+const TEAL_60 = "#347A8599";
+const TEAL_80 = "#347A85CC";
 
-const CYAN_15 = "#5CE1E626";
-const CYAN_20 = "#5CE1E633";
-const CYAN_30 = "#5CE1E64D";
-const CYAN_40 = "#5CE1E666";
-const CYAN_50 = "#5CE1E680";
-const CYAN_60 = "#5CE1E699";
-const CYAN_70 = "#5CE1E6B3";
+// White opacity helpers (for muted text — replaces CYAN_* muted)
+const WHITE_30 = "#FFFFFF4D";
+const WHITE_40 = "#FFFFFF66";
+const WHITE_50 = "#FFFFFF80";
+const WHITE_60 = "#FFFFFF99";
+const WHITE_70 = "#FFFFFFB3";
 
 /**
  * REUSABLE LEAD FORM
@@ -194,8 +201,8 @@ export default function LeadForm({
           onClick={() => setOpen(true)}
           className={`w-full flex items-center justify-center gap-2.5 px-5 py-3 sm:py-3.5 text-white text-sm cursor-pointer font-bold rounded-xl active:scale-[0.98] transition-all shadow-lg ${className}`}
           style={{
-            background: `linear-gradient(135deg, ${PURPLE}, ${MAGENTA})`,
-            boxShadow: `0 10px 25px -5px ${MAGENTA}25`,
+            background: `linear-gradient(135deg, ${TEAL}, ${DARK_TEAL})`,
+            boxShadow: `0 10px 25px -5px ${TEAL}40`,
           }}
         >
           <Heart size={16} /> I&apos;m Interested
@@ -225,8 +232,8 @@ export default function LeadForm({
                 transition={{ type: "spring", stiffness: 300, damping: 28 }}
                 className="relative w-full sm:max-w-md sm:rounded-2xl sm:my-6 shadow-2xl overflow-hidden sm:border-t sm:border-x"
                 style={{
-                  backgroundColor: CARD_PURPLE,
-                  borderColor: `${CYAN}10`,
+                  backgroundColor: DARK_TEAL,
+                  borderColor: `${TEAL}20`,
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
@@ -234,15 +241,15 @@ export default function LeadForm({
                 <div
                   className="relative px-4 sm:px-6 pt-5 sm:pt-6 pb-10 sm:pb-12"
                   style={{
-                    background: `linear-gradient(to right, ${MAGENTA}15, ${MAGENTA}08, transparent)`,
-                    borderBottom: `1px solid ${CYAN}10`,
+                    background: `linear-gradient(to right, ${TEAL}20, ${TEAL}10, transparent)`,
+                    borderBottom: `1px solid ${TEAL}15`,
                   }}
                 >
                   {!submitting && !submitted && (
                     <button
                       onClick={() => setOpen(false)}
                       className="absolute top-3 right-3 sm:top-4 sm:right-4 w-8 h-8 flex items-center justify-center rounded-full text-white hover:bg-white/20 transition-colors"
-                      style={{ backgroundColor: `${CYAN}0A` }}
+                      style={{ backgroundColor: `${TEAL}15` }}
                     >
                       <X size={16} />
                     </button>
@@ -252,14 +259,14 @@ export default function LeadForm({
                     <div
                       className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shrink-0"
                       style={{
-                        backgroundColor: `${MAGENTA}15`,
-                        border: `1px solid ${MAGENTA}20`,
+                        backgroundColor: `${TEAL}20`,
+                        border: `1px solid ${TEAL}30`,
                       }}
                     >
                       {hasProperty ? (
-                        <Heart size={16} style={{ color: PINK }} />
+                        <Heart size={16} style={{ color: TEAL }} />
                       ) : (
-                        <Send size={16} style={{ color: PINK }} />
+                        <Send size={16} style={{ color: TEAL }} />
                       )}
                     </div>
                     <div className="min-w-0 flex-1">
@@ -269,19 +276,19 @@ export default function LeadForm({
                         {title}
                       </h3>
                       {subtitle && (
-                        <p className="text-[11px] sm:text-xs truncate" style={{ color: PINK }}>
+                        <p className="text-[11px] sm:text-xs truncate" style={{ color: TEAL }}>
                           {subtitle}
                         </p>
                       )}
                       {propertyTitle && !subtitle && (
-                        <p className="text-[11px] sm:text-xs line-clamp-1" style={{ color: PINK }}>
+                        <p className="text-[11px] sm:text-xs line-clamp-1" style={{ color: TEAL }}>
                           {propertyTitle}
                         </p>
                       )}
                     </div>
                   </div>
 
-                  <p className="text-[11px] sm:text-xs mt-1" style={{ color: CYAN_30 }}>
+                  <p className="text-[11px] sm:text-xs mt-1" style={{ color: WHITE_60 }}>
                     {hasProperty
                       ? "Fill in your details and we'll get back to you shortly."
                       : "Send us a message and we'll respond promptly."}
@@ -293,8 +300,8 @@ export default function LeadForm({
                   <div
                     className="rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-5"
                     style={{
-                      backgroundColor: LIGHT_PURPLE,
-                      border: `1px solid ${CYAN}10`,
+                      backgroundColor: NAVY,
+                      border: `1px solid ${TEAL}15`,
                     }}
                   >
                     {/* SUCCESS */}
@@ -303,11 +310,11 @@ export default function LeadForm({
                         <div
                           className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center"
                           style={{
-                            backgroundColor: `${MAGENTA}15`,
-                            border: `1px solid ${MAGENTA}20`,
+                            backgroundColor: `${TEAL}20`,
+                            border: `1px solid ${TEAL}30`,
                           }}
                         >
-                          <CheckCircle2 size={26} style={{ color: PINK }} />
+                          <CheckCircle2 size={26} style={{ color: TEAL }} />
                         </div>
                         <h4
                           className={`text-base sm:text-lg text-white ${playfair.variable} font-(family-name:--font-playfair)`}
@@ -316,7 +323,7 @@ export default function LeadForm({
                         </h4>
                         <p
                           className="text-xs sm:text-sm text-center max-w-60 sm:max-w-65"
-                          style={{ color: CYAN_40 }}
+                          style={{ color: WHITE_60 }}
                         >
                           {hasProperty
                             ? "Your interest has been submitted. We'll contact you soon."
@@ -331,9 +338,9 @@ export default function LeadForm({
                           <div
                             className="flex items-start gap-2 px-3 sm:px-3.5 py-2.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs"
                             style={{
-                              backgroundColor: `${DARK_PINK}10`,
-                              border: `1px solid ${DARK_PINK}20`,
-                              color: "#F87171",
+                              backgroundColor: `${RED}15`,
+                              border: `1px solid ${RED}30`,
+                              color: "#FCA5A5",
                             }}
                           >
                             <X size={13} className="shrink-0 mt-0.5" />
@@ -345,10 +352,10 @@ export default function LeadForm({
                         <div>
                           <label
                             className="flex items-center gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] mb-1 sm:mb-1.5"
-                            style={{ color: CYAN_30 }}
+                            style={{ color: TEAL_80 }}
                           >
                             <User size={9} className="sm:w-2.5 sm:h-2.5" />
-                            Full Name <span style={{ color: MAGENTA }}>*</span>
+                            Full Name <span style={{ color: TEAL }}>*</span>
                           </label>
                           <input
                             ref={nameRef}
@@ -360,17 +367,17 @@ export default function LeadForm({
                             required
                             className="w-full px-3.5 sm:px-4 py-2.5 rounded-lg sm:rounded-xl text-sm transition-all focus:outline-none focus:border-transparent"
                             style={{
-                              backgroundColor: `${CYAN}05`,
-                              border: `1px solid ${CYAN}10`,
-                              color: CYAN,
+                              backgroundColor: `${TEAL}0A`,
+                              border: `1px solid ${TEAL}20`,
+                              color: WHITE,
                             }}
                             onFocus={(e) => {
-                              e.currentTarget.style.boxShadow = `0 0 0 2px ${MAGENTA}20`;
-                              e.currentTarget.style.borderColor = `${MAGENTA}30`;
+                              e.currentTarget.style.boxShadow = `0 0 0 2px ${TEAL}30`;
+                              e.currentTarget.style.borderColor = `${TEAL}50`;
                             }}
                             onBlur={(e) => {
                               e.currentTarget.style.boxShadow = "none";
-                              e.currentTarget.style.borderColor = `${CYAN}10`;
+                              e.currentTarget.style.borderColor = `${TEAL}20`;
                             }}
                           />
                         </div>
@@ -379,10 +386,10 @@ export default function LeadForm({
                         <div>
                           <label
                             className="flex items-center gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] mb-1 sm:mb-1.5"
-                            style={{ color: CYAN_30 }}
+                            style={{ color: TEAL_80 }}
                           >
                             <Phone size={9} className="sm:w-2.5 sm:h-2.5" />
-                            Phone <span style={{ color: MAGENTA }}>*</span>
+                            Phone <span style={{ color: TEAL }}>*</span>
                           </label>
                           <input
                             type="tel"
@@ -393,17 +400,17 @@ export default function LeadForm({
                             required
                             className="w-full px-3.5 sm:px-4 py-2.5 rounded-lg sm:rounded-xl text-sm transition-all focus:outline-none focus:border-transparent"
                             style={{
-                              backgroundColor: `${CYAN}05`,
-                              border: `1px solid ${CYAN}10`,
-                              color: CYAN,
+                              backgroundColor: `${TEAL}0A`,
+                              border: `1px solid ${TEAL}20`,
+                              color: WHITE,
                             }}
                             onFocus={(e) => {
-                              e.currentTarget.style.boxShadow = `0 0 0 2px ${MAGENTA}20`;
-                              e.currentTarget.style.borderColor = `${MAGENTA}30`;
+                              e.currentTarget.style.boxShadow = `0 0 0 2px ${TEAL}30`;
+                              e.currentTarget.style.borderColor = `${TEAL}50`;
                             }}
                             onBlur={(e) => {
                               e.currentTarget.style.boxShadow = "none";
-                              e.currentTarget.style.borderColor = `${CYAN}10`;
+                              e.currentTarget.style.borderColor = `${TEAL}20`;
                             }}
                           />
                         </div>
@@ -412,10 +419,10 @@ export default function LeadForm({
                         <div>
                           <label
                             className="flex items-center gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] mb-1 sm:mb-1.5"
-                            style={{ color: CYAN_30 }}
+                            style={{ color: TEAL_80 }}
                           >
                             <Mail size={9} className="sm:w-2.5 sm:h-2.5" />
-                            Email <span style={{ color: MAGENTA }}>*</span>
+                            Email <span style={{ color: TEAL }}>*</span>
                           </label>
                           <input
                             type="email"
@@ -426,17 +433,17 @@ export default function LeadForm({
                             required
                             className="w-full px-3.5 sm:px-4 py-2.5 rounded-lg sm:rounded-xl text-sm transition-all focus:outline-none focus:border-transparent"
                             style={{
-                              backgroundColor: `${CYAN}05`,
-                              border: `1px solid ${CYAN}10`,
-                              color: CYAN,
+                              backgroundColor: `${TEAL}0A`,
+                              border: `1px solid ${TEAL}20`,
+                              color: WHITE,
                             }}
                             onFocus={(e) => {
-                              e.currentTarget.style.boxShadow = `0 0 0 2px ${MAGENTA}20`;
-                              e.currentTarget.style.borderColor = `${MAGENTA}30`;
+                              e.currentTarget.style.boxShadow = `0 0 0 2px ${TEAL}30`;
+                              e.currentTarget.style.borderColor = `${TEAL}50`;
                             }}
                             onBlur={(e) => {
                               e.currentTarget.style.boxShadow = "none";
-                              e.currentTarget.style.borderColor = `${CYAN}10`;
+                              e.currentTarget.style.borderColor = `${TEAL}20`;
                             }}
                           />
                         </div>
@@ -445,7 +452,7 @@ export default function LeadForm({
                         <div>
                           <label
                             className="flex items-center gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] mb-1 sm:mb-1.5"
-                            style={{ color: CYAN_30 }}
+                            style={{ color: TEAL_80 }}
                           >
                             <MessageSquare size={9} className="sm:w-2.5 sm:h-2.5" />
                             Message
@@ -458,17 +465,17 @@ export default function LeadForm({
                             placeholder="I'm interested in this property..."
                             className="w-full px-3.5 sm:px-4 py-2.5 rounded-lg sm:rounded-xl text-sm transition-all focus:outline-none focus:border-transparent resize-none"
                             style={{
-                              backgroundColor: `${CYAN}05`,
-                              border: `1px solid ${CYAN}10`,
-                              color: CYAN,
+                              backgroundColor: `${TEAL}0A`,
+                              border: `1px solid ${TEAL}20`,
+                              color: WHITE,
                             }}
                             onFocus={(e) => {
-                              e.currentTarget.style.boxShadow = `0 0 0 2px ${MAGENTA}20`;
-                              e.currentTarget.style.borderColor = `${MAGENTA}30`;
+                              e.currentTarget.style.boxShadow = `0 0 0 2px ${TEAL}30`;
+                              e.currentTarget.style.borderColor = `${TEAL}50`;
                             }}
                             onBlur={(e) => {
                               e.currentTarget.style.boxShadow = "none";
-                              e.currentTarget.style.borderColor = `${CYAN}10`;
+                              e.currentTarget.style.borderColor = `${TEAL}20`;
                             }}
                           />
                         </div>
@@ -478,25 +485,25 @@ export default function LeadForm({
                           <div
                             className="flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-2.5 rounded-lg sm:rounded-xl"
                             style={{
-                              backgroundColor: `${MAGENTA}05`,
-                              border: `1px solid ${MAGENTA}10`,
+                              backgroundColor: `${TEAL}10`,
+                              border: `1px solid ${TEAL}20`,
                             }}
                           >
                             <Building2
                               size={13}
                               className="shrink-0"
-                              style={{ color: PINK }}
+                              style={{ color: TEAL }}
                             />
                             <span
                               className="text-[11px] sm:text-xs truncate flex-1"
-                              style={{ color: CYAN_30 }}
+                              style={{ color: WHITE_60 }}
                             >
                               {propertyCode || propertyTitle}
                             </span>
                             {propertyPrice && (
                               <span
                                 className="text-[11px] sm:text-xs font-bold shrink-0"
-                                style={{ color: PINK }}
+                                style={{ color: TEAL }}
                               >
                                 {formatPrice(propertyPrice, propertyCurrency)}
                               </span>
@@ -510,8 +517,8 @@ export default function LeadForm({
                           disabled={submitting}
                           className="w-full flex cursor-pointer items-center justify-center gap-2 px-5 py-2.5 sm:py-3 text-white text-sm font-bold rounded-lg sm:rounded-xl disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.98] transition-all shadow-lg"
                           style={{
-                            background: `linear-gradient(135deg, ${PURPLE}, ${MAGENTA})`,
-                            boxShadow: `0 10px 25px -5px ${MAGENTA}25`,
+                            background: `linear-gradient(135deg, ${TEAL}, ${DARK_TEAL})`,
+                            boxShadow: `0 10px 25px -5px ${TEAL}40`,
                           }}
                         >
                           {submitting ? (

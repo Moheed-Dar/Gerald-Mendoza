@@ -21,26 +21,43 @@ import { gsap } from "gsap";
 import { motion, AnimatePresence } from "framer-motion";
 
 // ============================================
-// NEW 4-COLOR SCHEME (matches About & Footer)
-// Purple | Cyan | Pink | Magenta
+// 5-COLOR SCHEME — "Deep Ocean Architectural"
 // ============================================
-const PURPLE = "#3C1E74"; // main accent
-const CYAN = "#5CE1E6"; // bright accent
-const PINK = "#FFA7E4"; // highlight
-const MAGENTA = "#B462B6"; // secondary / admin accent
-const DARK = "#2A1454"; // dark purple base
+// #F7F7F7 → Cream       (background / surfaces)
+// #347A85 → Teal        (primary brand / accents)
+// #28606B → Deep Teal   (secondary)
+// #143336 → Ink         (dark text / surfaces)
+// #000000 → Black       (pure highlights)
+const CREAM = "#F7F7F7";
+const TEAL = "#347A85";
+const DEEP_TEAL = "#28606B";
+const INK = "#143336";
+const BLACK = "#000000";
 
-// Tailwind hex mappings used in classes below:
-// #FFF7F0 -> #FAF7FF (light lavender bg)
-// #208288 -> #3C1E74 (purple)
-// #1F203D -> #2A1454 (dark purple)
-// #BEEBF0 -> #DCF7F9 (light cyan tint)
-// #F2673A -> #B462B6 (magenta / admin)
+// Derived tints (fully defined — no missing references)
+const INK_05 = `${INK}0D`;
+const INK_10 = `${INK}1A`;
+const INK_20 = `${INK}33`;
+const INK_30 = `${INK}4D`;
+const INK_40 = `${INK}66`;
+const INK_60 = `${INK}99`;
+const INK_80 = `${INK}CC`;
+const TEAL_05 = `${TEAL}0D`;
+const TEAL_10 = `${TEAL}1A`;
+const TEAL_15 = `${TEAL}26`;
+const TEAL_20 = `${TEAL}33`;
+const TEAL_25 = `${TEAL}40`;
+const TEAL_30 = `${TEAL}4D`;
+const TEAL_40 = `${TEAL}66`;
+const TEAL_60 = `${TEAL}99`;
+const CREAM_80 = `${CREAM}CC`;
+const CREAM_60 = `${CREAM}99`;
+const CREAM_40 = `${CREAM}66`;
+const CREAM_20 = `${CREAM}33`;
 
 const DEFAULT_NAV_LINKS = [
   { label: "Home", href: "/", icon: Home },
   { label: "About", href: "/about", icon: User },
-  // { label: "Testimonials", href: "/testimonials", icon: Building2 },
   { label: "Blogs", href: "/blogs", icon: BookOpen },
 ];
 
@@ -49,6 +66,10 @@ const CMS_LINKS = [
   { label: "Services", href: "/services", icon: Star },
   { label: "Contact Us", href: "/contact", icon: Phone },
 ];
+
+const LUXURY_FONT_FAMILY =
+  '"Playfair Display", "Cormorant Garamond", Georgia, serif';
+const LUXURY_ITALIC_FAMILY = '"Cormorant Garamond", Georgia, serif';
 
 export default function FullscreenMenu({ isOpen, onClose }) {
   const circleRef = useRef(null);
@@ -134,20 +155,17 @@ export default function FullscreenMenu({ isOpen, onClose }) {
     }
   }, [isOpen]);
 
-  // Admin link dynamic config
   const adminLinkConfig = {
     href: isLoggedIn ? "/admin/dashboard" : "/admin/login",
     label: isLoggedIn ? "Dashboard" : "Admin",
     icon: isLoggedIn ? LayoutDashboard : ShieldCheck,
   };
 
-  // Proper close handler
   const handleClose = () => {
     window.scrollTo({ top: 0, behavior: "instant" });
     onClose();
   };
 
-  // Link click handler
   const handleLinkClick = (e) => {
     e.stopPropagation();
     handleClose();
@@ -204,9 +222,31 @@ export default function FullscreenMenu({ isOpen, onClose }) {
 
   return (
     <>
-      {/* ===== DESKTOP BACKDROP — sirf md+ ===== */}
+      {/* Google Font link */}
+      <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+        rel="stylesheet"
+      />
+      {/* Plain <style> tag (NOT styled-jsx) — no hydration mismatch */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            .font-luxury {
+              font-family: ${LUXURY_FONT_FAMILY};
+              letter-spacing: 0.02em;
+            }
+            .font-luxury-italic {
+              font-family: ${LUXURY_ITALIC_FAMILY};
+              font-style: italic;
+            }
+          `,
+        }}
+      />
+
+      {/* ===== DESKTOP BACKDROP — only md+ ===== */}
       <div
-        className="hidden md:block fixed inset-0 z-998 bg-black/50 backdrop-blur-sm"
+        className="hidden md:block fixed inset-0 z-998"
+        style={{ backgroundColor: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)" }}
         onClick={handleClose}
       />
 
@@ -215,27 +255,38 @@ export default function FullscreenMenu({ isOpen, onClose }) {
         ref={menuRef}
         className="hidden md:flex fixed top-25 left-0 right-0 z-999 justify-center px-4 lg:px-8"
       >
-        <div className="w-full max-w-3xl bg-[#FAF7FF] rounded-2xl overflow-hidden shadow-2xl">
+        <div
+          className="w-full max-w-3xl overflow-hidden shadow-2xl"
+          style={{
+            backgroundColor: CREAM,
+            border: `1px solid ${INK_10}`,
+            borderRadius: "0",
+          }}
+        >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
             {/* Left: Hero Preview Image */}
             <div className="relative h-44 lg:h-auto lg:min-h-70">
               <Image
                 src="/banner/banner2.jpg"
-                alt="Matt Vatcher Properties Preview"
+                alt="Gerald Mendoza Properties Preview"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
                 sizes="(max-width: 1024px) 128px, 160px"
               />
-              {/* Dark purple overlay instead of navy */}
-              <div className="absolute inset-0 bg-linear-to-t from-[#2A1454]/80 via-[#2A1454]/20 to-transparent" />
+              {/* Ink overlay */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: `linear-gradient(to top, ${INK}CC 0%, ${INK}33 50%, transparent 100%)`,
+                }}
+              />
 
               <div className="absolute top-3 left-3">
                 <div className="relative w-24 h-8 flex items-center justify-center">
                   <div className="relative z-10 mt-10 w-50 h-20">
-                    {/* ✅ NEW LOGO — mettlogo11.png */}
                     <Image
-                      src="/images/mettlogo11.png"
-                      alt="Matt Vatcher"
+                      src="/images/logo12.png"
+                      alt="Gerald Mendoza"
                       fill
                       className="object-contain"
                       sizes="80px"
@@ -245,27 +296,42 @@ export default function FullscreenMenu({ isOpen, onClose }) {
               </div>
 
               <div className="absolute bottom-3 left-3">
-                <h2 className="text-2xl lg:text-3xl font-bold text-white tracking-tight">
-                  Matt Vatcher
+                <h2
+                  className="font-luxury text-2xl lg:text-3xl font-extrabold tracking-tight"
+                  style={{ color: CREAM }}
+                >
+                  Gerald Mendoza
                 </h2>
               </div>
             </div>
 
             {/* Right: Navigation Links */}
-            <div className="p-5 lg:p-6 bg-[#FAF7FF]">
+            <div className="p-5 lg:p-6" style={{ backgroundColor: CREAM }}>
               <div className="grid grid-cols-2 gap-6">
                 <div>
+                  <p
+                    className="font-mono text-[9px] uppercase tracking-[0.25em] font-bold mb-3 pb-2 border-b"
+                    style={{ color: TEAL, borderColor: TEAL_20 }}
+                  >
+                    Main Pages
+                  </p>
                   <div className="flex flex-col gap-1.5">
                     {DEFAULT_NAV_LINKS.map((link, index) => (
                       <Link
                         key={index}
                         href={link.href}
                         onClick={handleLinkClick}
-                        className="group relative py-1.5 text-gray-600 hover:text-[#3C1E74] transition-colors text-sm font-medium"
+                        className="group relative py-1.5 text-sm font-medium transition-colors"
+                        style={{ color: INK_60 }}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = TEAL)}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = INK_60)}
                       >
                         <span className="relative">
                           {link.label}
-                          <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-[#B462B6] transition-all duration-300 group-hover:w-full" />
+                          <span
+                            className="absolute -bottom-0.5 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full"
+                            style={{ backgroundColor: TEAL }}
+                          />
                         </span>
                       </Link>
                     ))}
@@ -273,17 +339,29 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                 </div>
 
                 <div>
+                  <p
+                    className="font-mono text-[9px] uppercase tracking-[0.25em] font-bold mb-3 pb-2 border-b"
+                    style={{ color: TEAL, borderColor: TEAL_20 }}
+                  >
+                    Explore
+                  </p>
                   <div className="flex flex-col gap-1.5">
                     {CMS_LINKS.map((link, index) => (
                       <Link
                         key={index}
                         href={link.href}
                         onClick={handleLinkClick}
-                        className="group relative py-1.5 text-gray-600 hover:text-[#3C1E74] transition-colors text-sm font-medium"
+                        className="group relative py-1.5 text-sm font-medium transition-colors"
+                        style={{ color: INK_60 }}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = TEAL)}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = INK_60)}
                       >
                         <span className="relative">
                           {link.label}
-                          <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-[#B462B6] transition-all duration-300 group-hover:w-full" />
+                          <span
+                            className="absolute -bottom-0.5 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full"
+                            style={{ backgroundColor: TEAL }}
+                          />
                         </span>
                       </Link>
                     ))}
@@ -294,14 +372,24 @@ export default function FullscreenMenu({ isOpen, onClose }) {
           </div>
 
           {/* Bottom Section */}
-          <div className="border-t border-[#DCF7F9] p-4 flex items-center justify-between gap-3 bg-[#FAF7FF]">
+          <div
+            className="p-4 flex items-center justify-between gap-3"
+            style={{
+              borderTop: `1px solid ${INK_10}`,
+              backgroundColor: CREAM,
+            }}
+          >
+            {/* ✅ Updated email */}
             <a
-              href="mailto:matt@torontosrunningrealtor.com"
-              className="flex items-center gap-2 text-gray-500 hover:text-[#3C1E74] transition-colors"
+              href="mailto:geraldmendoza@realtyexecutives.com"
+              className="flex items-center gap-2 transition-colors"
+              style={{ color: INK_60 }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = TEAL)}
+              onMouseLeave={(e) => (e.currentTarget.style.color = INK_60)}
             >
-              <Mail size={15} />
+              <Mail size={15} style={{ color: TEAL }} />
               <span className="text-sm font-medium">
-                matt@torontosrunningrealtor.com
+                geraldmendoza@realtyexecutives.com
               </span>
             </a>
 
@@ -310,11 +398,33 @@ export default function FullscreenMenu({ isOpen, onClose }) {
               <Link
                 href={adminLinkConfig.href}
                 onClick={handleLinkClick}
-                className={`flex items-center gap-1.5 px-3 py-2 text-sm font-semibold rounded-lg transition-colors ${
+                className="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold transition-all"
+                style={
                   isLoggedIn
-                    ? "bg-[#B462B6]/10 border border-[#B462B6]/30 text-[#B462B6] hover:bg-[#B462B6]/20 hover:border-[#B462B6]/50"
-                    : "bg-[#DCF7F9]/60 border border-[#3C1E74]/30 text-[#3C1E74] hover:bg-[#DCF7F9] hover:border-[#3C1E74]/50"
-                }`}
+                    ? {
+                        backgroundColor: TEAL_10,
+                        border: `1px solid ${TEAL_30}`,
+                        color: TEAL,
+                      }
+                    : {
+                        backgroundColor: TEAL_05,
+                        border: `1px solid ${TEAL_20}`,
+                        color: TEAL,
+                      }
+                }
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = TEAL_20;
+                  e.currentTarget.style.borderColor = TEAL_40;
+                }}
+                onMouseLeave={(e) => {
+                  if (isLoggedIn) {
+                    e.currentTarget.style.backgroundColor = TEAL_10;
+                    e.currentTarget.style.borderColor = TEAL_30;
+                  } else {
+                    e.currentTarget.style.backgroundColor = TEAL_05;
+                    e.currentTarget.style.borderColor = TEAL_20;
+                  }
+                }}
               >
                 {(() => {
                   const AdminIcon = adminLinkConfig.icon;
@@ -325,13 +435,19 @@ export default function FullscreenMenu({ isOpen, onClose }) {
               <Link
                 href="/properties"
                 onClick={handleLinkClick}
-                className="px-4 py-2 bg-[#3C1E74] text-white text-sm font-semibold rounded-lg hover:bg-[#B462B6] transition-colors"
+                className="px-4 py-2 text-sm font-semibold text-white transition-colors"
+                style={{ backgroundColor: INK }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = TEAL)}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = INK)}
               >
                 All Properties
               </Link>
               <button
                 onClick={handleClose}
-                className="w-9 h-9 flex items-center justify-center bg-[#2A1454] text-white rounded-lg hover:bg-[#B462B6] transition-colors"
+                className="w-9 h-9 flex items-center justify-center text-white transition-colors"
+                style={{ backgroundColor: INK }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = TEAL)}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = INK)}
               >
                 <ArrowRight size={16} />
               </button>
@@ -350,7 +466,8 @@ export default function FullscreenMenu({ isOpen, onClose }) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden fixed inset-0 z-998 bg-black/50 backdrop-blur-[2px]"
+              className="md:hidden fixed inset-0 z-998"
+              style={{ backgroundColor: "rgba(0,0,0,0.55)", backdropFilter: "blur(2px)" }}
               onClick={handleClose}
             />
 
@@ -364,7 +481,8 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                 stiffness: 300,
                 damping: 30,
               }}
-              className="md:hidden fixed top-0 right-0 bottom-0 z-999 w-80 bg-[#FAF7FF] shadow-2xl flex flex-col"
+              className="md:hidden fixed top-0 right-0 bottom-0 z-999 w-80 shadow-2xl flex flex-col"
+              style={{ backgroundColor: CREAM }}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
@@ -373,7 +491,10 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring" }}
                 onClick={handleClose}
-                className="absolute top-3 right-3 z-50 w-9 h-9 flex items-center justify-center rounded-full bg-[#3C1E74] text-white hover:bg-[#B462B6] transition-colors shadow-lg"
+                className="absolute top-3 right-3 z-50 w-9 h-9 flex items-center justify-center text-white transition-colors shadow-lg"
+                style={{ backgroundColor: INK }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = TEAL)}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = INK)}
               >
                 <X size={18} />
               </motion.button>
@@ -382,38 +503,59 @@ export default function FullscreenMenu({ isOpen, onClose }) {
               <div className="relative h-40 shrink-0">
                 <Image
                   src="/banner/banner2.jpg"
-                  alt="Matt Vatcher"
+                  alt="Gerald Mendoza"
                   fill
                   className="object-cover"
                   sizes="320px"
                   priority
                 />
-                {/* Dark purple overlay */}
-                <div className="absolute inset-0 bg-linear-to-t from-[#2A1454]/80 via-[#2A1454]/30 to-transparent" />
+                {/* Ink overlay */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: `linear-gradient(to top, ${INK}CC 0%, ${INK}33 50%, transparent 100%)`,
+                  }}
+                />
 
                 <div className="absolute top-3 left-3">
-                  <div className="flex items-center gap-2 bg-white/20 backdrop-blur-md rounded-full px-3 py-1.5 border border-white/30">
-                    {/* ✅ NEW LOGO in badge */}
-                    <div className="relative w-6 h-6 rounded-full bg-white/90 flex items-center justify-center overflow-hidden">
+                  <div
+                    className="flex items-center gap-2 rounded-full px-3 py-1.5"
+                    style={{
+                      backgroundColor: "rgba(247,247,247,0.2)",
+                      backdropFilter: "blur(8px)",
+                      border: "1px solid rgba(247,247,247,0.3)",
+                    }}
+                  >
+                    <div
+                      className="relative w-6 h-6 rounded-full flex items-center justify-center overflow-hidden"
+                      style={{ backgroundColor: "rgba(247,247,247,0.9)" }}
+                    >
                       <Image
-                        src="/images/mettlogo11.png"
-                        alt="Matt Vatcher Logo"
+                        src="/images/logo12.png"
+                        alt="Gerald Mendoza Logo"
                         fill
                         className="object-contain p-0.5"
                         sizes="24px"
                       />
                     </div>
-                    <span className="text-white font-semibold text-xs">
-                      Matt Vatcher
+                    <span
+                      className="font-luxury text-white font-semibold text-xs"
+                    >
+                      Gerald Mendoza
                     </span>
                   </div>
                 </div>
 
                 <div className="absolute bottom-3 left-3">
-                  <p className="text-[#FFA7E4] text-[10px] tracking-widest uppercase font-bold">
-                    Toronto Real Estate
+                  <p
+                    className="font-mono text-[10px] tracking-[0.2em] uppercase font-bold"
+                    style={{ color: TEAL }}
+                  >
+                    Tucson Real Estate
                   </p>
-                  <h2 className="text-lg font-bold text-white tracking-tight">
+                  <h2
+                    className="font-luxury text-lg font-extrabold text-white tracking-tight mt-0.5"
+                  >
                     Find Your Dream Home
                   </h2>
                 </div>
@@ -423,7 +565,10 @@ export default function FullscreenMenu({ isOpen, onClose }) {
               <div className="flex-1 px-4 py-4 overflow-y-auto">
                 {/* Main Pages */}
                 <div className="mb-3">
-                  <h3 className="text-gray-400 text-[10px] font-bold tracking-[0.2em] uppercase mb-2">
+                  <h3
+                    className="font-mono text-[10px] font-bold tracking-[0.2em] uppercase mb-2"
+                    style={{ color: INK_60 }}
+                  >
                     Main Pages
                   </h3>
                   <div className="flex flex-col gap-1">
@@ -434,15 +579,32 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                           key={index}
                           href={link.href}
                           onClick={handleLinkClick}
-                          className="group flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-[#DCF7F9] active:bg-[#DCF7F9]/70 transition-all duration-200"
+                          className="group flex items-center gap-3 px-3 py-3 transition-all duration-200"
+                          style={{ backgroundColor: "transparent" }}
+                          onMouseEnter={(e) =>
+                            (e.currentTarget.style.backgroundColor = TEAL_10)
+                          }
+                          onMouseLeave={(e) =>
+                            (e.currentTarget.style.backgroundColor = "transparent")
+                          }
                         >
-                          <div className="w-9 h-9 rounded-lg bg-[#DCF7F9]/60 group-hover:bg-[#3C1E74] flex items-center justify-center transition-all duration-200">
+                          <div
+                            className="w-9 h-9 flex items-center justify-center transition-all duration-200"
+                            style={{
+                              backgroundColor: TEAL_10,
+                              border: `1px solid ${TEAL_20}`,
+                            }}
+                          >
                             <Icon
                               size={16}
-                              className="text-[#3C1E74] group-hover:text-white transition-colors duration-200"
+                              className="transition-colors duration-200"
+                              style={{ color: TEAL }}
                             />
                           </div>
-                          <span className="text-gray-700 group-hover:text-[#3C1E74] font-medium text-sm transition-colors duration-200">
+                          <span
+                            className="font-luxury text-sm font-medium transition-colors duration-200"
+                            style={{ color: INK }}
+                          >
                             {link.label}
                           </span>
                         </Link>
@@ -451,11 +613,14 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                   </div>
                 </div>
 
-                <div className="h-px bg-[#DCF7F9] my-3" />
+                <div className="h-px my-3" style={{ backgroundColor: INK_10 }} />
 
                 {/* CMS Pages */}
                 <div>
-                  <h3 className="text-gray-400 text-[10px] font-bold tracking-[0.2em] uppercase mb-2">
+                  <h3
+                    className="font-mono text-[10px] font-bold tracking-[0.2em] uppercase mb-2"
+                    style={{ color: INK_60 }}
+                  >
                     Explore
                   </h3>
                   <div className="flex flex-col gap-1">
@@ -466,15 +631,32 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                           key={index}
                           href={link.href}
                           onClick={handleLinkClick}
-                          className="group flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-[#DCF7F9] active:bg-[#DCF7F9]/70 transition-all duration-200"
+                          className="group flex items-center gap-3 px-3 py-3 transition-all duration-200"
+                          style={{ backgroundColor: "transparent" }}
+                          onMouseEnter={(e) =>
+                            (e.currentTarget.style.backgroundColor = TEAL_10)
+                          }
+                          onMouseLeave={(e) =>
+                            (e.currentTarget.style.backgroundColor = "transparent")
+                          }
                         >
-                          <div className="w-9 h-9 rounded-lg bg-[#DCF7F9]/60 group-hover:bg-[#3C1E74] flex items-center justify-center transition-all duration-200">
+                          <div
+                            className="w-9 h-9 flex items-center justify-center transition-all duration-200"
+                            style={{
+                              backgroundColor: TEAL_10,
+                              border: `1px solid ${TEAL_20}`,
+                            }}
+                          >
                             <Icon
                               size={16}
-                              className="text-[#3C1E74] group-hover:text-white transition-colors duration-200"
+                              className="transition-colors duration-200"
+                              style={{ color: TEAL }}
                             />
                           </div>
-                          <span className="text-gray-700 group-hover:text-[#3C1E74] font-medium text-sm transition-colors duration-200">
+                          <span
+                            className="font-luxury text-sm font-medium transition-colors duration-200"
+                            style={{ color: INK }}
+                          >
                             {link.label}
                           </span>
                         </Link>
@@ -485,16 +667,25 @@ export default function FullscreenMenu({ isOpen, onClose }) {
               </div>
 
               {/* Bottom Section */}
-              <div className="border-t border-[#DCF7F9] px-4 py-4 shrink-0 bg-[#DCF7F9]/40">
-                {/* Email */}
+              <div
+                className="px-4 py-4 shrink-0"
+                style={{
+                  borderTop: `1px solid ${INK_10}`,
+                  backgroundColor: TEAL_05,
+                }}
+              >
+                {/* ✅ Updated email */}
                 <a
-                  href="mailto:matt@torontosrunningrealtor.com"
+                  href="mailto:geraldmendoza@realtyexecutives.com"
                   onClick={(e) => e.stopPropagation()}
-                  className="flex items-center justify-center gap-1.5 text-gray-500 hover:text-[#3C1E74] transition-colors mb-3"
+                  className="flex items-center justify-center gap-1.5 transition-colors mb-3"
+                  style={{ color: INK_60 }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = TEAL)}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = INK_60)}
                 >
-                  <Mail size={12} />
+                  <Mail size={12} style={{ color: TEAL }} />
                   <span className="text-[11px] font-medium">
-                    matt@torontosrunningrealtor.com
+                    geraldmendoza@realtyexecutives.com
                   </span>
                 </a>
 
@@ -503,25 +694,48 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                   <Link
                     href={adminLinkConfig.href}
                     onClick={handleLinkClick}
-                    className={`w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 ${
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold transition-all duration-200"
+                    style={
                       isLoggedIn
-                        ? "bg-[#B462B6]/10 border border-[#B462B6]/30 text-[#B462B6] hover:bg-[#B462B6]/20 active:bg-[#B462B6]/30"
-                        : "bg-[#DCF7F9]/60 border border-[#3C1E74]/30 text-[#3C1E74] hover:bg-[#DCF7F9] active:bg-[#DCF7F9]/70"
-                    }`}
+                        ? {
+                            backgroundColor: TEAL_10,
+                            border: `1px solid ${TEAL_30}`,
+                            color: TEAL,
+                          }
+                        : {
+                            backgroundColor: TEAL_05,
+                            border: `1px solid ${TEAL_20}`,
+                            color: TEAL,
+                          }
+                    }
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = TEAL_20;
+                      e.currentTarget.style.borderColor = TEAL_40;
+                    }}
+                    onMouseLeave={(e) => {
+                      if (isLoggedIn) {
+                        e.currentTarget.style.backgroundColor = TEAL_10;
+                        e.currentTarget.style.borderColor = TEAL_30;
+                      } else {
+                        e.currentTarget.style.backgroundColor = TEAL_05;
+                        e.currentTarget.style.borderColor = TEAL_20;
+                      }
+                    }}
                   >
                     {(() => {
                       const AdminIcon = adminLinkConfig.icon;
                       return <AdminIcon size={16} />;
                     })()}
-                    <span>
-                      {isLoggedIn ? "Go to Dashboard" : "Admin Login"}
-                    </span>
+                    <span>{isLoggedIn ? "Go to Dashboard" : "Admin Login"}</span>
                   </Link>
 
                   <Link
                     href="/properties"
                     onClick={handleLinkClick}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#3C1E74] text-white text-sm font-semibold rounded-xl hover:bg-[#B462B6] active:bg-[#B462B6] transition-all duration-200"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200"
+                    style={{ backgroundColor: INK }}
+                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = TEAL)}
+                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = INK)}
                   >
                     <FileText size={16} />
                     <span>All Properties</span>

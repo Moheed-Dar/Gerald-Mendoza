@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -100,7 +99,7 @@ function CustomRichTextEditor({ value, onChange }) {
       type="button"
       onMouseDown={(e) => e.preventDefault()}
       onClick={() => applyFormat(command)}
-      className="w-8 h-8 rounded-md flex items-center justify-center text-[#FFF7F0]/70 hover:bg-[#20B2B8]/15 hover:text-[#20B2B8] transition-colors"
+      className="w-8 h-8 rounded-md flex items-center justify-center text-[#FFFFFF]/70 hover:bg-[#347A85]/15 hover:text-[#347A85] transition-colors"
       title={title}
     >
       <Icon size={15} />
@@ -108,9 +107,9 @@ function CustomRichTextEditor({ value, onChange }) {
   );
 
   return (
-    <div className="bg-[#1F2D3D] border border-[#FFF7F0]/8 rounded-xl overflow-hidden focus-within:border-[#20B2B8]/40 focus-within:ring-2 focus-within:ring-[#20B2B8]/10 transition-all">
+    <div className="bg-[#0A1628]/60 border border-[#FFFFFF]/8 rounded-xl overflow-hidden focus-within:border-[#347A85]/50 focus-within:ring-2 focus-within:ring-[#347A85]/10 transition-all">
       {/* Toolbar */}
-      <div className="flex flex-wrap items-center gap-1 p-2 border-b border-[#FFF7F0]/8 bg-[#172636]">
+      <div className="flex flex-wrap items-center gap-1 p-2 border-b border-[#FFFFFF]/8 bg-[#0A1628]/80">
         
         <select
           onMouseDown={saveSelection}
@@ -118,15 +117,15 @@ function CustomRichTextEditor({ value, onChange }) {
             applyFormat('fontSize', e.target.value);
             e.target.value = "";
           }}
-          className="bg-[#1F2D3D] border border-[#FFF7F0]/8 rounded-md px-2 py-1 text-xs text-[#FFF7F0]/70 outline-none mr-1 cursor-pointer hover:border-[#20B2B8]/40"
+          className="bg-[#143336] border border-[#FFFFFF]/8 rounded-md px-2 py-1 text-xs text-[#FFFFFF]/70 outline-none mr-1 cursor-pointer hover:border-[#347A85]/40"
           defaultValue=""
           title="Font Size"
         >
-          <option value="" disabled style={{ backgroundColor: "#1F2D3D" }}>Font Size</option>
-          <option value="1" style={{ backgroundColor: "#1F2D3D" }}>Small</option>
-          <option value="3" style={{ backgroundColor: "#1F2D3D" }}>Normal</option>
-          <option value="5" style={{ backgroundColor: "#1F2D3D" }}>Large</option>
-          <option value="6" style={{ backgroundColor: "#1F2D3D" }}>Huge</option>
+          <option value="" disabled style={{ backgroundColor: "#143336" }}>Font Size</option>
+          <option value="1" style={{ backgroundColor: "#143336" }}>Small</option>
+          <option value="3" style={{ backgroundColor: "#143336" }}>Normal</option>
+          <option value="5" style={{ backgroundColor: "#143336" }}>Large</option>
+          <option value="6" style={{ backgroundColor: "#143336" }}>Huge</option>
         </select>
 
         <ToolButton icon={Bold} command="bold" title="Bold" />
@@ -136,21 +135,21 @@ function CustomRichTextEditor({ value, onChange }) {
         
         <ToolButton icon={Eraser} command="removeFormat" title="Clear Formatting" />
 
-        <div className="w-px h-6 bg-[#FFF7F0]/10 mx-1"></div>
+        <div className="w-px h-6 bg-[#FFFFFF]/10 mx-1"></div>
 
         <ToolButton icon={List} command="insertUnorderedList" title="Bullet List" />
         <ToolButton icon={ListOrdered} command="insertOrderedList" title="Numbered List" />
 
-        <div className="w-px h-6 bg-[#FFF7F0]/10 mx-1"></div>
+        <div className="w-px h-6 bg-[#FFFFFF]/10 mx-1"></div>
 
         <ToolButton icon={AlignLeft} command="justifyLeft" title="Align Left" />
         <ToolButton icon={AlignCenter} command="justifyCenter" title="Align Center" />
         <ToolButton icon={AlignRight} command="justifyRight" title="Align Right" />
 
-        <div className="w-px h-6 bg-[#FFF7F0]/10 mx-1"></div>
+        <div className="w-px h-6 bg-[#FFFFFF]/10 mx-1"></div>
 
         <label 
-          className="w-8 h-8 rounded-md flex items-center justify-center text-[#FFF7F0]/70 hover:bg-[#20B2B8]/15 hover:text-[#20B2B8] transition-colors cursor-pointer relative" 
+          className="w-8 h-8 rounded-md flex items-center justify-center text-[#FFFFFF]/70 hover:bg-[#347A85]/15 hover:text-[#347A85] transition-colors cursor-pointer relative" 
           title="Text Color"
           onMouseDown={(e) => e.preventDefault()}
         >
@@ -163,7 +162,7 @@ function CustomRichTextEditor({ value, onChange }) {
         </label>
 
         <label 
-          className="w-8 h-8 rounded-md flex items-center justify-center text-[#FFF7F0]/70 hover:bg-[#20B2B8]/15 hover:text-[#20B2B8] transition-colors cursor-pointer relative" 
+          className="w-8 h-8 rounded-md flex items-center justify-center text-[#FFFFFF]/70 hover:bg-[#347A85]/15 hover:text-[#347A85] transition-colors cursor-pointer relative" 
           title="Highlight Color"
           onMouseDown={(e) => e.preventDefault()}
         >
@@ -185,7 +184,7 @@ function CustomRichTextEditor({ value, onChange }) {
         onMouseUp={saveSelection}
         onKeyUp={saveSelection}
         suppressContentEditableWarning={true}
-        className="p-4 text-sm text-[#FFF7F0] outline-none min-h-50 
+        className="p-4 text-sm text-[#FFFFFF] outline-none min-h-50 
                    [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-2 
                    [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:my-2 
                    [&_li]:ml-2 [&_li]:my-1
@@ -194,7 +193,7 @@ function CustomRichTextEditor({ value, onChange }) {
                    [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:my-3 [&_h1]:text-white
                    [&_h2]:text-xl [&_h2]:font-bold [&_h2]:my-3 [&_h2]:text-white
                    [&_h3]:text-lg [&_h3]:font-bold [&_h3]:my-2 [&_h3]:text-white
-                   [&_blockquote]:border-l-4 [&_blockquote]:border-[#20B2B8] [&_blockquote]:pl-4 [&_blockquote]:text-[#FFF7F0]/60 [&_blockquote]:italic"
+                   [&_blockquote]:border-l-4 [&_blockquote]:border-[#347A85] [&_blockquote]:pl-4 [&_blockquote]:text-[#FFFFFF]/60 [&_blockquote]:italic"
       ></div>
     </div>
   );
@@ -202,14 +201,14 @@ function CustomRichTextEditor({ value, onChange }) {
 
 function Section({ icon: Icon, title, children, optional }) {
   return (
-    <div className="bg-[#FFF7F0]/2 rounded-2xl border border-[#FFF7F0]/6 p-5 sm:p-6">
+    <div className="bg-[#FFFFFF]/2 rounded-2xl border border-[#FFFFFF]/6 p-5 sm:p-6">
       <div className="flex items-center gap-2.5 mb-5">
-        <div className="w-8 h-8 rounded-lg bg-[#20B2B8]/10 flex items-center justify-center shrink-0">
-          <Icon size={15} className="text-[#20B2B8]" />
+        <div className="w-8 h-8 rounded-lg bg-[#347A85]/10 flex items-center justify-center shrink-0">
+          <Icon size={15} className="text-[#347A85]" />
         </div>
         <div>
-          <h3 className="text-sm font-bold text-[#FFF7F0]">{title}</h3>
-          {optional && <span className="text-[10px] text-[#FFF7F0]/20">Optional</span>}
+          <h3 className="text-sm font-bold text-[#FFFFFF]">{title}</h3>
+          {optional && <span className="text-[10px] text-[#FFFFFF]/30">Optional</span>}
         </div>
       </div>
       <div className="space-y-4">{children}</div>
@@ -220,11 +219,11 @@ function Section({ icon: Icon, title, children, optional }) {
 function Field({ label, required, children, hint }) {
   return (
     <div>
-      <label className="block text-[11px] font-semibold text-[#FFF7F0]/40 uppercase tracking-wider mb-1.5">
-        {label} {required && <span className="text-[#D81B60] normal-case"> *</span>}
+      <label className="block text-[11px] font-semibold text-[#FFFFFF]/50 uppercase tracking-wider mb-1.5">
+        {label} {required && <span className="text-red-400 normal-case"> *</span>}
       </label>
       {children}
-      {hint && <p className="text-[#FFF7F0]/15 text-[10px] mt-1">{hint}</p>}
+      {hint && <p className="text-[#FFFFFF]/30 text-[10px] mt-1">{hint}</p>}
     </div>
   );
 }
@@ -251,7 +250,6 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
 
   // ============================================
   // ✅ SCROLL FIX: Lock body scroll while modal is open
-  // (Background page scroll nahi hogi, sirf modal scroll hogi)
   // ============================================
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
@@ -319,7 +317,7 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
   };
 
   // ==========================================
-  // ✅ UPDATED SUBMIT HANDLER WITH VALIDATIONS
+  // ✅ SUBMIT HANDLER WITH VALIDATIONS
   // ==========================================
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -355,8 +353,6 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
       fd.append("status", form.status);
       fd.append("tags", JSON.stringify(form.tags));
       fd.append("points", JSON.stringify(form.points));
-
-      // Image is now strictly required and will always be appended
       fd.append("featuredImage", featuredImage);
 
       const res = await createBlog(fd);
@@ -375,19 +371,19 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
     }
   };
 
-  const inputClass = "w-full bg-[#1F2D3D] border border-[#FFF7F0]/[0.08] rounded-xl px-4 py-2.5 text-sm text-[#FFF7F0] placeholder:text-[#FFF7F0]/20 outline-none focus:border-[#20B2B8]/40 focus:ring-2 focus:ring-[#20B2B8]/10 transition-all";
+  const inputClass = "w-full bg-[#0A1628]/60 border border-[#FFFFFF]/[0.08] rounded-xl px-4 py-2.5 text-sm text-[#FFFFFF] placeholder:text-[#FFFFFF]/25 outline-none focus:border-[#347A85]/50 focus:ring-2 focus:ring-[#347A85]/10 transition-all";
   const selectClass = `${inputClass} appearance-none`;
-  const optionStyle = { backgroundColor: "#1F2D3D" };
+  const optionStyle = { backgroundColor: "#143336" };
 
   const contentTextLength = form.content ? form.content.replace(/<[^>]*>/g, ' ').trim().length : 0;
 
   return (
     <>
-      {/* ✅ SCROLL FIX: Custom scrollbar styles (teal theme) */}
+      {/* ✅ Custom scrollbar styles (new teal theme) */}
       <style>{`
         .blog-form-scroll {
           scrollbar-width: thin;
-          scrollbar-color: rgba(32, 178, 184, 0.35) transparent;
+          scrollbar-color: rgba(52, 122, 133, 0.5) transparent;
         }
         .blog-form-scroll::-webkit-scrollbar {
           width: 6px;
@@ -396,11 +392,11 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
           background: transparent;
         }
         .blog-form-scroll::-webkit-scrollbar-thumb {
-          background: rgba(32, 178, 184, 0.35);
+          background: rgba(52, 122, 133, 0.5);
           border-radius: 999px;
         }
         .blog-form-scroll::-webkit-scrollbar-thumb:hover {
-          background: rgba(32, 178, 184, 0.6);
+          background: rgba(52, 122, 133, 0.8);
         }
       `}</style>
 
@@ -408,44 +404,47 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-9999 bg-[#172636]/95 overflow-hidden"
+        className="fixed inset-0 z-9999 bg-[#0A1628]/95 backdrop-blur-sm overflow-hidden"
         onClick={onClose}
       >
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
-          className="relative z-10 flex flex-col h-full overflow-hidden bg-[#1F2D3D]"
+          className="relative z-10 flex flex-col h-full overflow-hidden bg-[#143336]"
           onClick={(e) => e.stopPropagation()}
         >
+          {/* Decorative top glow */}
+          <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-xl h-32 bg-[#347A85]/15 rounded-full blur-3xl pointer-events-none" />
+
           {/* Header */}
-          <div className="shrink-0 border-b border-[#FFF7F0]/6 bg-[#1F2D3D]">
+          <div className="shrink-0 relative border-b border-[#FFFFFF]/8 bg-[#143336]">
             <div className="flex items-center justify-between px-6 lg:px-8 h-16">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#20B2B8]/10 flex items-center justify-center">
-                  <FileText size={18} className="text-[#20B2B8]" />
+                <div className="w-9 h-9 rounded-xl bg-[#347A85]/15 flex items-center justify-center border border-[#347A85]/25">
+                  <FileText size={18} className="text-[#347A85]" />
                 </div>
                 <div>
-                  <h2 className="text-base font-bold text-[#FFF7F0]">Add New Blog Post</h2>
-                  <p className="text-[#FFF7F0]/30 text-[11px] -mt-0.5">Fill in the blog details</p>
+                  <h2 className="text-base font-bold text-[#FFFFFF]">Add New Blog Post</h2>
+                  <p className="text-[#FFFFFF]/40 text-[11px] -mt-0.5">Fill in the blog details</p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={onClose}
-                className="w-9 h-9 rounded-xl border border-[#FFF7F0]/10 flex items-center justify-center hover:bg-[#FFF7F0]/5 transition-colors"
+                className="w-9 h-9 rounded-xl border border-[#FFFFFF]/10 flex items-center justify-center hover:bg-[#FFFFFF]/5 text-[#FFFFFF]/50 hover:text-[#FFFFFF] transition-colors"
               >
-                <X size={16} className="text-[#FFF7F0]/50" />
+                <X size={16} />
               </button>
             </div>
 
             {error && (
               <div className="px-6 lg:px-8 pb-3">
-                <div className="px-4 py-2.5 bg-[#D81B60]/10 border border-[#D81B60]/15 rounded-xl flex items-center gap-3">
-                  <AlertCircle size={15} className="text-[#D81B60] shrink-0" />
-                  <p className="text-[#D81B60] text-xs flex-1 wrap-break-word">{error}</p>
-                  <button onClick={() => setError("")} className="p-0.5 hover:bg-[#D81B60]/20 rounded-lg">
-                    <X size={13} className="text-[#D81B60]" />
+                <div className="px-4 py-2.5 bg-red-500/10 border border-red-500/25 rounded-xl flex items-center gap-3">
+                  <AlertCircle size={15} className="text-red-400 shrink-0" />
+                  <p className="text-red-400 text-xs flex-1 wrap-break-word">{error}</p>
+                  <button onClick={() => setError("")} className="p-0.5 hover:bg-red-500/20 rounded-lg">
+                    <X size={13} className="text-red-400" />
                   </button>
                 </div>
               </div>
@@ -453,9 +452,8 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
           </div>
 
           {/* ===== SCROLLABLE CONTENT ===== */}
-          {/* ✅ SCROLL FIX: min-h-0 + data-lenis-prevent added */}
           <div
-            className="blog-form-scroll flex-1 min-h-0 overflow-y-auto overscroll-contain"
+            className="blog-form-scroll flex-1 min-h-0 overflow-y-auto overscroll-contain relative"
             data-lenis-prevent
           >
             <form
@@ -480,8 +478,8 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
                     onChange={(val) => handleChange("content", val)}
                   />
                   <div className="flex justify-between mt-1">
-                    <span className="text-[#FFF7F0]/15 text-[10px]"></span>
-                    <span className={`text-[10px] ${contentTextLength < 100 ? 'text-[#D81B60]/70' : 'text-emerald-400/70'}`}>
+                    <span className="text-[#FFFFFF]/30 text-[10px]"></span>
+                    <span className={`text-[10px] ${contentTextLength < 100 ? 'text-red-400/80' : 'text-emerald-400/80'}`}>
                       {contentTextLength} / 100 characters
                     </span>
                   </div>
@@ -539,7 +537,7 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
                     <button
                       type="button"
                       onClick={handleAddTag}
-                      className="px-4 py-2.5 bg-[#20B2B8]/15 text-[#20B2B8] rounded-xl text-sm font-medium hover:bg-[#20B2B8]/25 transition-colors"
+                      className="px-4 py-2.5 bg-[#347A85]/15 text-[#347A85] border border-[#347A85]/25 rounded-xl text-sm font-medium hover:bg-[#347A85]/25 transition-colors"
                     >
                       Add
                     </button>
@@ -548,12 +546,12 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
                     {form.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="flex items-center gap-1.5 px-3 py-1 bg-[#FFF7F0]/5 text-[#FFF7F0]/70 rounded-lg text-xs border border-[#FFF7F0]/10"
+                        className="flex items-center gap-1.5 px-3 py-1 bg-[#347A85]/10 text-[#FFFFFF]/80 rounded-lg text-xs border border-[#347A85]/20"
                       >
                         <Tag size={10} />
                         {tag}
                         <button type="button" onClick={() => handleRemoveTag(tag)}>
-                          <X size={12} className="hover:text-[#D81B60]" />
+                          <X size={12} className="hover:text-red-400" />
                         </button>
                       </span>
                     ))}
@@ -563,7 +561,7 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
 
               {/* KEY POINTS SECTION */}
               <Section icon={ListChecks} title="Key Points" optional>
-                <div className="space-y-3 p-4 bg-[#FFF7F0]/3 rounded-xl border border-[#FFF7F0]/5">
+                <div className="space-y-3 p-4 bg-[#0A1628]/40 rounded-xl border border-[#FFFFFF]/5">
                   <Field label="Point Title" required>
                     <input
                       type="text"
@@ -585,7 +583,7 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
                   <button
                     type="button"
                     onClick={handleAddPoint}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#20B2B8]/10 text-[#20B2B8] border border-[#20B2B8]/20 rounded-xl text-sm font-medium hover:bg-[#20B2B8]/20 transition-colors"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#347A85]/10 text-[#347A85] border border-[#347A85]/25 rounded-xl text-sm font-medium hover:bg-[#347A85]/20 transition-colors"
                   >
                     <Plus size={14} /> Add Point
                   </button>
@@ -593,29 +591,29 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
 
                 {form.points.length > 0 && (
                   <div className="space-y-2 mt-4">
-                    <p className="text-xs font-semibold text-[#FFF7F0]/40 uppercase tracking-wider mb-2">
+                    <p className="text-xs font-semibold text-[#FFFFFF]/50 uppercase tracking-wider mb-2">
                       Added Points ({form.points.length})
                     </p>
                     {form.points.map((point, index) => (
                       <div
                         key={index}
-                        className="flex items-start gap-3 p-3 bg-[#1F2D3D] rounded-lg border border-[#FFF7F0]/8"
+                        className="flex items-start gap-3 p-3 bg-[#0A1628]/60 rounded-lg border border-[#FFFFFF]/8"
                       >
-                        <div className="w-6 h-6 rounded-full bg-[#20B2B8]/20 flex items-center justify-center shrink-0 mt-0.5">
-                          <span className="text-[#20B2B8] text-xs font-bold">{index + 1}</span>
+                        <div className="w-6 h-6 rounded-full bg-[#347A85]/20 flex items-center justify-center shrink-0 mt-0.5">
+                          <span className="text-[#347A85] text-xs font-bold">{index + 1}</span>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-[#FFF7F0]">{point.title}</p>
+                          <p className="text-sm font-medium text-[#FFFFFF]">{point.title}</p>
                           {point.description && (
-                            <p className="text-xs text-[#FFF7F0]/40 mt-0.5">{point.description}</p>
+                            <p className="text-xs text-[#FFFFFF]/50 mt-0.5">{point.description}</p>
                           )}
                         </div>
                         <button
                           type="button"
                           onClick={() => handleRemovePoint(index)}
-                          className="p-1 rounded-md hover:bg-[#D81B60]/10 transition-colors group"
+                          className="p-1 rounded-md hover:bg-red-500/10 transition-colors group"
                         >
-                          <X size={14} className="text-[#FFF7F0]/30 group-hover:text-[#D81B60]" />
+                          <X size={14} className="text-[#FFFFFF]/40 group-hover:text-red-400" />
                         </button>
                       </div>
                     ))}
@@ -623,24 +621,25 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
                 )}
               </Section>
 
-              {/* ✅ REMOVED optional PROP FROM HERE */}
+              {/* FEATURED IMAGE SECTION */}
               <Section icon={ImagePlus} title="Featured Image">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {imagePreview ? (
-                    <div className="relative aspect-video rounded-xl overflow-hidden border border-[#FFF7F0]/8 group">
+                    <div className="relative aspect-video rounded-xl overflow-hidden border border-[#FFFFFF]/8 group">
                       <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-linear-to-t from-[#0A1628]/30 to-transparent pointer-events-none" />
                       <button
                         type="button"
                         onClick={() => { setFeaturedImage(null); setImagePreview(null); }}
-                        className="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-[#D81B60]/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-red-500/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                       >
                         <X size={11} className="text-white" />
                       </button>
                     </div>
                   ) : (
-                    <label className="aspect-video rounded-xl border-2 border-dashed border-[#FFF7F0]/8 hover:border-[#20B2B8]/30 flex flex-col items-center justify-center cursor-pointer transition-all hover:bg-[#FFF7F0]/2 sm:col-span-1">
-                      <ImagePlus size={22} className="text-[#FFF7F0]/15 mb-1" />
-                      <span className="text-[10px] text-[#FFF7F0]/20 font-medium">Upload Image</span>
+                    <label className="aspect-video rounded-xl border-2 border-dashed border-[#FFFFFF]/10 hover:border-[#347A85]/50 flex flex-col items-center justify-center cursor-pointer transition-all hover:bg-[#347A85]/5 sm:col-span-1">
+                      <ImagePlus size={22} className="text-[#FFFFFF]/25 mb-1" />
+                      <span className="text-[10px] text-[#FFFFFF]/35 font-medium">Upload Image</span>
                       <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
                     </label>
                   )}
@@ -653,16 +652,16 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
           </div>
 
           {/* Footer */}
-          <div className="shrink-0 border-t border-[#FFF7F0]/6 bg-[#1F2D3D] shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
+          <div className="shrink-0 border-t border-[#FFFFFF]/8 bg-[#143336] shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
             <div className="flex items-center justify-between px-6 lg:px-8 h-16 max-w-4xl mx-auto">
-              <p className="text-[#FFF7F0]/20 text-xs hidden sm:block">
-                <span className="text-[#D81B60]/60">*</span> Required fields
+              <p className="text-[#FFFFFF]/35 text-xs hidden sm:block">
+                <span className="text-red-400/70">*</span> Required fields
               </p>
               <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-5 py-2.5 border border-[#FFF7F0]/10 text-[#FFF7F0]/50 text-sm font-semibold rounded-xl hover:bg-[#FFF7F0]/5 transition-colors"
+                  className="px-5 py-2.5 border border-[#FFFFFF]/10 text-[#FFFFFF]/60 text-sm font-semibold rounded-xl hover:bg-[#FFFFFF]/5 hover:text-[#FFFFFF] transition-colors"
                 >
                   Cancel
                 </button>
@@ -670,7 +669,7 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
                   type="submit"
                   form="blogCreateForm"
                   disabled={loading}
-                  className="flex items-center gap-2 px-7 py-2.5 bg-[#20B2B8] hover:bg-[#1a9ca1] disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-[#20B2B8]/20"
+                  className="flex items-center gap-2 px-7 py-2.5 bg-[#347A85] hover:bg-[#2a616a] disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-[#347A85]/30"
                 >
                   {loading ? (
                     <><Loader2 size={16} className="animate-spin" /> Creating...</>

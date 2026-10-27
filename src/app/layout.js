@@ -9,8 +9,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata = {
-  title: "Matt Vatcher Real Estate - Your Trusted Real Estate Partner",
-  description: "Matt Vatcher Real Estate - Find your dream home",
+  title: "Gerald Mendoza  Real Estate - Your Trusted Real Estate Partner",
+  description: "Gerald Mendoza  Real Estate - Find your dream home",
 };
 
 export default function RootLayout({ children }) {

@@ -19,17 +19,36 @@ import {
 } from "lucide-react";
 
 // ==========================================
-// ✅ NEW COLOR PALETTE (matches About/Footer/Menu)
-// Purple | Cyan | Pink | Magenta
+// ✅ UPDATED COLOR PALETTE — matches Footer
+// "Deep Ocean Architectural"
+// Cream | Teal | Deep Teal | Ink
 // ==========================================
-const PURPLE = "#3C1E74"; // main accent
-const CYAN = "#5CE1E6"; // bright accent
-const PINK = "#FFA7E4"; // highlight
-const MAGENTA = "#B462B6"; // secondary accent
-const DARK_PURPLE = "#2A1454"; // dark base (headings, hero)
-const LIGHT_LAV = "#F3EBFB"; // light lavender tint (replaces MINT)
-const BORDER_LAV = "#E3D4F5"; // light border
-const WHITE = "#FFFFFF";
+const CREAM = "#F7F7F7"; // light base (replaces WHITE / LIGHT_LAV)
+const TEAL = "#347A85"; // main accent (replaces PURPLE)
+const DEEP_TEAL = "#28606B"; // secondary accent (replaces MAGENTA)
+const INK = "#143336"; // dark base (replaces DARK_PURPLE)
+
+// Derived tints
+const INK_05 = `${INK}0D`;
+const INK_10 = `${INK}1A`;
+const INK_15 = `${INK}26`;
+const INK_20 = `${INK}33`;
+const INK_30 = `${INK}4D`;
+const INK_40 = `${INK}66`;
+const INK_60 = `${INK}99`;
+const INK_80 = `${INK}CC`;
+const TEAL_05 = `${TEAL}0D`;
+const TEAL_10 = `${TEAL}1A`;
+const TEAL_15 = `${TEAL}26`;
+const TEAL_20 = `${TEAL}33`;
+const TEAL_25 = `${TEAL}40`;
+const TEAL_30 = `${TEAL}4D`;
+const TEAL_40 = `${TEAL}66`;
+const TEAL_60 = `${TEAL}99`;
+const CREAM_80 = `${CREAM}CC`;
+const CREAM_60 = `${CREAM}99`;
+const CREAM_40 = `${CREAM}66`;
+const CREAM_20 = `${CREAM}33`;
 
 // ==========================================
 // ✅ SAFE IMAGE HELPER
@@ -68,22 +87,23 @@ const BlogCard = ({ blog }) => {
   return (
     <Link href={`/blogs/${blog._id}`} className="group block">
       <article
-        className="bg-white rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+        className="rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
         style={{
-          border: `1px solid ${BORDER_LAV}`,
-          boxShadow: `0 2px 12px ${PURPLE}10`,
+          backgroundColor: CREAM,
+          border: `1px solid ${TEAL_20}`,
+          boxShadow: `0 2px 12px ${INK}10`,
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = `${MAGENTA}`;
-          e.currentTarget.style.boxShadow = `0 8px 30px ${PURPLE}25`;
+          e.currentTarget.style.borderColor = DEEP_TEAL;
+          e.currentTarget.style.boxShadow = `0 8px 30px ${TEAL}25`;
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = `${BORDER_LAV}`;
-          e.currentTarget.style.boxShadow = `0 2px 12px ${PURPLE}10`;
+          e.currentTarget.style.borderColor = TEAL_20;
+          e.currentTarget.style.boxShadow = `0 2px 12px ${INK}10`;
         }}
       >
         {/* Image */}
-        <div className="relative h-52 w-full overflow-hidden bg-slate-100">
+        <div className="relative h-52 w-full overflow-hidden" style={{ backgroundColor: TEAL_10 }}>
           {imageUrl ? (
             <Image
               src={imageUrl}
@@ -96,18 +116,19 @@ const BlogCard = ({ blog }) => {
             <div
               className="flex items-center justify-center h-full"
               style={{
-                background: `linear-gradient(to bottom right, ${LIGHT_LAV}, ${MAGENTA}20)`,
+                background: `linear-gradient(to bottom right, ${TEAL_10}, ${DEEP_TEAL}20)`,
               }}
             >
-              <BookOpen className="w-12 h-12" style={{ color: `${MAGENTA}80` }} />
+              <BookOpen className="w-12 h-12" style={{ color: `${DEEP_TEAL}80` }} />
             </div>
           )}
 
           {blog.category && (
             <span
-              className="absolute top-3 left-3 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide z-10"
+              className="absolute top-3 left-3 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide z-10"
               style={{
-                background: `linear-gradient(135deg, ${PURPLE}, ${MAGENTA})`,
+                color: CREAM,
+                background: `linear-gradient(135deg, ${TEAL}, ${DEEP_TEAL})`,
               }}
             >
               {blog.category}
@@ -118,7 +139,7 @@ const BlogCard = ({ blog }) => {
         {/* Content */}
         <div className="p-5">
           {/* Meta */}
-          <div className="flex items-center gap-4 text-xs text-slate-500 mb-3">
+          <div className="flex items-center gap-4 text-xs mb-3" style={{ color: INK_60 }}>
             <span className="flex items-center gap-1">
               <Calendar className="w-3.5 h-3.5" />
               {formatDate(blog.createdAt)}
@@ -133,16 +154,16 @@ const BlogCard = ({ blog }) => {
 
           {/* Title */}
           <h3
-            className="text-lg font-semibold text-slate-900 mb-2 line-clamp-2 transition-colors duration-200"
-            style={{ color: DARK_PURPLE }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = MAGENTA)}
-            onMouseLeave={(e) => (e.currentTarget.style.color = DARK_PURPLE)}
+            className="text-lg font-semibold mb-2 line-clamp-2 transition-colors duration-200"
+            style={{ color: INK }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = DEEP_TEAL)}
+            onMouseLeave={(e) => (e.currentTarget.style.color = INK)}
           >
             {blog.title}
           </h3>
 
           {/* Preview */}
-          <p className="text-sm text-slate-600 leading-relaxed mb-4 line-clamp-3">
+          <p className="text-sm leading-relaxed mb-4 line-clamp-3" style={{ color: INK_60 }}>
             {preview}
           </p>
 
@@ -154,8 +175,8 @@ const BlogCard = ({ blog }) => {
                   key={i}
                   className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-md"
                   style={{
-                    color: PURPLE,
-                    backgroundColor: LIGHT_LAV,
+                    color: TEAL,
+                    backgroundColor: TEAL_10,
                   }}
                 >
                   <Tag className="w-3 h-3" />
@@ -163,7 +184,7 @@ const BlogCard = ({ blog }) => {
                 </span>
               ))}
               {blog.tags.length > 3 && (
-                <span className="text-xs text-slate-400 px-1 py-0.5">
+                <span className="text-xs px-1 py-0.5" style={{ color: INK_60 }}>
                   +{blog.tags.length - 3} more
                 </span>
               )}
@@ -173,7 +194,7 @@ const BlogCard = ({ blog }) => {
           {/* Read More */}
           <div
             className="flex items-center gap-1 text-sm font-medium group-hover:gap-2 transition-all duration-200"
-            style={{ color: MAGENTA }}
+            style={{ color: DEEP_TEAL }}
           >
             Read More
             <ArrowRight className="w-4 h-4" />
@@ -194,26 +215,26 @@ const CategoryButton = ({ category, count, isActive, onClick }) => (
     style={
       isActive
         ? {
-            background: `linear-gradient(135deg, ${PURPLE}, ${MAGENTA})`,
-            color: WHITE,
-            boxShadow: `0 2px 8px ${PURPLE}40`,
+            background: `linear-gradient(135deg, ${TEAL}, ${DEEP_TEAL})`,
+            color: CREAM,
+            boxShadow: `0 2px 8px ${TEAL}40`,
           }
         : {
-            backgroundColor: WHITE,
-            color: "#64748b",
-            border: `1px solid ${BORDER_LAV}`,
+            backgroundColor: CREAM,
+            color: INK_60,
+            border: `1px solid ${TEAL_20}`,
           }
     }
     onMouseEnter={(e) => {
       if (!isActive) {
-        e.currentTarget.style.borderColor = PURPLE;
-        e.currentTarget.style.color = PURPLE;
+        e.currentTarget.style.borderColor = TEAL;
+        e.currentTarget.style.color = TEAL;
       }
     }}
     onMouseLeave={(e) => {
       if (!isActive) {
-        e.currentTarget.style.borderColor = BORDER_LAV;
-        e.currentTarget.style.color = "#64748b";
+        e.currentTarget.style.borderColor = TEAL_20;
+        e.currentTarget.style.color = INK_60;
       }
     }}
   >
@@ -221,7 +242,7 @@ const CategoryButton = ({ category, count, isActive, onClick }) => (
     {count > 0 && (
       <span
         className="ml-1.5 text-xs"
-        style={{ color: isActive ? "rgba(255,255,255,0.8)" : "#94a3b8" }}
+        style={{ color: isActive ? CREAM_80 : INK_60 }}
       >
         ({count})
       </span>
@@ -415,24 +436,33 @@ export default function BlogsPage() {
   // ✅ RENDER
   // ==========================================
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen" style={{ backgroundColor: CREAM }}>
       {/* ============================== */}
       {/* HERO SECTION */}
       {/* ============================== */}
       <section
         className="relative overflow-hidden"
         style={{
-          background: `linear-gradient(135deg, ${DARK_PURPLE} 0%, ${PURPLE} 55%, ${MAGENTA} 130%)`,
+          background: `linear-gradient(135deg, ${INK} 0%, ${TEAL} 55%, ${DEEP_TEAL} 130%)`,
         }}
       >
         {/* Decorative blobs */}
         <div
           className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl -mr-20 -mt-20"
-          style={{ background: `radial-gradient(circle, ${CYAN}40, transparent)` }}
+          style={{ background: `radial-gradient(circle, ${TEAL}40, transparent)` }}
         />
         <div
           className="absolute bottom-0 left-0 w-96 h-96 rounded-full blur-3xl -ml-20 -mb-20"
-          style={{ background: `radial-gradient(circle, ${PINK}30, transparent)` }}
+          style={{ background: `radial-gradient(circle, ${CREAM}30, transparent)` }}
+        />
+
+        {/* Subtle dot pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.05] pointer-events-none"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, ${CREAM} 1px, transparent 0)`,
+            backgroundSize: "48px 48px",
+          }}
         />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
@@ -440,21 +470,24 @@ export default function BlogsPage() {
             <span
               className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-6"
               style={{
-                backgroundColor: `${CYAN}20`,
+                backgroundColor: `${CREAM}20`,
                 backdropFilter: "blur(8px)",
-                color: CYAN,
-                border: `1px solid ${CYAN}40`,
+                color: CREAM,
+                border: `1px solid ${CREAM}40`,
               }}
             >
               <BookOpen className="w-4 h-4" />
               Our Blog
             </span>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-white tracking-tight leading-tight mb-6">
+            <h1
+              className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight mb-6"
+              style={{ color: CREAM }}
+            >
               Insights &{" "}
               <span
                 style={{
-                  background: `linear-gradient(to right, ${CYAN}, ${PINK})`,
+                  background: `linear-gradient(to right, ${CREAM}, ${TEAL_40})`,
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                 }}
@@ -463,37 +496,41 @@ export default function BlogsPage() {
               </span>
             </h1>
 
-            <p className="text-lg leading-relaxed mb-8" style={{ color: `${CYAN}CC` }}>
+            <p className="text-lg leading-relaxed mb-8" style={{ color: CREAM_80 }}>
               Stay updated with the latest trends, tips, and stories from our experts.
             </p>
 
             {/* Search */}
             <div className="relative max-w-xl mx-auto">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 z-10 pointer-events-none" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 z-10 pointer-events-none" style={{ color: CREAM_60 }} />
               <input
                 type="text"
                 value={search}
                 onChange={handleSearchChange}
                 placeholder="Search blogs by title, content, or tags..."
-                className="relative w-full pl-12 pr-10 py-4 border rounded-xl text-white placeholder-slate-400 focus:outline-none transition-all"
+                className="relative w-full pl-12 pr-10 py-4 border rounded-xl focus:outline-none transition-all"
                 style={{
                   backgroundColor: "rgba(255,255,255,0.08)",
                   backdropFilter: "blur(8px)",
-                  borderColor: `${CYAN}40`,
+                  borderColor: `${CREAM}40`,
+                  color: CREAM,
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = `${CYAN}`;
-                  e.currentTarget.style.boxShadow = `0 0 0 2px ${CYAN}40`;
+                  e.currentTarget.style.borderColor = TEAL;
+                  e.currentTarget.style.boxShadow = `0 0 0 2px ${TEAL}40`;
                 }}
                 onBlur={(e) => {
-                  e.currentTarget.style.borderColor = `${CYAN}40`;
+                  e.currentTarget.style.borderColor = `${CREAM}40`;
                   e.currentTarget.style.boxShadow = "none";
                 }}
               />
               {search && (
                 <button
                   onClick={clearSearch}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-300 hover:text-white transition-colors z-10"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 transition-colors z-10"
+                  style={{ color: CREAM_60 }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = CREAM)}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = CREAM_60)}
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -509,15 +546,15 @@ export default function BlogsPage() {
       <section
         className="sticky top-0 z-30 backdrop-blur-sm"
         style={{
-          backgroundColor: `${WHITE}F2`, // Slightly transparent white
-          borderBottom: `1px solid ${BORDER_LAV}`,
+          backgroundColor: `${CREAM}F2`,
+          borderBottom: `1px solid ${TEAL_20}`,
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             {/* Dynamic Categories */}
             <div className="flex items-center gap-2 overflow-x-auto pb-1 w-full sm:w-auto scrollbar-hide">
-              <Filter className="w-4 h-4 text-slate-500 shrink-0" />
+              <Filter className="w-4 h-4 shrink-0" style={{ color: INK_60 }} />
 
               <CategoryButton
                 category="All"
@@ -537,13 +574,13 @@ export default function BlogsPage() {
               ))}
 
               {categoryLoading && (
-                <span className="text-xs text-slate-400 px-3 py-2">
+                <span className="text-xs px-3 py-2" style={{ color: INK_60 }}>
                   Loading categories...
                 </span>
               )}
 
               {!categoryLoading && availableCategories.length === 0 && (
-                <span className="text-xs text-slate-400 px-3 py-2">
+                <span className="text-xs px-3 py-2" style={{ color: INK_60 }}>
                   No categories available
                 </span>
               )}
@@ -551,20 +588,22 @@ export default function BlogsPage() {
 
             {/* Sort */}
             <div className="flex items-center gap-2 shrink-0">
-              <span className="text-xs text-slate-500">Sort:</span>
+              <span className="text-xs" style={{ color: INK_60 }}>Sort:</span>
               <select
                 value={`${sortBy}-${order}`}
                 onChange={handleSortChange}
-                className="text-sm border rounded-lg px-3 py-1.5 bg-white text-slate-700 focus:outline-none transition-all"
+                className="text-sm border rounded-lg px-3 py-1.5 focus:outline-none transition-all"
                 style={{
-                  borderColor: `${BORDER_LAV}`,
+                  backgroundColor: CREAM,
+                  color: INK,
+                  borderColor: TEAL_20,
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = PURPLE;
-                  e.currentTarget.style.boxShadow = `0 0 0 2px ${PURPLE}30`;
+                  e.currentTarget.style.borderColor = TEAL;
+                  e.currentTarget.style.boxShadow = `0 0 0 2px ${TEAL}30`;
                 }}
                 onBlur={(e) => {
-                  e.currentTarget.style.borderColor = BORDER_LAV;
+                  e.currentTarget.style.borderColor = TEAL_20;
                   e.currentTarget.style.boxShadow = "none";
                 }}
               >
@@ -584,25 +623,25 @@ export default function BlogsPage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         {/* Results Count */}
         <div className="flex items-center justify-between mb-8">
-          <p className="text-sm text-slate-500">
+          <p className="text-sm" style={{ color: INK_60 }}>
             {loading ? (
               "Loading..."
             ) : (
               <>
                 Showing{" "}
-                <span className="font-semibold text-slate-700">{blogs.length}</span> of{" "}
-                <span className="font-semibold text-slate-700">{totalBlogs}</span> blogs
+                <span className="font-semibold" style={{ color: INK }}>{blogs.length}</span> of{" "}
+                <span className="font-semibold" style={{ color: INK }}>{totalBlogs}</span> blogs
                 {search && (
                   <>
                     {" "}for &ldquo;
-                    <span className="font-semibold" style={{ color: MAGENTA }}>{search}</span>
+                    <span className="font-semibold" style={{ color: DEEP_TEAL }}>{search}</span>
                     &rdquo;
                   </>
                 )}
                 {activeCategory && (
                   <>
                     {" "}in{" "}
-                    <span className="font-semibold" style={{ color: MAGENTA }}>{activeCategory}</span>
+                    <span className="font-semibold" style={{ color: DEEP_TEAL }}>{activeCategory}</span>
                   </>
                 )}
               </>
@@ -612,10 +651,10 @@ export default function BlogsPage() {
           {hasActiveFilters && !loading && (
             <button
               onClick={clearAllFilters}
-              className="text-xs text-slate-500 underline underline-offset-2 transition-colors"
-              style={{ color: "#64748b" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = PURPLE)}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#64748b")}
+              className="text-xs underline underline-offset-2 transition-colors"
+              style={{ color: INK_60 }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = TEAL)}
+              onMouseLeave={(e) => (e.currentTarget.style.color = INK_60)}
             >
               Clear all filters
             </button>
@@ -627,9 +666,9 @@ export default function BlogsPage() {
           <div className="flex flex-col items-center justify-center py-20">
             <Loader2
               className="w-10 h-10 animate-spin mb-4"
-              style={{ color: PURPLE }}
+              style={{ color: TEAL }}
             />
-            <p className="text-slate-500 text-sm">Loading blogs...</p>
+            <p className="text-sm" style={{ color: INK_60 }}>Loading blogs...</p>
           </div>
         )}
 
@@ -639,22 +678,23 @@ export default function BlogsPage() {
             <div
               className="border rounded-xl p-8 text-center max-w-md"
               style={{
-                backgroundColor: `${DARK_PURPLE}08`,
-                borderColor: `${DARK_PURPLE}20`,
+                backgroundColor: INK_05,
+                borderColor: INK_20,
               }}
             >
-              <p className="font-medium mb-2" style={{ color: DARK_PURPLE }}>
+              <p className="font-medium mb-2" style={{ color: INK }}>
                 Failed to load blogs
               </p>
-              <p className="text-sm mb-4" style={{ color: `${DARK_PURPLE}CC` }}>{error}</p>
+              <p className="text-sm mb-4" style={{ color: INK_80 }}>{error}</p>
               <button
                 onClick={fetchBlogs}
-                className="px-4 py-2 text-white text-sm font-medium rounded-lg transition-colors"
+                className="px-4 py-2 text-sm font-medium rounded-lg transition-colors"
                 style={{
-                  backgroundColor: PURPLE,
+                  backgroundColor: TEAL,
+                  color: CREAM,
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = MAGENTA)}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = PURPLE)}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = DEEP_TEAL)}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = TEAL)}
               >
                 Try Again
               </button>
@@ -665,9 +705,9 @@ export default function BlogsPage() {
         {/* Empty */}
         {!loading && !error && blogs.length === 0 && (
           <div className="flex flex-col items-center justify-center py-20">
-            <BookOpen className="w-16 h-16 mb-4" style={{ color: `${PURPLE}40` }} />
-            <h3 className="text-xl font-semibold text-slate-700 mb-2">No blogs found</h3>
-            <p className="text-slate-500 text-sm mb-6 text-center max-w-md">
+            <BookOpen className="w-16 h-16 mb-4" style={{ color: `${TEAL}40` }} />
+            <h3 className="text-xl font-semibold mb-2" style={{ color: INK }}>No blogs found</h3>
+            <p className="text-sm mb-6 text-center max-w-md" style={{ color: INK_60 }}>
               {search || activeCategory
                 ? "Try adjusting your search or filters."
                 : "No blogs published yet."}
@@ -675,9 +715,10 @@ export default function BlogsPage() {
             {hasActiveFilters && (
               <button
                 onClick={clearAllFilters}
-                className="px-4 py-2 text-white text-sm font-medium rounded-lg transition-colors"
+                className="px-4 py-2 text-sm font-medium rounded-lg transition-colors"
                 style={{
-                  background: `linear-gradient(135deg, ${PURPLE}, ${MAGENTA})`,
+                  background: `linear-gradient(135deg, ${TEAL}, ${DEEP_TEAL})`,
+                  color: CREAM,
                 }}
               >
                 Clear Filters
@@ -705,13 +746,13 @@ export default function BlogsPage() {
               style={
                 hasPrevPage
                   ? {
-                      backgroundColor: WHITE,
-                      border: `1px solid ${BORDER_LAV}`,
-                      color: DARK_PURPLE,
+                      backgroundColor: CREAM,
+                      border: `1px solid ${TEAL_20}`,
+                      color: INK,
                     }
                   : {
-                      backgroundColor: "#f1f5f9",
-                      color: "#94a3b8",
+                      backgroundColor: TEAL_05,
+                      color: INK_60,
                       cursor: "not-allowed",
                     }
               }
@@ -728,14 +769,14 @@ export default function BlogsPage() {
                   style={
                     page === currentPage
                       ? {
-                          background: `linear-gradient(135deg, ${PURPLE}, ${MAGENTA})`,
-                          color: WHITE,
-                          boxShadow: `0 2px 8px ${PURPLE}40`,
+                          background: `linear-gradient(135deg, ${TEAL}, ${DEEP_TEAL})`,
+                          color: CREAM,
+                          boxShadow: `0 2px 8px ${TEAL}40`,
                         }
                       : {
-                          backgroundColor: WHITE,
-                          border: `1px solid ${BORDER_LAV}`,
-                          color: DARK_PURPLE,
+                          backgroundColor: CREAM,
+                          border: `1px solid ${TEAL_20}`,
+                          color: INK,
                         }
                   }
                 >
@@ -751,13 +792,13 @@ export default function BlogsPage() {
               style={
                 hasNextPage
                   ? {
-                      backgroundColor: WHITE,
-                      border: `1px solid ${BORDER_LAV}`,
-                      color: DARK_PURPLE,
+                      backgroundColor: CREAM,
+                      border: `1px solid ${TEAL_20}`,
+                      color: INK,
                     }
                   : {
-                      backgroundColor: "#f1f5f9",
-                      color: "#94a3b8",
+                      backgroundColor: TEAL_05,
+                      color: INK_60,
                       cursor: "not-allowed",
                     }
               }
