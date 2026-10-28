@@ -387,70 +387,8 @@ export default function HeroSection() {
               </Link>
             </div>
 
-            {/* Trust / Awards Row */}
-            <div
-              className="mt-12 flex items-center gap-8 border-t pt-8"
-              style={{ borderColor: INK_10 }}
-            >
-              <div className="flex items-center gap-3">
-                <Award size={24} strokeWidth={2} style={{ color: TEAL }} />
-                <div className="flex flex-col leading-tight">
-                  <span
-                    className="font-luxury text-base font-bold"
-                    style={{ color: INK }}
-                  >
-                    Award Winning
-                  </span>
-                  <span
-                    className="text-xs font-semibold uppercase tracking-wider"
-                    style={{ color: INK_60 }}
-                  >
-                    Realty 2025
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <TrendingUp size={24} strokeWidth={2} style={{ color: TEAL }} />
-                <div className="flex flex-col leading-tight">
-                  <span
-                    className="font-luxury text-base font-bold"
-                    style={{ color: INK }}
-                  >
-                    Top 1% Brokerage
-                  </span>
-                  <span
-                    className="text-xs font-semibold uppercase tracking-wider"
-                    style={{ color: INK_60 }}
-                  >
-                    Nationwide
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <Star
-                  size={24}
-                  strokeWidth={2}
-                  className="fill-current"
-                  style={{ color: TEAL }}
-                />
-                <div className="flex flex-col leading-tight">
-                  <span
-                    className="font-luxury text-base font-bold"
-                    style={{ color: INK }}
-                  >
-                    4.9 / 5.0
-                  </span>
-                  <span
-                    className="text-xs font-semibold uppercase tracking-wider"
-                    style={{ color: INK_60 }}
-                  >
-                    12k+ Reviews
-                  </span>
-                </div>
-              </div>
-            </div>
+           
+        
           </div>
 
           {/* ================ RIGHT : GALLERY + CARDS ================ */}

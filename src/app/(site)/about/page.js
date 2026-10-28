@@ -93,14 +93,8 @@ export default function About() {
 
   const socialLinks = [
     {
-      icon: InstagramIcon,
-      href: "https://www.instagram.com/",
-      label: "Instagram",
-      hoverColor: TEAL,
-    },
-    {
       icon: FacebookIcon,
-      href: "https://www.facebook.com/",
+      href: "https://www.facebook.com/mendozafirst/",
       label: "Facebook",
       hoverColor: DEEP_TEAL,
     },

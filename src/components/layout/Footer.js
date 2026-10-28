@@ -120,11 +120,7 @@ export default function Footer() {
   ];
 
   const socialLinks = [
-    {
-      name: "Instagram",
-      href: "https://www.instagram.com/",
-      icon: <InstagramIcon size={18} />,
-    },
+   
     {
       name: "Facebook",
       href: "https://www.facebook.com/mendozafirst/",
