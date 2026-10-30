@@ -62,7 +62,6 @@ export default function Footer() {
   const [subscribeMsg, setSubscribeMsg] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const currentYear = new Date().getFullYear();
 
   useEffect(() => {
     setMounted(true);
@@ -117,15 +116,6 @@ export default function Footer() {
     { name: "Services", href: "/services" },
     { name: "Blog", href: "/blogs" },
     { name: "Contact", href: "/contact" },
-  ];
-
-  const socialLinks = [
-   
-    {
-      name: "Facebook",
-      href: "https://www.facebook.com/mendozafirst/",
-      icon: <FacebookIcon size={18} />,
-    },
   ];
 
   return (
@@ -231,7 +221,6 @@ export default function Footer() {
           {/* COL 1: BRAND */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-5">
-              {/* ✅ LOGO IMAGE — replaces Building2 icon */}
               <div
                 className="relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-lg"
                 style={{
@@ -296,7 +285,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* COL 2: NAVIGATION */}
+          {/* COL 2: NAVIGATION (with Facebook icon) */}
           <div>
             <h4
               className="font-mono text-xs uppercase tracking-[0.25em] font-extrabold mb-5 pb-3 border-b"
@@ -327,6 +316,45 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+
+            {/* Facebook social link */}
+            <div
+              className="mt-6 pt-5 border-t"
+              style={{ borderColor: TEAL_20 }}
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <span
+                  className="font-mono text-[10px] uppercase tracking-[0.2em] font-bold"
+                  style={{ color: TEAL }}
+                >
+                  Follow Us
+                </span>
+              </div>
+              <a
+                href="https://www.facebook.com/mendozafirst/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="inline-flex w-9 h-9 items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-0.5"
+                style={{
+                  backgroundColor: TEAL_15,
+                  border: `1px solid ${TEAL_30}`,
+                  color: TEAL,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = TEAL;
+                  e.currentTarget.style.borderColor = TEAL;
+                  e.currentTarget.style.color = CREAM;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = TEAL_15;
+                  e.currentTarget.style.borderColor = TEAL_30;
+                  e.currentTarget.style.color = TEAL;
+                }}
+              >
+                <FacebookIcon size={18} />
+              </a>
+            </div>
           </div>
 
           {/* COL 3: CONTACT */}
@@ -374,7 +402,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:geraldmendoza@realtyexecutives.com"
+                  href="mailto:geraldvmendoza@gmail.com"
                   className="group flex items-start gap-3 transition-all duration-300 hover:translate-x-1"
                 >
                   <span
@@ -397,7 +425,7 @@ export default function Footer() {
                       className="block text-sm font-semibold break-all"
                       style={{ color: CREAM }}
                     >
-                      geraldmendoza@realtyexecutives.com
+                      geraldvmendoza@gmail.com
                     </span>
                   </span>
                 </a>
@@ -428,7 +456,7 @@ export default function Footer() {
                       className="block text-sm font-semibold"
                       style={{ color: CREAM }}
                     >
-                      6760 N. Oracle Road
+                      3773 East Broadway Blvd
                     </span>
                     <span
                       className="block text-xs mt-0.5"
@@ -571,11 +599,7 @@ export default function Footer() {
         style={{ borderColor: TEAL_20, backgroundColor: "#0A1A1C" }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          {/* ===== TOP ROW: Leatonic Credit ===== */}
-          <div
-            className="flex justify-center mb-4 pb-4 border-b"
-            style={{ borderColor: TEAL_15 }}
-          >
+          <div className="flex justify-center">
             <Link
               href="https://leatonic.com/"
               target="_blank"
@@ -593,84 +617,10 @@ export default function Footer() {
               />
             </Link>
           </div>
-
-          {/* ===== BOTTOM ROW: Social + Gerald Copyright + Back to Top ===== */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-5">
-            <div className="flex items-center gap-3">
-              <span
-                className="font-mono text-[10px] uppercase tracking-[0.25em] font-bold"
-                style={{ color: CREAM_60 }}
-              >
-                Connect:
-              </span>
-              <div className="flex items-center gap-2">
-                {socialLinks.map((social) => (
-                  <a
-                    key={social.name}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.name}
-                    className="w-9 h-9 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-0.5"
-                    style={{
-                      backgroundColor: TEAL_15,
-                      border: `1px solid ${TEAL_30}`,
-                      color: TEAL,
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = TEAL;
-                      e.currentTarget.style.borderColor = TEAL;
-                      e.currentTarget.style.color = CREAM;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = TEAL_15;
-                      e.currentTarget.style.borderColor = TEAL_30;
-                      e.currentTarget.style.color = TEAL;
-                    }}
-                  >
-                    {social.icon}
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            <p
-              className="font-luxury text-sm text-center order-first md:order-0"
-              style={{ color: CREAM_80 }}
-            >
-              © {currentYear} Gerald V Mendoza, Jr. — Realty Executives Tucson
-              Elite.
-            </p>
-
-            <button
-              onClick={scrollToTop}
-              className="group flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:gap-3"
-              style={{
-                color: CREAM,
-                backgroundColor: TEAL_10,
-                border: `1px solid ${TEAL_30}`,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = TEAL;
-                e.currentTarget.style.color = CREAM;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = TEAL_10;
-                e.currentTarget.style.color = CREAM;
-              }}
-              aria-label="Back to top"
-            >
-              Back To Top
-              <ArrowUp
-                size={12}
-                strokeWidth={3}
-                className="group-hover:-translate-y-0.5 transition-transform"
-              />
-            </button>
-          </div>
         </div>
       </div>
-      {/* FLOATING SCROLL-TO-TOP BUTTON */}
+
+      {/* ============ FLOATING SCROLL-TO-TOP BUTTON ============ */}
       {mounted && (
         <button
           onClick={scrollToTop}

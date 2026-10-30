@@ -381,7 +381,7 @@ export default function FullscreenMenu({ isOpen, onClose }) {
           >
             {/* ✅ Updated email */}
             <a
-              href="mailto:geraldmendoza@realtyexecutives.com"
+              href="mailto:geraldvmendoza@gmail.com"
               className="flex items-center gap-2 transition-colors"
               style={{ color: INK_60 }}
               onMouseEnter={(e) => (e.currentTarget.style.color = TEAL)}
@@ -389,7 +389,7 @@ export default function FullscreenMenu({ isOpen, onClose }) {
             >
               <Mail size={15} style={{ color: TEAL }} />
               <span className="text-sm font-medium">
-                geraldmendoza@realtyexecutives.com
+                geraldvmendoza@gmail.com
               </span>
             </a>
 
@@ -676,7 +676,7 @@ export default function FullscreenMenu({ isOpen, onClose }) {
               >
                 {/* ✅ Updated email */}
                 <a
-                  href="mailto:geraldmendoza@realtyexecutives.com"
+                  href="mailto:geraldvmendoza@gmail.com"
                   onClick={(e) => e.stopPropagation()}
                   className="flex items-center justify-center gap-1.5 transition-colors mb-3"
                   style={{ color: INK_60 }}
@@ -685,7 +685,7 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                 >
                   <Mail size={12} style={{ color: TEAL }} />
                   <span className="text-[11px] font-medium">
-                    geraldmendoza@realtyexecutives.com
+                    geraldvmendoza@gmail.com
                   </span>
                 </a>
 

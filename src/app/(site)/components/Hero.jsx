@@ -312,7 +312,7 @@ export default function HeroSection() {
                 className="font-mono text-sm font-bold tracking-[0.2em]"
                 style={{ color: TEAL }}
               >
-                [ 01 — COLLECTION 2026 ]
+                [ 01 — COLLECTION ]
               </span>
             </div>
 
@@ -386,9 +386,6 @@ export default function HeroSection() {
                 Book Consultation
               </Link>
             </div>
-
-           
-        
           </div>
 
           {/* ================ RIGHT : GALLERY + CARDS ================ */}

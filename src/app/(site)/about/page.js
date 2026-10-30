@@ -15,6 +15,7 @@ import {
   Music,
   Home,
   Heart,
+  ScreenShare
 } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -74,9 +75,13 @@ const careerHighlights = [
   },
   {
     icon: Heart,
-    year: "Today",
-    title: "Realty Executives Tucson Elite",
+    title: "Former brokerage",
     description: "Back home in the Ol' Pueblo, bringing calm & humor to every deal.",
+  },
+  {
+    icon: ScreenShare,
+    title: "Real broker",
+    description: "Highest acclaim and affection from not only his colleagues over the years.",
   },
 ];
 
@@ -365,7 +370,7 @@ export default function About() {
                     className="font-luxury text-2xl sm:text-3xl font-extrabold leading-none mt-1"
                     style={{ color: INK }}
                   >
-                    2025
+                    2016
                   </p>
                 </motion.div>
               </div>
@@ -628,7 +633,7 @@ export default function About() {
                 </p>
                 <div className="flex flex-col gap-3 sm:gap-4 font-medium text-sm sm:text-base">
                   <a
-                    href="mailto:geraldmendoza@realtyexecutives.com"
+                    href="mailto:geraldvmendoza@gmail.com"
                     className="hover:translate-x-1 transition-transform flex items-center gap-3 group"
                     style={{ color: INK }}
                   >
@@ -642,7 +647,7 @@ export default function About() {
                       <Mail size={18} strokeWidth={2} style={{ color: TEAL }} />
                     </span>
                     <span className="truncate group-hover:underline">
-                      geraldmendoza@realtyexecutives.com
+                      geraldvmendoza@gmail.com
                     </span>
                   </a>
 
@@ -677,7 +682,7 @@ export default function About() {
                       <MapPin size={18} strokeWidth={2} style={{ color: TEAL }} />
                     </span>
                     <span>
-                      6760 N. Oracle Road, Tucson, AZ
+                      3773 East Broadway Blvd, Tucson, AZ
                       <span
                         className="block text-xs font-semibold uppercase tracking-wider mt-0.5"
                         style={{ color: INK_60 }}
@@ -735,7 +740,7 @@ export default function About() {
               className="font-mono text-xs sm:text-sm uppercase tracking-[0.25em] font-bold"
               style={{ color: TEAL }}
             >
-              [ Properties In Focus ]
+              [ Our Vision ]
             </span>
             <div
               className="flex-1 h-px"
